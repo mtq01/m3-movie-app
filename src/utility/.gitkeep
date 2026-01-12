@@ -1,0 +1,7 @@
+# THIS IS A PLACEHOLDER
+
+GitHub wont upload empty folders, its only for files.
+
+This allows us to create folder structure and upload it to github for the team before we start the project. 
+
+Once an actual file is created, the .gitkeep file can be deleted :D

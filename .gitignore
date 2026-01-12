@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Ignore API Key File (Secure API Key - Standard Practice)
+.env
+.env.*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
