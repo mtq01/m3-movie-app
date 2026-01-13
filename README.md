@@ -40,7 +40,7 @@ Pushing Your Branch with Upstream:
 
 Once you push your feature to GitHub you need to make a PR.
 
-    a. Open GitHub Repo:                 https://github.com/miket604/m3-movie-app/tree/main
+    a. Open GitHub Repo:                 https://github.com/mtq01/m3-movie-app/tree/main
     
     b. Select the Base:                  Change 'main' to 'staging'
     
@@ -67,7 +67,7 @@ those updates into your local feature branch so you don't fall behind. (See Step
 
     g. Delete Merged Branches            (OPTIONAL, not reccomended while we're learning, we wont do this)
             Locally                      - git branch -d yourName/feature/feature-name       
-            Delete on GitHub             - https://github.com/miket604/m3-movie-app/branches (click trashcan bside branch)
+            Delete on GitHub             - https://github.com/mtq01/m3-movie-app/branches (click trashcan bside branch)
             Prune 'Ghost' References     - git fetch --prune
 
             Note: IF we did delete the Branches on GitHub and Locally, we would also need to run the'--prune' command to clean up any 'ghost' references. Our computer still thinks the branch exists until we prune it.
