@@ -1,7 +1,7 @@
 
 const Nav = () => {
   return (
-    <div>Nav Component</div>
+    <div>Nav Component Update</div>
   )
 }
 
