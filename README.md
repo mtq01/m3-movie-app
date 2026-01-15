@@ -55,15 +55,46 @@ Once you push your feature to GitHub you need to make a PR.
                                          - Everyone needs to pull the latest changes to ASAP.
                                          - All members need to confirm they pulled the lastest changes.
 
-[IMPORTANT]: IF you are currently working on your own feature branch when a merge happens, you MUST pull 
-those updates into your local feature branch so you don't fall behind. (See Step F)
+[IMPORTANT]: When a new PR is merged on GitHub, you need to update your active feature branches. If you're actively working on more than 1 feature you will need to run the 'git merge origin/staging' on each one in order to update it. The 'git fetch --all --prune' only needs to be run once per new PR because it stores a photocopy of the changes in you 'git' folder.
     
-    f. Pulling Latest Changes:           - git checkout staging             (switches to 'staging' branch)
-                                         - git pull origin staging          (pulls latest updates to 'staging')
-                                         - git checkout your-feature-branch 
-                                         - git merge staging                (brings the PR updates into your branch)
+    f. Pulling Latest Changes:           - git checkout your/feature/branch (ensure you are on your branch) 
+                                         - git fetch --all --prune          (updates your map and cleans out old branches)
+                                         - git merge origin/staging         (brings official server code into your local)
+    
+    Details: 
+                                         - [fetch] reaches out to the server and makes a photocopy of all the updates made by the team, without touching your files.
 
-[IMPORTANT]: The last 2 git commands in Step F. are required when a PR is merged while you're working on a local feature branch of your own. Otherwise, you will have Git issues when trying to push your feature.
+                                         - [--all] tells git to map every branch on the server (even brand new ones)
+
+                                         - [--prune] when a PR is merged the branch is deleted on GitHub, but your computer will still show that 'ghost' branch in your list until we prune it (delete it). If its gone from the server, it gets removed from your local disk & keeps your git branches clean and organized.
+
+                                         - [merge] takes the photocopy and adds it to your feature branch.
+
+                                         - [origin/staging] 'origin' is the name of the server. 'staging' is the specific branch on the server. This merges the official server version & skips your local staging branch (which is safer because your local branch could be out of date or have accidental test code in it)
+
+    Extras (Optional):                             
+                                        - Peek a specific file in terminal. Handy if you know which file you want to look at. It will print the content of the file directly in terminal withour changing your current workspace:
+                                    
+                                        git show origin/name/feature/name-of-feature:path/to/file.css
+
+                                        - Peek what changed. See what was added/removed compared to what you have right now. 'head' is the shortcut for 'where you are right now', '..' means compare against, and 'origin/staging' is the photocopy of the server you downloaded:
+
+                                        git diff HEAD..origin/name/feature/name-of-feature      (shows all code changes)
+
+                                        - Alternative ways to "peek" and the differences.
+
+                                        git diff HEAD..origin/staging --name-only               (shows the file name changes)
+                                        git log HEAD..origin/staging                            (shows the list of commits)
+
+                                        - If the changes are too complex to read in terminal, you can open the files in your editor to see how they work (You can view/edity our collaboraters features, but please dont make changes to your team members code without permission):
+
+                                        git checkout origin/name/feature/name-of-feature
+
+   
+   
+
+
+
 
     g. Delete Merged Branches            (OPTIONAL, not reccomended while we're learning, we wont do this)
             Locally                      - git branch -d yourName/feature/feature-name       
