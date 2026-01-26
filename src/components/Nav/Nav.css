@@ -3,7 +3,7 @@
     width: 5rem;
     padding-right: 1rem;
 
-    /* white vertical border to right of cinemax logo (height adjusted) */
+    /* adds white vertical border to right of cinemax logo (height adjusted) */
     background: linear-gradient(white, white); 
     background-size: 0.0625rem 50%; 
     background-repeat: no-repeat;
@@ -15,6 +15,7 @@ nav {
     /* justify-content: space-between; */
     align-items: center;
     padding: var(--temp);
+    background: #001838;
 }
 
 ul {
@@ -22,4 +23,12 @@ ul {
     flex-direction: row;
     gap: 1rem;
     list-style-type: none;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover {
+    color: #E4A100;
 }
