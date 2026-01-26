@@ -1,7 +1,9 @@
+// import component styles
+import './Nav.css';
 
 const Nav = () => {
   return (
-    <div>Nav Component Update</div>
+    <nav>Nav Component Update</nav>
   )
 }
 
