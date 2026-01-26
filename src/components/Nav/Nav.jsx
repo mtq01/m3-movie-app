@@ -3,7 +3,16 @@ import './Nav.css';
 
 const Nav = () => {
   return (
-    <nav>Nav Component Update</nav>
+    <nav>
+      <p>Logo</p>
+
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>My List</li>
+      </ul>
+      
+    </nav>
   )
 }
 
