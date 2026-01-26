@@ -1,11 +1,18 @@
 /* mobile styling */
 #logo {
     width: 5rem;
+    padding-right: 1rem;
+
+    /* white vertical border to right of cinemax logo (height adjusted) */
+    background: linear-gradient(white, white); 
+    background-size: 0.0625rem 50%; 
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 nav {
     border: 1px solid white;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     padding: var(--temp);
 }
