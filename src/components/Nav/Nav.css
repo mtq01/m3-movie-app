@@ -5,14 +5,13 @@
 
     /* adds white vertical border to right of cinemax logo (height adjusted) */
     background: linear-gradient(white, white); 
-    background-size: 0.0625rem 50%; 
+    background-size: .0625rem 50%; 
     background-repeat: no-repeat;
     background-position: right center;
 }
 nav {
     border: 1px solid white;
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     padding: var(--temp);
     background: #001838;
@@ -23,6 +22,7 @@ ul {
     flex-direction: row;
     gap: 1rem;
     list-style-type: none;
+    padding-left: 1.5rem;
 }
 
 a {
