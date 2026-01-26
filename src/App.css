@@ -1,9 +1,11 @@
 /*
 Styles for the main App component go here.
 
-- Top level CSS
-- Main layout rules
-- Non-Component Specific styles
-- Global Styles (Typefaces, margins etc)
+- Component Specific (primarily the App.jsx component & its children)
+- Main layout 
+
+We can potentially delete this file since we are using component specific styling,
+but I figured we should wait to see if there is a better use for it. There probably is.
+ 
 
 */
