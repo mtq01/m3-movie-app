@@ -4,12 +4,12 @@ import './Nav.css';
 const Nav = () => {
   return (
     <nav>
-      <p>Logo</p>
+      <img id="logo" src="./src/assets/logos/cinemax-logo.svg" alt="Cinemax" srcset="" />
 
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>My List</li>
+        <li><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">My List</a></li>
       </ul>
       
     </nav>
