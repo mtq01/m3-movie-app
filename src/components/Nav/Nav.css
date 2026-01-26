@@ -1,8 +1,12 @@
 /* mobile styling */
+#logo {
+    width: 5rem;
+}
 nav {
     border: 1px solid white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: var(--temp);
 }
 
