@@ -4,6 +4,15 @@
    ========================================================================== */
 
 /**
+* 1. Reset all Margins & Padding to 0.
+* 2. Set box-sizing site wide for a predictable layout
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
