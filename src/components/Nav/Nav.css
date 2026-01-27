@@ -10,7 +10,7 @@
     background-position: right center;
 }
 nav {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     display: flex;
     align-items: center;
     padding: var(--temp);
@@ -27,6 +27,7 @@ ul {
 
 a {
     color: #fff;
+    text-decoration: none;
 }
 
 a:hover {
