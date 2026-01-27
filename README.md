@@ -62,28 +62,30 @@ Once you push your feature to GitHub you need to make a PR.
 
 **f. Pulling Latest Changes (The Workflow)**
 
-- git stash push -m "Saving work before update"     (from your feature branch, protects your work before pulling changes!)
+- `git stash push -m "Saving work before update"`     (from your feature branch, protects your work before pulling changes!)
 
-- git checkout staging                              (switch to your local copy of staging)
+- `git checkout staging`                              (switch to your local copy of staging)
 
-- git pull origin staging                           (update your local staging so it matches GitHub exactly.)
+- `git pull origin staging`                           (update your local staging so it matches GitHub exactly.)
 
-- git checkout your/feature/branch                  (go back to the feature you are actually building.)
+- `git checkout your/feature/branch`                  (go back to the feature you are actually building.)
 
-- git fetch --all --prune                           (update your "map" of the server and delete "ghost" branches.)
+- `git fetch --all --prune`                           (update your "map" of the server and delete "ghost" branches.)
 
-- git merge origin/staging                          (pour the fresh server code into your feature branch.)
+- `git merge origin/staging`                          (pour the fresh server code into your feature branch.)
 
-- git stash pop                                     (brings your work back onto the new code from the stash.)
+- `git stash pop`                                     (brings your work back onto the new code from the stash.)
 
 **Key Details**
 
 **fetch:** Reaches out to GitHub and makes a "photocopy" of all team updates. It does not touch your actual code files, making it 100% safe to run anytime.
-    - Tip: If you have an active feature branch you're working on (and don't need to create a brand new feature) you can update the active feature a little faster by following these steps:
-            a. git stash -m "comment"
-            b. git fetch --prune
-            c. git merge origin staging
-            d. git stash pop
+
+- Tip: If you have an active feature branch you're working on *(and don't need to create a brand new feature)* you can update the active feature a little faster by following these steps:
+
+- `git stash -m "comment"` 
+- `git fetch --prune` 
+- `git merge origin staging`
+- `git stash pop`
 
 
 **--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates.
