@@ -55,24 +55,58 @@ Once you push your feature to GitHub you need to make a PR.
                                          - Everyone needs to pull the latest changes to ASAP.
                                          - All members need to confirm they pulled the lastest changes.
 
-[IMPORTANT]: When a new PR is merged on GitHub, you need to update your active feature branches. If you're actively working on more than 1 feature you will need to run the 'git merge origin/staging' on each one in order to update it. The 'git fetch --all --prune' only needs to be run once per new PR because it stores a photocopy of the changes in you 'git' folder.
-    
-    f. Pulling Latest Changes:           - git checkout your/feature/branch (ensure you are on your branch) 
-                                         - git fetch --all --prune          (updates your map and cleans out old branches)
-                                         - git merge origin/staging         (brings official server code into your local)
-    
-    Details: 
-                                         - [fetch] reaches out to the server and makes a photocopy of all the updates made by the team, without touching your files.
+## Pulling Changes Locally
+[IMPORTANT]: When a PR is merged on GitHub, our local feature branches become "out of date." To avoid headaches later, update your active branches immediately. If you are working on multiple features, repeat the Merge and Stash Pop steps for each one.
 
-                                         - [--all] tells git to map every branch on the server (even brand new ones)
+**STASH**: Moves your uncommitted changes into a temporary storage box so they don't get tangled up or deleted during a merge. It's essentially a local "save" option that's used when you arent ready to commit, but need to save.
 
-                                         - [--prune] when a PR is merged the branch is deleted on GitHub, but your computer will still show that 'ghost' branch in your list until we prune it (delete it). If its gone from the server, it gets removed from your local disk & keeps your git branches clean and organized.
+**f. Pulling Latest Changes (The Workflow)**
 
-                                         - [merge] takes the photocopy and adds it to your feature branch.
+- git stash push -m "Saving work before update"     (from your feature branch, protects your work before pulling changes!)
 
-                                         - [origin/staging] 'origin' is the name of the server. 'staging' is the specific branch on the server. This merges the official server version & skips your local staging branch (which is safer because your local branch could be out of date or have accidental test code in it)
+- git checkout staging                              (switch to your local copy of staging)
 
-    Extras (Optional):                             
+- git pull origin staging                           (update your local staging so it matches GitHub exactly.)
+
+- git checkout your/feature/branch                  (go back to the feature you are actually building.)
+
+- git fetch --all --prune                           (update your "map" of the server and delete "ghost" branches.)
+
+- git merge origin/staging                          (pour the fresh server code into your feature branch.)
+
+- git stash pop                                     (brings your work back onto the new code from the stash.)
+
+**Key Details**
+
+**fetch:** Reaches out to GitHub and makes a "photocopy" of all team updates. It does not touch your actual code files, making it 100% safe to run anytime.
+    - Tip: If you have an active feature branch you're working on (and don't need to create a brand new feature) you can update the active feature a little faster by following these steps:
+            a. git stash -m "comment"
+            b. git fetch --prune
+            c. git merge origin staging
+            d. git stash pop
+
+
+**--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates.
+
+**--prune:** Cleans up "ghost" branches. If a teammate deleted a branch on GitHub after a merge, this removes it from your local list so it stays clean.
+
+**merge:** Actually combines the "photocopy" (the server code) into your current file.
+
+**origin/staging:** origin is the server (GitHub). By merging origin/staging instead of just staging, you are guaranteed to get the official, clean version of the code.
+
+## Merge Conflicts
+
+1. If you get a merge conflict, dont panic.
+
+2. **Follow these steps (or ask me):**
+Pick a winner: VSCode will give you buttons at the top of the conflict:
+    - *Accept Current Change:* Keeps your version.
+    - *Accept Incoming Change:* Keeps the staging version. 
+    - *Accept Both:* Keeps both (you'll have to clean up the order).
+    - *Save and Commit:* Once the scary "red" is gone, save the file, stage it (git add .), and commit the fix.
+
+
+**Extras (Optional):**                             
                                         - Peek a specific file in terminal. Handy if you know which file you want to look at. It will print the content of the file directly in terminal withour changing your current workspace:
                                     
                                         git show origin/name/feature/name-of-feature:path/to/file.css
@@ -95,8 +129,7 @@ Once you push your feature to GitHub you need to make a PR.
 
 
 
-
-    g. Delete Merged Branches            (OPTIONAL, not reccomended while we're learning, we wont do this)
+**g. Delete Merged Branches              (OPTIONAL)**
             Locally                      - git branch -d yourName/feature/feature-name       
             Delete on GitHub             - https://github.com/mtq01/m3-movie-app/branches (click trashcan bside branch)
             Prune 'Ghost' References     - git fetch --prune
@@ -104,7 +137,7 @@ Once you push your feature to GitHub you need to make a PR.
             Note: IF we did delete the Branches on GitHub and Locally, we would also need to run the'--prune' command to clean up any 'ghost' references. Our computer still thinks the branch exists until we prune it.
                                          
                                          
-Tips on Deleting a Local Branch:
+**Tips on Deleting a Local Branch:**
 
 a. What if you need to make changes to that feature later on?
     
