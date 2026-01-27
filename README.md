@@ -76,16 +76,16 @@ Once you push your feature to GitHub you need to make a PR.
 
 - `git stash pop`                                     (brings your work back onto the new code from the stash.)
 
-# Key Details
+**Key Details**
 
 **fetch:** Reaches out to GitHub and makes a "photocopy" of all team updates. It does not touch your actual code files, making it 100% safe to run anytime.
 
 - Tip: If you have an active feature branch you're working on *(and don't need to create a brand new feature)* you can update the active feature a little faster by following these steps:
 
-a. `git stash -m "comment"` 
-b. `git fetch --prune` 
-c. `git merge origin staging`
-d. `git stash pop`
+- `git stash -m "comment"` 
+- `git fetch --prune` 
+- `git merge origin staging`
+- `git stash pop`
 
 
 **--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates.
