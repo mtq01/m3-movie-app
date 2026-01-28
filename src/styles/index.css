@@ -8,14 +8,33 @@ Styles for the Global Elements go here.
 
 */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* typography */
+  --font-body: "Open Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-body: "Source Sans 3", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --line-height-base: 1.5;
 
+  /* colors */
+  --light-blue: #86bbff;
+  --dark-blue: #000812;
+  --mid-dark-blue: #041934;
+  --mid-blue: #03224a;
+  --accent-yellow: #e4a100;
+
+  /* spacing */
+  --site-gutter-lg: 1.5rem;
+  --site-gutter-sm: 1rem;
+  --max-content-width: 1280px;
+
+  /* UI */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+
+  /* base */
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
