@@ -1,12 +1,13 @@
-// import component styles
+// import component styles & script
 import './Nav.css';
+import './Nav.js';
 
 const Nav = () => {
   return (
     <nav id="main-nav" aria-label="Main Navigation" class="border-bottom">
         {/* <aligned left (always) */}
         <a class="cinemax-logo" href="#">
-            <img id="logo" src="cinemax-logo.svg" alt="Cinemax" />
+            <img id="logo" src="./src/assets/logos/cinemax-logo.svg" alt="Cinemax" />
         </a>
 
         {/* shows on click of hamburger menu button (mobile) */}
