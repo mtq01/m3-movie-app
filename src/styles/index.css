@@ -30,8 +30,8 @@ Styles for the Global Elements go here.
   --accent-yellow: #e4a100;
 
   /* spacing */
-  --site-gutter-lg: 1.5rem;
-  --site-gutter-sm: 1rem;
+  --site-margin-lg: 1.5rem;
+  --site-margin-sm: 1rem;
   --max-content-width: 120rem;
 
   /* UI */
@@ -85,7 +85,7 @@ p {
 
 .container {
   width: 100%;
-  padding: 0 var(--site-gutter-sm);
+  padding: 0 var(--site-margin-sm);
 }
 
 /* Full-bleed pointer for ui backgrounds */
@@ -99,5 +99,6 @@ p {
   .container {
     max-width: var(--max-content-width);
     margin: 0 auto;
+    padding: 0 var(--site-margin-lg);
   }
 }
