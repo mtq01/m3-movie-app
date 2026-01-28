@@ -1,28 +1,86 @@
 /* mobile styling */
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 #logo {
     width: 5rem;
     padding-right: 1rem;
 
     /* adds white vertical border to right of cinemax logo (height adjusted) */
-    background: linear-gradient(white, white); 
-    background-size: .0625rem 50%; 
+    background: linear-gradient(white, white);
+    background-size: .0625rem 50%;
     background-repeat: no-repeat;
     background-position: right center;
 }
-nav {
-    /* border: 1px solid white; */
+
+#hamburger,
+#account {
+    display: block;
+    background: transparent;
+    border: none;
+    padding: 0.125rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+}
+
+.account-icon {
+    width: 1.75rem;
+    fill: #ffffff;
+}
+.account-icon:hover {
+    fill: #E4A100;
+}
+
+.menu-text {
+    color: white;
+}
+
+.menu-text:hover {
+    color: #E4A100;
+}
+
+#main-nav {
     display: flex;
     align-items: center;
-    padding: var(--temp);
+    justify-content: space-between;
+    /* temp padding until :root var is added */
+    padding: 0 1rem;
     background: #001838;
 }
 
+#primary-nav-menu {
+    display: none;
+}
+
+#primary-nav-menu.toggled {
+    display: flex;
+    background: #001838;
+    position: absolute;
+    z-index: 1001;
+    right: 0;
+    left: 0;
+    top: 64px;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-top: 0.0625rem solid rgb(66, 65, 65);
+}
+
+
 ul {
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 1rem;
     list-style-type: none;
-    padding-left: 1.5rem;
+    padding: 0 0 0 1.25rem;
 }
 
 a {
@@ -32,4 +90,35 @@ a {
 
 a:hover {
     color: #E4A100;
+}
+
+
+
+/* desktop media query */
+@media (min-width: 37.5em) {
+
+    #hamburger {
+        display: none;
+    }
+
+
+    #main-nav {
+        justify-content: start;
+    }
+
+    #primary-nav-menu {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        gap: 1.5rem;
+        /* width 100% pushes the Account icon to the right (where i want it) but its kind of a sloppy approach. */
+        width: 100%;
+    }
+
+    .align-right {
+        flex-grow: 6;
+        display: flex;
+        justify-content: end;
+    }
+
 }
