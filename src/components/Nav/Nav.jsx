@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "./Nav.css";
+import "../../styles/Nav.css";
 
 const Nav = () => {
   // +++++ state management +++++
@@ -17,7 +17,6 @@ const Nav = () => {
 
   // +++++ hook/function (event listeners) +++++
   useEffect(() => {
-
     // closes the mobile menu if the screen is wider than 600px
     const handleResize = () => {
       if (window.innerWidth >= 600) setIsToggled(false);
@@ -25,9 +24,12 @@ const Nav = () => {
 
     // closes mobile-menu when clicking anywhere outside of it
     const handleClickOutside = (event) => {
-        if (navReference.current && !navReference.current.contains(event.target)) {
-            setIsToggled(false);
-        }
+      if (
+        navReference.current &&
+        !navReference.current.contains(event.target)
+      ) {
+        setIsToggled(false);
+      }
     };
 
     // event listeners for the resize & clicking outside of menu
@@ -36,9 +38,9 @@ const Nav = () => {
 
     // cleanup: removes listeners after leaving the page
     return () => {
-    window.removeEventListener("resize", handleResize);
-    document.removeEventListener("mousedown", handleClickOutside);
-    }
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
     // [] empty brackets mean 'run once when the component first appears, and never again'
   }, []);
 
@@ -53,7 +55,12 @@ const Nav = () => {
 
   return (
     // {navReference} adds the bookmark to the <nav> element
-    <nav id="main-nav" ref={navReference} aria-label="Main Navigation" className="border-bottom">
+    <nav
+      id="main-nav"
+      ref={navReference}
+      aria-label="Main Navigation"
+      className="border-bottom"
+    >
       <a className="cinemax-logo" href="#">
         <img
           id="logo"
@@ -65,7 +72,7 @@ const Nav = () => {
       {/* {menuClassName} applies the conditional logic from above */}
       <ul id="primary-nav-menu" className={menuClassName}>
         <li>
-             {/* setIsToggled to false on click of the link (closing the dropdown menu) */}
+          {/* setIsToggled to false on click of the link (closing the dropdown menu) */}
           <a href="#" onClick={() => setIsToggled(false)}>
             Home
           </a>
