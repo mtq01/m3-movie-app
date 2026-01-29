@@ -1,23 +1,78 @@
 /*
 Styles for the Global Elements go here.
 
-- Base Styles
 - Variables
+- Base Styles
 - Non-Component Specific styles
 - Typography
 
 */
+
+/* =========================
+     ROOT STYLING
+  ========================== */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* typography */
+  --font-body: "Open Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-heading:
+    "Source Sans 3", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-weight: 600;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* colors */
+  --bg-dark-blue: #000812;
+  --nav-dark-blue: #041934;
+  --bg-mid-blue: #03224a;
+  --ui-light-blue: #86bbff; /* buttons and links */
+  --accent-yellow: #e4a100;
 
+  /* spacing */
+  --max-content-width: 120rem;
+  --global-margin: 0 1rem;
+  --section-padding: 1.5rem 1rem;
+
+  /* UI */
+
+  --border-radius: 0.375rem;
+  /* NOTE: I will update this once radius confirmed after I create the movie posters - Michelle */
+
+  /* base */
+
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+     BASE STYLING
+  ========================== */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark-blue);
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+#root {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+/* =========================
+     TYPOGRAPHY
+  ========================== */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
 }
