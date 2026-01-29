@@ -89,7 +89,7 @@ const Nav = () => {
         </li>
         <li className="align-right">
           <button id="account" aria-expanded="false" aria-label="Account Menu">
-            <span className="menu-text">Login</span>
+            <span>Login</span>
             <svg
               className="account-icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ const Nav = () => {
         aria-label="Navigation Menu"
         onClick={() => setIsToggled(!isToggled)} // flips true to false, or false to true
       >
-        <span className="menu-text">Menu</span>
+        <span>Menu</span>
         <svg
           className="account-icon"
           xmlns="http://www.w3.org/2000/svg"
