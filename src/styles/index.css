@@ -24,11 +24,13 @@ Styles for the Global Elements go here.
   --bg-mid-blue: #03224a;
   --ui-light-blue: #86bbff; /* buttons and links */
   --accent-yellow: #e4a100;
+  --primary-text-color: #fff;
 
   /* spacing */
   --max-content-width: 120rem;
   --global-margin: 0 1rem;
-  --section-padding: 1.5rem 1rem;
+  --global-padding: 1rem;
+  --flex-gap: 1.5rem;
 
   /* UI */
 
@@ -58,7 +60,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--bg-dark-blue);
   line-height: 1.5;
-  color: #ffffff;
+  color: var(--primary-text-color);
 }
 
 #root {
@@ -75,4 +77,14 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
+}
+
+a {
+    color: var(--primary-text-color);
+    /* remove underline */
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-yellow);
 }
