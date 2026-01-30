@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "../../styles/Nav.css";
+import "../styles/Nav.css";
 
 const Nav = () => {
   // +++++ state management +++++
