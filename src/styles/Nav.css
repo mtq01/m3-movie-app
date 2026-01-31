@@ -1,22 +1,14 @@
-/* mobile styling */
-* {
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
+/* <nav> mobile styling */
 #logo {
     width: 5rem;
     padding-right: 1rem;
 
-    /* adds white vertical border to right of cinemax logo (height adjusted) */
-    background: linear-gradient(white, white);
-    background-size: .0625rem 50%;
-    background-repeat: no-repeat;
-    background-position: right center;
+    /* hides white vertical border to right of cinemax logo that displays on desktop */
+    background: linear-gradient(transparent, transparent);
+
 }
 
+/* icon button styling */
 #hamburger,
 #account {
     display: block;
@@ -27,33 +19,34 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    /* gap is distance between icon and text */
     gap: 0.5rem;
-    color: #fff;
+    /* icon label color */
+    color: var(--primary-text-color);
+    /* uppercase text for icon labels (menu / login) */
+    text-transform: uppercase;
+
+    &:hover {
+        color: var(--accent-yellow);
+    }
 }
 
 .account-icon {
     width: 1.75rem;
     fill: #ffffff;
 }
+
 .account-icon:hover {
-    fill: #E4A100;
-}
-
-.menu-text {
-    color: white;
-}
-
-.menu-text:hover {
-    color: #E4A100;
+    fill: var(--accent-yellow);
 }
 
 #main-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* temp padding until :root var is added */
-    padding: 0 1rem;
-    background: #001838;
+    /* unique nav padding? change to var??? */
+    padding: var(--global-padding);
+    background: var(--nav-dark-blue);
 }
 
 #primary-nav-menu {
@@ -62,15 +55,15 @@
 
 #primary-nav-menu.toggled {
     display: flex;
-    background: #001838;
+    background: var(--nav-dark-blue);
     position: absolute;
     z-index: 1001;
     right: 0;
     left: 0;
-    top: 64px;
+    top: 6rem;
     flex-direction: column;
-    padding: 1rem 0;
-    border-top: 0.0625rem solid rgb(66, 65, 65);
+    padding: var(--global-padding);
+    border-top: 0.0625rem solid var(--bg-dark-blue);
 }
 
 
@@ -78,24 +71,24 @@ ul {
     display: flex;
     align-items: center;
     flex-direction: row;
-    gap: 1rem;
+    /* gap is distance between links */
+    gap: var(--flex-gap);
     list-style-type: none;
-    padding: 0 0 0 1.25rem;
-}
-
-a {
-    color: #fff;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #E4A100;
+    /* make all link text uppercase */
+    text-transform: uppercase;
 }
 
 
 
 /* desktop media query */
 @media (min-width: 37.5em) {
+    #logo {
+        /* adds white vertical border to right of cinemax logo (height adjusted) - hidden on mobile */
+        background: linear-gradient(white, white);
+        background-size: .0625rem 75%;
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
 
     #hamburger {
         display: none;
@@ -110,9 +103,13 @@ a:hover {
         display: flex;
         flex-direction: row;
         position: static;
-        gap: 1.5rem;
+        gap: var(--flex-gap);
         /* width 100% pushes the Account icon to the right (where i want it) but its kind of a sloppy approach. */
         width: 100%;
+    }
+
+    ul {
+        padding: 0 0 0 1.25rem;
     }
 
     .align-right {

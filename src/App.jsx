@@ -1,8 +1,8 @@
 // import { useState } from 'react';
 import './styles/index.css';
 import './styles/normalize.css';
-import Nav from './components/Nav/Nav';
-import Footer from './components/Footer/Footer';
+import Nav from './components/Nav.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
 
