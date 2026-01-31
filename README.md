@@ -84,7 +84,7 @@ Once you push your feature to GitHub you need to make a PR.
 
 - `git stash -m "comment"` 
 - `git fetch --prune` 
-- `git merge origin staging`
+- `git merge origin/staging`
 - `git stash pop`
 
 
