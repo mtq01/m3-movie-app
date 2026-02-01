@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Ignore .md files (we dont need to upload the README on this specific project)
+.md
+
 # Ignore API Key File (Secure API Key - Standard Practice)
 .env
 .env.*
