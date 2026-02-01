@@ -1,4 +1,6 @@
-/* MICHELLE NOTE - This file is only for testing and will be replaced or deleted later */
+/* MICHELLE NOTE - This file is only for testing and will be replaced or deleted later once API is connected 
+
+** Image path is current linked via public as a static just for testing, this will be replaced later */
 
 const movieList = [
   {

@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard";
 function MovieCards() {
   return (
     <div className="movie-cards-container">
+      {/* loop through the movie list and generate one Movie Card per movie */}
       {movieList.map((movie) => {
         return (
           <MovieCard

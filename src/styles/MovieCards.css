@@ -1,11 +1,16 @@
+/* Movie Cards Styling */
+
+/* container that holds the movie cards and handles the grid output*/
 .movie-cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17.8125rem, 1fr));
   gap: 3rem 1rem;
   padding: 1.5rem 0;
+  /* centers cards inside the grid columns */
   justify-items: center;
 }
 
+/* Poster image wrapper to control poster image size - acts like a frame */
 .movie-poster {
   width: 17.8125rem;
   height: 26.625rem;
@@ -21,11 +26,13 @@
   display: block;
 }
 
+/* single movie card wrapper */
 .movie-card {
   display: flex;
   flex-direction: column;
 }
 
+/* holds all movie card text and interactions */
 .movie-content {
   display: flex;
   flex-direction: column;
@@ -48,6 +55,7 @@ button.favourite {
 
 /* MOBILE ENDS HERE */
 
+/* media is very big becasue it's set limit the columns to just six at very large screens */
 @media (min-width: 90em) {
   .movie-cards-container {
     max-width: 120rem;
@@ -55,10 +63,6 @@ button.favourite {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 4rem 0.25rem;
-  }
-
-  .movie-card {
-    display: flex;
-    justify-content: space-between;
+    padding: 0 1.5rem;
   }
 }
