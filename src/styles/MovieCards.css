@@ -9,8 +9,16 @@
 .movie-poster {
   width: 18.75rem;
   height: 28rem;
+  overflow: hidden;
   background-color: azure;
   border-radius: 0.25rem;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .movie-card {
@@ -22,12 +30,15 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 0.5rem;
-  gap: 0.5rem;
 }
 
 .movie-card-row-1 {
   display: flex;
   justify-content: space-between;
+}
+
+.movie-overview {
+  padding: 1.5rem 0;
 }
 
 /* MOBILE ENDS HERE */
