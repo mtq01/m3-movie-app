@@ -1,0 +1,56 @@
+
+#site-footer {
+  background-color: var(--nav-dark-blue);
+  padding: var(--global-padding);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* override global ul styles */
+.footer-links {
+  list-style: none;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column; /* stack Home & About */
+  align-items: flex-start;
+  gap: 0.65rem; 
+}
+
+
+/* override global ul styles */
+.footer-icons {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--flex-gap);
+}
+
+/* icon sizing */
+.footer-icons img {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* icon hover effect */
+.footer-icons a:hover img {
+  filter: brightness(0) saturate(100%) invert(62%) sepia(85%)
+  saturate(600%) hue-rotate(5deg);
+  /* Color and fill do not affect an <img> tag, so I had to use this sloppy line, or I could use an inline SVG and use fill to change the hover color. */
+}
+
+
+.footer-copy {
+  border-top: solid var(--ui-light-blue);
+  margin-top: 1.2rem;
+  padding-top: 0.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--ui-light-blue);
+}
+
+/* We do not need desktop media query for footer*/
