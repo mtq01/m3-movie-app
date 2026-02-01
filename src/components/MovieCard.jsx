@@ -1,3 +1,4 @@
+import "../styles/MovieCards.css";
 function MovieCard({
   poster,
   title,
