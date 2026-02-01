@@ -4,3 +4,15 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
 }
+
+.movie-poster {
+  min-width: 250px;
+  height: 420px;
+  background-color: azure;
+  border-radius: 0.5rem;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+}
