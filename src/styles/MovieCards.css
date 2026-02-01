@@ -1,14 +1,14 @@
 .movie-cards-container {
   display: grid;
-  grid-template-columns: repeat(1fr);
-  gap: 3rem;
-  padding: 1.5rem 1rem;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(17.8125rem, 1fr));
+  gap: 3rem 1rem;
+  padding: 1.5rem 0;
+  justify-items: center;
 }
 
 .movie-poster {
-  width: 18.75rem;
-  height: 28rem;
+  width: 17.8125rem;
+  height: 26.625rem;
   overflow: hidden;
   background-color: azure;
   border-radius: 0.25rem;
@@ -41,22 +41,20 @@
   padding: 1.5rem 0;
 }
 
+button.favourite {
+  width: 2rem;
+  height: 2rem;
+}
+
 /* MOBILE ENDS HERE */
 
-@media (min-width: 37.5em) {
+@media (min-width: 90em) {
   .movie-cards-container {
-    max-width: 75rem;
+    max-width: 120rem;
     height: auto;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 4rem 1rem;
-  }
-
-  .movie-poster {
-    width: 17.8125rem;
-    height: 26.625rem;
+    gap: 4rem 0.25rem;
   }
 
   .movie-card {
