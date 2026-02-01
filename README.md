@@ -2,7 +2,6 @@
 
 
 ## Step 1 - Clone Repo & Install node_modules Locally
-(If you're reading this, you have successfully cloned the repo.)
 
     a. Do NOT create a feature branch yet.
     b. Open the movie-app folder in Terminal
@@ -11,12 +10,15 @@
 ## Step 2 - Create a Feature Branch
 (Please NEVER code directly on the Main or Staging branches.)
 
-How to Create a Feature Branch:
+**How to Create a Feature Branch:**
+
+Ensure staging is up to date then create the feature off of that.
 
     a. Switch to Staging Branch:         git checkout staging
-    b. Pull Updates:                     git pull origin staging
-    c. Feature Branch Name Example:      mike/feature/add-api-logic
-    d. Create Feature Branch:            git checkout -b yourFirstName/feature/name-of-feature
+    b. Fetch Changes:                    git fetch --prune
+    c. Merge Updates:                    git merge origin/staging
+    d. Feature Branch Name Example:      mike/feature/add-api-logic
+    e. Create Feature Branch:            git checkout -b yourFirstName/feature/name-of-feature
 
 Pushing Your Branch with Upstream:
 
@@ -46,7 +48,7 @@ Once you push your feature to GitHub you need to make a PR.
     
     c. Assign Reviewer:                  On the right side, click the Gear Icon & Select a Team Member
     
-    d. Honor System:                     - No one is allowed to merge their own PR!
+    d. Honor System:                     - No one is allowed to merge their own PR! (A rule was set on GitHub requiring a reviewer)
                                          - Mention your Pull Request in the Discord Group Chat
                                          - Wait for another member of M3 to review & hit 'Approve & Merge'
     
@@ -62,15 +64,19 @@ Once you push your feature to GitHub you need to make a PR.
 
 **f. Pulling Latest Changes (The Workflow)**
 
+*there are faster ways, but we are doing everything manually step by step to practice Git commands*
+
 - `git stash push -m "Saving work before update"`     (from your feature branch, protects your work before pulling changes!)
 
 - `git checkout staging`                              (switch to your local copy of staging)
 
-- `git pull origin staging`                           (update your local staging so it matches GitHub exactly.)
+- `git fetch --prune`                           (view changes to staging before merging & prune any deleted branches)
+
+- git merge origin/staging
 
 - `git checkout your/feature/branch`                  (go back to the feature you are actually building.)
 
-- `git fetch --all --prune`                           (update your "map" of the server and delete "ghost" branches.)
+- `git fetch`                           (view changes, `--prune` is not needed here bcuz we did that previously)
 
 - `git merge origin/staging`                          (pour the fresh server code into your feature branch.)
 
@@ -88,7 +94,7 @@ Once you push your feature to GitHub you need to make a PR.
 - `git stash pop`
 
 
-**--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates.
+**--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates. (technically not needed since we aren't using forks in our repo, but it's still valid)
 
 **--prune:** Cleans up "ghost" branches. If a teammate deleted a branch on GitHub after a merge, this removes it from your local list so it stays clean.
 
