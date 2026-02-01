@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import nav & footer component
 import Nav from "../components/Nav.jsx";
+import Footer from "../components/Footer.jsx";
 
 // import pages
 import HomePage from "../pages/HomePage.jsx";
@@ -18,6 +19,7 @@ function AppRouter() {
         <Route path="/favorites" exact element={<FavoritesPage />} />
       </Routes>
       {/* Footer Component Goes Here */}
+      <Footer />
     </BrowserRouter>
   );
 }
