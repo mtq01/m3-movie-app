@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
 
 const Nav = () => {
@@ -44,6 +45,11 @@ const Nav = () => {
     // [] empty brackets mean 'run once when the component first appears, and never again'
   }, []);
 
+  /* 
+  ????????????????
+  - WHY cant i put the following lines of code inside the handleMenuClose() function without the menu failing to open/close
+  ????????????????
+  */
   // +++++ css class logic +++++
   // dynamically builds a class based on current state
   let menuClassName = "nav-links";
@@ -52,6 +58,10 @@ const Nav = () => {
   if (isToggled) {
     menuClassName = "nav-links toggled";
   }
+  // closes menu when link is clicked
+  const handleMenuClose = () => {
+      setIsToggled(false);
+  };
 
   return (
     // {navReference} adds the bookmark to the <nav> element
@@ -73,19 +83,19 @@ const Nav = () => {
       <ul id="primary-nav-menu" className={menuClassName}>
         <li>
           {/* setIsToggled to false on click of the link (closing the dropdown menu) */}
-          <a href="#" onClick={() => setIsToggled(false)}>
-            Home
-          </a>
+          <div onClick={handleMenuClose}>
+            <NavLink to="/">Home</NavLink>
+          </div>
         </li>
         <li>
-          <a href="#" onClick={() => setIsToggled(false)}>
-            About
-          </a>
+          <div onClick={handleMenuClose}>
+            <NavLink to="/about">About</NavLink>
+          </div>
         </li>
         <li>
-          <a href="#" onClick={() => setIsToggled(false)}>
-            My List
-          </a>
+          <div onClick={handleMenuClose}>
+            <NavLink to="/favorites">Favorites</NavLink>
+          </div>
         </li>
         <li className="align-right">
           <button id="account" aria-expanded="false" aria-label="Account Menu">
