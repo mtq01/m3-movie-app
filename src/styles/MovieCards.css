@@ -1,13 +1,14 @@
 .movie-cards-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(1fr);
+  gap: 3rem;
+  padding: 1.5rem 1rem;
+  justify-content: center;
 }
 
 .movie-poster {
-  min-width: 250px;
-  height: 420px;
+  width: 18.75rem;
+  height: 28rem;
   background-color: azure;
   border-radius: 0.5rem;
 }
@@ -15,4 +16,27 @@
 .movie-card {
   display: flex;
   flex-direction: column;
+}
+
+/* MOBILE ENDS HERE */
+
+@media (min-width: 37.5em) {
+  .movie-cards-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .movie-poster {
+    min-width: 15.625rem;
+    height: 26.25rem;
+    background-color: azure;
+    border-radius: 0.5rem;
+  }
+
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+  }
 }
