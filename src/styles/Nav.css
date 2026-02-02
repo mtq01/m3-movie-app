@@ -79,6 +79,22 @@ ul {
 }
 
 
+/* Mahtab style --> login-backdrop and login */
+.login-backdrop {
+  position: fixed;
+  inset: 0; /* inset: 0 is shorthand for top, right, bottom and left = 0 */
+  background: var(--nav-dark-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.login {
+  background: var(--ui-light-blue);
+  padding: 2rem;
+  max-width: 50vw;
+}
 
 /* desktop media query */
 @media (min-width: 37.5em) {
