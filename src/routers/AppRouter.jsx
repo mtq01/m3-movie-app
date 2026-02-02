@@ -13,12 +13,13 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Nav />
+      <main>
       <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/about" exact element={<AboutPage />} />
-        <Route path="/favorites" exact element={<FavoritesPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
-      {/* Footer Component Goes Here */}
+      </main>
       <Footer />
     </BrowserRouter>
   );

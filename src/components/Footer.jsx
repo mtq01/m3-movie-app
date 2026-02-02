@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "../styles/Footer.css";
 
 const Footer = () => {
@@ -9,10 +10,10 @@ const Footer = () => {
         {/* navigation links */}
         <ul className="footer-links">
           <li>
-            <a href="#">Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <a href="#">About</a>
+            <NavLink to="/about">About</NavLink>
           </li>
         </ul>
 

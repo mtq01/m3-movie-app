@@ -12,10 +12,15 @@ const Nav = () => {
   */
   const [isToggled, setIsToggled] = useState(false);
 
+  //Mahtab-every feature is like isToggled, but controls the login state
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   // acts like a bookmark for the <nav> element
   // helps check if the user clicked outside the dropdown
   const navReference = useRef(null);
 
+  //Mahtab-bookmark for login
+  const loginReference = useRef(null);
   // +++++ hook/function (event listeners) +++++
   useEffect(() => {
     // closes the mobile menu if the screen is wider than 600px
@@ -30,6 +35,14 @@ const Nav = () => {
         !navReference.current.contains(event.target)
       ) {
         setIsToggled(false);
+      }
+
+      //Mahtab-close login when clicking anywhere outside of it
+      if (
+        loginReference.current &&
+        !loginReference.current.contains(event.target)
+      ) {
+        setIsLoginOpen(false);
       }
     };
 
@@ -63,6 +76,12 @@ const Nav = () => {
       setIsToggled(false);
   };
 
+   //Mahtab-opens login and closes nav
+  const handleLoginOpen = () => {
+    setIsToggled(false);
+    setIsLoginOpen(true);
+  };
+
   return (
     // {navReference} adds the bookmark to the <nav> element
     <nav
@@ -71,13 +90,22 @@ const Nav = () => {
       aria-label="Main Navigation"
       className="border-bottom"
     >
-      <a className="cinemax-logo" href="#">
+      {/* <a className="cinemax-logo" href="#">
         <img
           id="logo"
           src="./src/assets/logos/cinemax-logo.svg"
           alt="Cinemax"
         />
-      </a>
+      </a> */}
+
+      {/* Mahtab-link logo to home page using React Router */}
+      <NavLink to="/" className="cinemax-logo" onClick={handleMenuClose}>
+      <img
+        id="logo"
+        src="./src/assets/logos/cinemax-logo.svg"
+        alt="Cinemax"
+      />
+      </NavLink>
 
       {/* {menuClassName} applies the conditional logic from above */}
       <ul id="primary-nav-menu" className={menuClassName}>
@@ -98,7 +126,7 @@ const Nav = () => {
           </div>
         </li>
         <li className="align-right">
-          <button id="account" aria-expanded="false" aria-label="Account Menu">
+          <button id="account" aria-expanded={isLoginOpen} aria-label="Account Menu" onClick={handleLoginOpen}>
             <span>Login</span>
             <svg
               className="account-icon"
@@ -128,6 +156,31 @@ const Nav = () => {
           <path d="M120-693.33V-760h720v66.67H120ZM120-200v-66.67h720V-200H120Zm0-246.67v-66.66h720v66.66H120Z" />
         </svg>
       </button>
+      
+      {/* Mahtab-login form process - very basic form without any logic for processing */}
+      {isLoginOpen && (
+        <div className="login-backdrop">
+          <div className="login" ref={loginReference}>
+            <h2>Login Form</h2>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setIsLoginOpen(false);
+              }}
+            >
+              <label>Username</label>
+              <input type="text" />
+
+              <label>Password</label>
+              <input type="password" />
+            
+              <button type="submit">Sign In</button>
+            </form>
+          </div>
+        </div>
+      )}
+
     </nav>
   );
 };
