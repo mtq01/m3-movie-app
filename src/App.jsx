@@ -1,15 +1,14 @@
 // import { useState } from 'react';
-import './styles/index.css';
-import './styles/normalize.css';
+import "./styles/index.css";
+import "./styles/normalize.css";
 import AppRouter from "./routers/AppRouter";
 
 function App() {
-
   return (
     <>
-        <AppRouter />
+      <AppRouter />
     </>
-  )
+  );
 }
 
 export default App;
