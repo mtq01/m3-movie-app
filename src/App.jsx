@@ -1,17 +1,14 @@
 // import { useState } from 'react';
-import './App.css';
-import Nav from './components/Nav/Nav';
-import Footer from './components/Footer/Footer';
+import "./styles/index.css";
+import "./styles/normalize.css";
+import AppRouter from "./routers/AppRouter";
 
 function App() {
-
   return (
     <>
-        <Nav />
-        <h1>M3 - Movie App</h1>
-        <Footer />
+      <AppRouter />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,137 @@
+/* <nav> mobile styling */
+#logo {
+    width: 5rem;
+    padding-right: 1rem;
+
+    /* hides white vertical border to right of cinemax logo that displays on desktop */
+    background: linear-gradient(transparent, transparent);
+
+}
+
+/* icon button styling */
+#hamburger,
+#account {
+    display: block;
+    background: transparent;
+    border: none;
+    padding: 0.125rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* gap is distance between icon and text */
+    gap: 0.5rem;
+    /* icon label color */
+    color: var(--primary-text-color);
+    /* uppercase text for icon labels (menu / login) */
+    text-transform: uppercase;
+
+    &:hover {
+        color: var(--accent-yellow);
+    }
+}
+
+.account-icon {
+    width: 1.75rem;
+    fill: #ffffff;
+}
+
+.account-icon:hover {
+    fill: var(--accent-yellow);
+}
+
+#main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* unique nav padding? change to var??? */
+    padding: var(--global-padding);
+    background: var(--nav-dark-blue);
+}
+
+#primary-nav-menu {
+    display: none;
+}
+
+#primary-nav-menu.toggled {
+    display: flex;
+    background: var(--nav-dark-blue);
+    position: absolute;
+    z-index: 1001;
+    right: 0;
+    left: 0;
+    top: 6rem;
+    flex-direction: column;
+    padding: var(--global-padding);
+    border-top: 0.0625rem solid var(--bg-dark-blue);
+}
+
+
+ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    /* gap is distance between links */
+    gap: var(--flex-gap);
+    list-style-type: none;
+    /* make all link text uppercase */
+    text-transform: uppercase;
+}
+
+
+/* Mahtab style --> login-backdrop and login */
+.login-backdrop {
+  position: fixed;
+  inset: 0; /* inset: 0 is shorthand for top, right, bottom and left = 0 */
+  background: var(--nav-dark-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.login {
+  background: var(--ui-light-blue);
+  padding: 2rem;
+  max-width: 50vw;
+}
+
+/* desktop media query */
+@media (min-width: 37.5em) {
+    #logo {
+        /* adds white vertical border to right of cinemax logo (height adjusted) - hidden on mobile */
+        background: linear-gradient(white, white);
+        background-size: .0625rem 75%;
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+
+    #hamburger {
+        display: none;
+    }
+
+
+    #main-nav {
+        justify-content: start;
+    }
+
+    #primary-nav-menu {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        gap: var(--flex-gap);
+        /* width 100% pushes the Account icon to the right (where i want it) but its kind of a sloppy approach. */
+        width: 100%;
+    }
+
+    ul {
+        padding: 0 0 0 1.25rem;
+    }
+
+    .align-right {
+        flex-grow: 6;
+        display: flex;
+        justify-content: end;
+    }
+
+}
