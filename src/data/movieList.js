@@ -8,7 +8,8 @@ const movieList = [
     title: "Movie Title One",
     poster: "/mandolorian-poster.webp",
     release_date: "2026-01-01",
-    overview: "placeholder overview text",
+    overview:
+      "The evil Empire has fallen, and Imperial warlords remain scattered throughout the galaxy. As the fledgling New Republic works to protect everything the Rebellion fought for, they have enlisted the help of legendary Mandalorian bounty hunter Din Djarin and his young apprentice Grogu.",
     details_link: "/movies/1",
     is_favourite: false,
   },
@@ -35,7 +36,8 @@ const movieList = [
     title: "Movie Title Four",
     poster: "/mandolorian-poster.webp",
     release_date: "2026-01-01",
-    overview: "placeholder overview text",
+    overview:
+      "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
     details_link: "/movies/4",
     is_favourite: false,
   },
