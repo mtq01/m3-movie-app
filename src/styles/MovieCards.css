@@ -3,7 +3,7 @@
 /* container that holds the movie cards and handles the grid output*/
 .movie-cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17.8125rem, 1fr));
+  grid-template-columns: 1fr;
   gap: 3rem 1rem;
   padding: 1.5rem 0;
   /* centers cards inside the grid columns */
@@ -14,13 +14,13 @@
 .movie-card {
   display: flex;
   flex-direction: column;
-  width: 17.8125rem;
+  max-width: 17rem;
 }
 
 /* Poster image wrapper to control poster image size - acts like a frame */
 .movie-poster {
-  width: 17.8125rem;
-  height: 26.625rem;
+  width: 100%;
+  aspect-ratio: 2/3;
   overflow: hidden;
   background-color: azure;
   border-radius: 0.25rem;
@@ -47,10 +47,15 @@
 
 .movie-overview {
   padding: 1.5rem 0;
+  margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.movie-date {
+  font-style: italic;
 }
 
 button.favourite {
@@ -58,15 +63,22 @@ button.favourite {
   height: 2rem;
 }
 
-/* MOBILE ENDS HERE */
+/* TABLET BREAKPOINT HERE */
+
+@media (min-width: 48em) {
+  .movie-cards-container {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 1rem 5rem;
+  }
+}
+
+/* DESKTOP BREAKPOINT HERE */
 
 /* media is very big becasue it's set limit the columns to just six at very large screens */
-@media (min-width: 90em) {
+@media (min-width: 80em) {
   .movie-cards-container {
     max-width: 120rem;
     grid-template-columns: repeat(6, 1fr);
-    gap: 4rem 0.25rem;
-    padding: 0 1.5rem;
   }
 
   /* movie card with movie content positioned on top on hover */
@@ -88,18 +100,17 @@ button.favourite {
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 1rem;
+    padding: 1.25rem;
     background-color: rgba(3, 34, 74, 0.75);
     opacity: 0;
     transition: 0.5s ease;
-    gap: 1rem;
   }
 
   /* movie card hovers */
 
   .movie-card:hover .movie-poster {
     opacity: 0.3;
-    filter: blur(5px);
+    filter: blur(2px);
   }
 
   .movie-card:hover .movie-content {
