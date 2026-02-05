@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { appTitle } from "../globals/globals";
 import MovieCards from "../components/MovieCards";
+import Carousel from "../components/Carousel";
 
 // dynamic page title
 const HomePage = () => {
@@ -11,11 +12,8 @@ const HomePage = () => {
 
   return (
     <section>
-      {/* Page Specific Components*/}
+      <Carousel />
       <MovieCards />
-      {/* Placeholders - <h2> <p> and <section> can be deleted */}
-      <h2>Home Page</h2>
-      <p>Add page specific components</p>
     </section>
   );
 };

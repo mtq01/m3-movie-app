@@ -40,11 +40,19 @@
     fill: var(--accent-yellow);
 }
 
+header {
+    /* allows hero to sit under navbar */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+}
+
 #main-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* unique nav padding? change to var??? */
     padding: var(--global-padding);
     background: var(--nav-dark-blue);
 }

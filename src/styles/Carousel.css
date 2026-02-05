@@ -1,0 +1,93 @@
+/* mobile styles */
+#hero {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* dots sit on top of the cover img */
+    z-index: 15;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--accent-yellow);
+    transform: scale(1.35);
+    border: 2px solid white;
+    /* Makes the active dot pop slightly */
+}
+
+#carousel-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* images */
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* keeps img from having a weird crop on screen resize. doesnt work for every img depending on where the characters are. for example: if you change center to right the mandolorian poster looks good, but the aardvark one doesnt on resize */
+    object-position: top center;
+    display: none;
+    /* hides inactive slide */
+}
+
+.slide.active {
+    display: block;
+    /* displays active slide */
+}
+
+/* button styles */
+
+/* default */
+button.carousel-btn {
+    position: absolute;
+    /* sets height and width of btns */
+    width: 3rem;
+    height: 3rem;
+    /* aligns arrow in the center of the btn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0 0.5rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    /* bcuz of the navbar i changed this from 50% to 60. otherwise the buttons look like they sit too high */
+    top: 60%;
+    /* move btns down 50% from the top to center of parent container */
+    transform: translateY(-50%);
+    /* moves btns back up by half of their own height */
+    z-index: 10;
+}
+
+button.carousel-btn:hover {
+    background: rgba(0, 0, 0);
+}
+
+/* pushes button to the right of the container */
+#btn-next {
+    right: 0;
+}

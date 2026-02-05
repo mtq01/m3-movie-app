@@ -83,20 +83,14 @@ const Nav = () => {
   };
 
   return (
-    // {navReference} adds the bookmark to the <nav> element
+    <header>
+    {/* {navReference} adds the bookmark to the <nav> element */}
     <nav
       id="main-nav"
       ref={navReference}
       aria-label="Main Navigation"
       className="border-bottom"
     >
-      {/* <a className="cinemax-logo" href="#">
-        <img
-          id="logo"
-          src="./src/assets/logos/cinemax-logo.svg"
-          alt="Cinemax"
-        />
-      </a> */}
 
       {/* Mahtab-link logo to home page using React Router */}
       <NavLink to="/" className="cinemax-logo" onClick={handleMenuClose}>
@@ -182,6 +176,7 @@ const Nav = () => {
       )}
 
     </nav>
+    </header>
   );
 };
 
