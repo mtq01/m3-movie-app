@@ -20,7 +20,7 @@ Styles for the Global Elements go here.
 
   /* colors */
   --bg-dark-blue: #000812;
-  --nav-dark-blue: #041934;
+  --nav-dark-blue: hsla(214, 86%, 11%, 0.95);
   --bg-mid-blue: #03224a;
   --ui-light-blue: #86bbff; /* buttons and links */
   --accent-yellow: #e4a100;
