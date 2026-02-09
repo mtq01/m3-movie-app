@@ -2,6 +2,7 @@
 
 ** Image path is current linked via public as a static just for testing, this will be replaced later */
 
+//Mahtab - New property (category) has been defined. Values are top_rated, now_playing, upcoming and popular.
 const movieList = [
   {
     id: 1,
@@ -12,6 +13,7 @@ const movieList = [
       "The evil Empire has fallen, and Imperial warlords remain scattered throughout the galaxy. As the fledgling New Republic works to protect everything the Rebellion fought for, they have enlisted the help of legendary Mandalorian bounty hunter Din Djarin and his young apprentice Grogu.",
     details_link: "/movies/1",
     is_favourite: false,
+    category: "top_rated",
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/2",
     is_favourite: false,
+    category: "top_rated",
   },
   {
     id: 3,
@@ -30,6 +33,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/3",
     is_favourite: false,
+    category: "now_playing",
   },
   {
     id: 4,
@@ -40,6 +44,7 @@ const movieList = [
       "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
     details_link: "/movies/4",
     is_favourite: false,
+    category: "now_playing",
   },
   {
     id: 5,
@@ -49,6 +54,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/5",
     is_favourite: false,
+    category: "now_playing",
   },
   {
     id: 6,
@@ -58,6 +64,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/6",
     is_favourite: false,
+    category: "now_playing",
   },
   {
     id: 7,
@@ -67,6 +74,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/7",
     is_favourite: false,
+    category: "upcoming",
   },
   {
     id: 8,
@@ -76,6 +84,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/8",
     is_favourite: false,
+    category: "popular",
   },
   {
     id: 9,
@@ -85,6 +94,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/9",
     is_favourite: false,
+    category: "popular",
   },
   {
     id: 10,
@@ -94,6 +104,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/10",
     is_favourite: false,
+    category: "popular",
   },
   {
     id: 11,
@@ -103,6 +114,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/11",
     is_favourite: false,
+    category: "popular",
   },
   {
     id: 12,
@@ -112,6 +124,7 @@ const movieList = [
     overview: "placeholder overview text",
     details_link: "/movies/12",
     is_favourite: false,
+    category: "popular",
   },
 ];
 
