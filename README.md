@@ -72,7 +72,7 @@ Once you push your feature to GitHub you need to make a PR.
 
 - `git fetch --prune`                           (view changes to staging before merging & prune any deleted branches)
 
-- git merge origin/staging
+- `git merge origin/staging`
 
 - `git checkout your/feature/branch`                  (go back to the feature you are actually building.)
 
@@ -138,9 +138,9 @@ Pick a winner: VSCode will give you buttons at the top of the conflict:
 
 
 **g. Delete Merged Branches              (OPTIONAL)**
-            Locally                      - git branch -d yourName/feature/feature-name       
-            Delete on GitHub             - https://github.com/mtq01/m3-movie-app/branches (click trashcan bside branch)
-            Prune 'Ghost' References     - git fetch --prune
+            Locally                      - `git branch -d yourName/feature/feature-name`       
+            Delete on GitHub             - `https://github.com/mtq01/m3-movie-app/branches (click trashcan bside branch)`
+            Prune 'Ghost' References     - `git fetch --prune`
 
             Note: IF we did delete the Branches on GitHub and Locally, we would also need to run the'--prune' command to clean up any 'ghost' references. Our computer still thinks the branch exists until we prune it.
                                          
