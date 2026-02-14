@@ -1,6 +1,9 @@
 // Page - About
 import { useEffect } from "react";
 import { appTitle } from "../globals/globals";
+import "../styles/AboutPage.css";
+import aboutHero from "../assets/images/cinemax-about-us-background.jpg";
+import tmdbLogo from "../assets/images/tmdb-logo.svg";
 
 // dynamic page title
 const AboutPage = () => {
@@ -9,12 +12,29 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <section>
-      {/* Page Specific Components*/}
+    <section className="about">
+      <img
+        className="about-hero-image"
+        src={aboutHero}
+        alt="employees working at table together"
+      />
+      <div className="about-content-container">
+        <h2>About Us</h2>
+        <p className="about-content">
+          <span className="cinemax-bolded">CineMAX</span> is a modern digital
+          platform dedicated to celebrating the art of film. We curate and
+          deliver rich movie data — from cast and crew details to trailers,
+          ratings, and reviews — through an engaging, easy-to-navigate
+          interface. Our mission is to help audiences explore cinema from every
+          era and genre, connecting passionate movie lovers with the stories,
+          creators, and moments that define them. At MovieCine, film discovery
+          is more than a search — it’s an experience.
+        </p>
 
-      {/* Placeholders - <h2> <p> and <section> can be deleted */}
-      <h2>About Page</h2>
-      <p>About page content...</p>
+        <div className="attribute-container">
+          <img src={tmdbLogo} />
+        </div>
+      </div>
     </section>
   );
 };
