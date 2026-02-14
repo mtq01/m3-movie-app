@@ -111,11 +111,7 @@ const Carousel = () => {
         })}
       </div>
 
-    {/* +++++ nav buttons +++++
-     declare the click behaviour directly on the element instead of using 'addEventListener' bcuz its React and not Vanilla JS
-     */}
-      <button id="btn-next" className="carousel-btn" onClick={nextSlide}>❯</button>
-      <button id="btn-prev" className="carousel-btn" onClick={prevSlide}>❮</button>
+
     </div>
   );
 };
