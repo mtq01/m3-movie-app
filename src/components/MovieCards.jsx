@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import movieList from "../data/movieList";
 import MovieCard from "./MovieCard";
 import Filter from "./Filter";
-import { apiKey } from "../globals/globals";
+import {
+  apiKey,
+  endPointPopular,
+  endPointTopRated,
+  endPointNowPlaying,
+  endPointUpcoming,
+} from "../globals/globals";
 
 function MovieCards() {
   const [activeCategory, setActiveCategory] = useState("top_rated"); //default value is top_rated movies.
