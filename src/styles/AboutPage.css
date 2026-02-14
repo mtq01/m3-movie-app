@@ -62,6 +62,8 @@
   text-align: center;
 }
 
+/* MOBILE ENDS HERE */
+
 @media (min-width: 35rem) {
   .about {
     min-height: 80vh; /*temp min-height until base is adjusted */
