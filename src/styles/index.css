@@ -63,6 +63,10 @@ body {
   color: var(--primary-text-color);
 }
 
+main {
+  padding-top: 6rem;
+}
+
 #root {
   max-width: var(--max-content-width);
   margin: 0 auto;
@@ -80,11 +84,11 @@ h4 {
 }
 
 a {
-    color: var(--primary-text-color);
-    /* remove underline */
-    text-decoration: none;
+  color: var(--primary-text-color);
+  /* remove underline */
+  text-decoration: none;
 }
 
 a:hover {
-    color: var(--accent-yellow);
+  color: var(--accent-yellow);
 }
