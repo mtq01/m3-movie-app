@@ -31,8 +31,13 @@ const AboutPage = () => {
           is more than a search — it’s an experience.
         </p>
 
-        <div className="attribute-container">
-          <img src={tmdbLogo} />
+        <div className="tmdb-attribute-container">
+          <img className="tmdb-logo" src={tmdbLogo} alt="tmdb-logo" />
+
+          <p className="tmdb-attribute-text">
+            “This product uses the TMDb API but is not endorsed or certified by
+            TMDb”
+          </p>
         </div>
       </div>
     </section>
