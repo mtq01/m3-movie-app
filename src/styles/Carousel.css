@@ -91,3 +91,9 @@ button.carousel-btn:hover {
 #btn-next {
     right: 0;
 }
+
+@media (min-width: 20em) {
+    #hero {
+        height: auto;
+    }
+}

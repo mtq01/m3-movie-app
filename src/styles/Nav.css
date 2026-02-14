@@ -1,6 +1,6 @@
 /* <nav> mobile styling */
 #logo {
-    width: 5rem;
+    width: 3.5rem;
     padding-right: 1rem;
 
     /* hides white vertical border to right of cinemax logo that displays on desktop */
@@ -68,7 +68,7 @@ header {
     z-index: 1001;
     right: 0;
     left: 0;
-    top: 6rem;
+    top: 5.35rem;
     flex-direction: column;
     padding: var(--global-padding);
     border-top: 0.0625rem solid var(--bg-dark-blue);
