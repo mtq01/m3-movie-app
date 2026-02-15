@@ -10,25 +10,28 @@ const Favorites = () => {
   }, []);
 
   return (
-    <section>
-      <div className="heading-container">
-        <svg
-          className="fav-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-        >
-          <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
-        </svg>
+    <section className="favorites">
+      <div className="fav-container">
+        <div className="fav-heading-container">
+          <svg
+            className="fav-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+          >
+            <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
+          </svg>
 
-        <h2>My List</h2>
-      </div>
-      <div className="fav-content-container">
-        <p>
-          You have no favorite movies, return to the <a>homepage</a> to add a
-          favourite movie
-        </p>
+          <h2>My List</h2>
+        </div>
+        <div className="fav-content-container">
+          <div className="no-movie-msg-wrapper">
+            <h3>Sorry!</h3>
+            <p>
+              You have no favorite movies, return to the <a>homepage</a> to add
+              a favourite movie.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
