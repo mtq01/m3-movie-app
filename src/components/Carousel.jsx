@@ -1,7 +1,22 @@
+/* 
++++++ createPortal is used under 'pop up logic / ui'. to solve a Stacking Context issue +++++
+
+- without it, the popup is stuck inside the carousels CSS rules. even when using a high z-index the navbar (which sits outside the carousel) stayed
+on top.
+
+- using createPortal decouples the popup from the carousels DOM hierarchy and renders it in the 'document.body' and then the popup can utilize the
+z-index properly and sit on top of all other page elements. It's a weird workaround for this, but I couldn't get anything else to work.
+*/
+import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
 import "../globals/globals.js";
-import { apiKey, endPointPopular, imageBaseURL, endPointTrailer } from "../globals/globals.js";
+import {
+  apiKey,
+  endPointPopular,
+  imageBaseURL,
+  endPointTrailer,
+} from "../globals/globals.js";
 
 const Carousel = () => {
   // +++++ track index / initialize state +++++
@@ -95,7 +110,6 @@ const Carousel = () => {
   // +++++ renders "loading" if 'movies' is empty on page load. +++++
   if (movies.length === 0) return <div className="loading">Loading...</div>;
 
-
   // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
     <div id="hero">
@@ -118,8 +132,7 @@ const Carousel = () => {
           let shortDescription = slide.overview;
           if (slide.overview.length > 250) {
             shortDescription = slide.overview.slice(0, 250) + "...";
-          } 
-
+          }
 
           // return the img tag with the class (determined by the logic above)
           return (
@@ -148,65 +161,68 @@ const Carousel = () => {
         })}
       </div>
 
-            {/* pop up logic / ui */}
-              {isPopupOpen === true && (
-                <div
-                  className="popup-overlay"
-                  onClick={() => {
-                    setIsPopupOpen(false);
-                    setTrailerKey("");
-                  }}
-                >
-                  <div
-                    className="popup-content"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <button
-                      className="close-btn"
-                      onClick={() => {
-                        setIsPopupOpen(false);
-                        setTrailerKey("");
-                      }}
-                    >
-                      X
-                    </button>
+      {/* +++++ pop up logic / ui +++++ */}
+      {isPopupOpen && createPortal (
+        <div
+          className="popup-overlay"
+          onClick={() => {
+            setIsPopupOpen(false);
+            setTrailerKey("");
+          }}
+        >
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-btn"
+              onClick={() => {
+                setIsPopupOpen(false);
+                setTrailerKey("");
+              }}
+            >
+              X
+            </button>
 
-                    {/* temp hardcode YT embed */}
-                    <iframe
-                      title="Movie Trailer"
-                      src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
-                      allow="autoplay; encrypted-media;"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              )}
+            {/* movie trailer iframe */}
+            <div className="video-responsive">
+              <iframe
+                title="Movie Trailer"
+                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
+                allow="autoplay; encrypted-media;"
+                allowFullScreen>
+                </iframe>
+            </div>
+          </div>
+        </div>,
+        // destination for the 'teleport' (createPortal)
+        document.body
+      )}
 
       {/* +++++ pagination dots +++++ */}
-      <div className="dots-container">
-        {/* loop thru the array & create one dot per slide obj
+      <div className="pill-container">
+        <div className="dots-container">
+          {/* loop thru the array & create one dot per slide obj
         the '_' means we arent using the slide data itself, just its index */}
-        {movies.map((_, index) => {
-          // is the dot the active slide? (same as above logic for 'slide active')
-          let dotClass = "dot";
-          if (index === currentIndex) {
-            dotClass = "dot active";
-          }
-          return (
-            <span
-              // key={index} unique key that hepls react render the list
-              key={index}
-              className={dotClass}
-              /* 
+          {movies.map((_, index) => {
+            // is the dot the active slide? (same as above logic for 'slide active')
+            let dotClass = "dot";
+            if (index === currentIndex) {
+              dotClass = "dot active";
+            }
+            return (
+              <span
+                // key={index} unique key that hepls react render the list
+                key={index}
+                className={dotClass}
+                /* 
             this arrow function prevents 'setCurrentIndex' from running immediately on page load. 
             basically: "wait for a click, then change the state to the specific index"
             otherwise you get a weird error "too many re-renders" which happened to me. 
             if you want to see what i mean remove: '() =>' and refresh the browser
             */
-              onClick={() => setCurrentIndex(index)}
-            ></span>
-          );
-        })}
+                onClick={() => setCurrentIndex(index)}
+              ></span>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
