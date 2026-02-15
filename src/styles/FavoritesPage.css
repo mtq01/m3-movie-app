@@ -1,5 +1,6 @@
 .favorites {
   height: 75vh;
+  padding-top: 5rem;
 }
 .fav-container {
   display: flex;
