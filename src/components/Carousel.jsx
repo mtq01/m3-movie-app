@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
-import angryBirds from "../assets/images/angry-birds-hero.jpg";
-import mandolorian from "../assets/images/mando-hero.jpg";
-import arkAardvark from "../assets/images/ark-aardvark-hero.jpg";
-
-// +++++ array of slide objects (this will change once the API is used) +++++
-const slidesMapArray = [
-  { src: angryBirds, alt: "angry birds" },
-  { src: mandolorian, alt: "mandoloarian" },
-  { src: arkAardvark, alt: "The Ark and the Aardvark" },
-];
+import "../globals/globals.js";
+import { apiKey, endPointPopular, imageBaseURL, endPointTrailer } from "../globals/globals.js";
 
 const Carousel = () => {
   // +++++ track index / initialize state +++++
+  const [movies, setMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [trailerKey, setTrailerKey] = useState("");
 
-  // --> next slide logic
+  // --> next slide logic (required for useEffect timer to work)
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
-      if (prevIndex === slidesMapArray.length - 1) {
+      if (prevIndex === movies.length - 1) {
         return 0; // go back to the start
       } else {
         return prevIndex + 1; // go fwd
@@ -26,18 +21,59 @@ const Carousel = () => {
     });
   };
 
-  // <-- prev slide logic
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        return slidesMapArray.length - 1; // go to the end
-      } else {
-        return prevIndex - 1; // go fwd
+  // +++++ fetch movie trailer +++++
+  const getTrailer = async (movieId) => {
+    // if popup open, close it & clear key
+    if (isPopupOpen) {
+      setIsPopupOpen(false);
+      setTrailerKey("");
+    } else {
+      // make url for speicifc movie
+      const movieUrl = `${endPointTrailer}${movieId}/videos?api_key=${apiKey}`;
+
+      try {
+        const response = await fetch(movieUrl);
+        const data = await response.json();
+
+        // find trailer in results array
+        const video = data.results.find(
+          (vid) => vid.type === "Trailer" && vid.site === "YouTube",
+        );
+
+        if (video) {
+          setTrailerKey(video.key);
+          setIsPopupOpen(true);
+        } else {
+          alert("No Trailer Found!");
+        }
+      } catch (error) {
+        console.error("Error fetching trailer:", error);
       }
-    });
+    }
   };
 
-  // +++++ change slides every 5sec +++++
+  // +++++ fetch movies (banner img) from TMDB +++++
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const url = `${endPointPopular}?api_key=${apiKey}`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.results) {
+          // content filter: set # of images to cycle thru
+          // 0 = starting index
+          // 5 = endpoint
+          setMovies(data.results.slice(0, 5));
+        }
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+    fetchMovies();
+  }, []);
+
+  // +++++ [timer] change slides every 5sec +++++
   useEffect(() => {
     // set thee interval
     const interval = setInterval(() => {
@@ -47,19 +83,30 @@ const Carousel = () => {
     // stop timer if user leafs the page
     return () => clearInterval(interval);
 
-    // reset timer everytime the slide changes
-  }, [currentIndex]);
+    // [next slide] reset timer everytime the slide changes
+  }, [currentIndex, movies]);
 
+  // +++++ popup logic +++++
+  const togglePopup = () => {
+    //flipping the tiggle swtich
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  // +++++ renders "loading" if 'movies' is empty on page load. +++++
+  if (movies.length === 0) return <div className="loading">Loading...</div>;
+
+
+  // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
     <div id="hero">
       <div id="carousel-slides">
-        {/* +++++ runs for each obj in the slidesMapArray, x3 total +++++ */}
-        {slidesMapArray.map((slide, index) => {
+        {/* +++++ runs for each obj in the movies array, x3 total +++++ */}
+        {movies.map((slide, index) => {
           // create var for the className so each slide gets the .slide css styling
           let classNameValue = "slide";
 
           // +++++ conditional logic to check if its the active slide +++++
-            /* index: refers to where we are in the loop (0,1,2)
+          /* index: refers to where we are in the loop (0,1,2)
                currentIndex: is what lives in the react state
                if they match, redefine the var to include both classes
             */
@@ -67,27 +114,79 @@ const Carousel = () => {
             classNameValue = "slide active";
           }
 
-          // +++++ the output +++++
-            /* return the img tag with the class (determined by the logic above) 
-            */
+          // movie description text (adjusted for mobile in css)
+          let shortDescription = slide.overview;
+          if (slide.overview.length > 250) {
+            shortDescription = slide.overview.slice(0, 250) + "...";
+          } 
+
+
+          // return the img tag with the class (determined by the logic above)
           return (
-            <img
-            // key={index} keeps track of which img is which
-              key={index}
-              src={slide.src}
-              alt={slide.alt}
-              className={classNameValue}
-            />
+            // key={slide.id} TMDB unique ID
+            <div key={slide.id} className={classNameValue}>
+              <img
+                // backdrop_path asks for horizontal landscape img (large banners/carouselss)
+                src={`${imageBaseURL}${slide.backdrop_path}`}
+                // .title is the movie name
+                alt={slide.title}
+                className={classNameValue}
+              />
+
+              <div className="movie-info">
+                <h2>{slide.title}</h2>
+                <p>{shortDescription}</p>
+                <button
+                  className="trailer-btn"
+                  onClick={() => getTrailer(slide.id)}
+                >
+                  Watch Trailer
+                </button>
+              </div>
+            </div>
           );
         })}
       </div>
 
-    {/* +++++ pagination dots +++++ */}
+            {/* pop up logic / ui */}
+              {isPopupOpen === true && (
+                <div
+                  className="popup-overlay"
+                  onClick={() => {
+                    setIsPopupOpen(false);
+                    setTrailerKey("");
+                  }}
+                >
+                  <div
+                    className="popup-content"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      className="close-btn"
+                      onClick={() => {
+                        setIsPopupOpen(false);
+                        setTrailerKey("");
+                      }}
+                    >
+                      X
+                    </button>
+
+                    {/* temp hardcode YT embed */}
+                    <iframe
+                      title="Movie Trailer"
+                      src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
+                      allow="autoplay; encrypted-media;"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+              )}
+
+      {/* +++++ pagination dots +++++ */}
       <div className="dots-container">
         {/* loop thru the array & create one dot per slide obj
         the '_' means we arent using the slide data itself, just its index */}
-        {slidesMapArray.map((_, index) => {
-
+        {movies.map((_, index) => {
           // is the dot the active slide? (same as above logic for 'slide active')
           let dotClass = "dot";
           if (index === currentIndex) {
@@ -95,11 +194,10 @@ const Carousel = () => {
           }
           return (
             <span
-            // key={index} unique key that hepls react render the list
+              // key={index} unique key that hepls react render the list
               key={index}
               className={dotClass}
-
-            /* 
+              /* 
             this arrow function prevents 'setCurrentIndex' from running immediately on page load. 
             basically: "wait for a click, then change the state to the specific index"
             otherwise you get a weird error "too many re-renders" which happened to me. 
@@ -110,12 +208,6 @@ const Carousel = () => {
           );
         })}
       </div>
-
-    {/* +++++ nav buttons +++++
-     declare the click behaviour directly on the element instead of using 'addEventListener' bcuz its React and not Vanilla JS
-     */}
-      <button id="btn-next" className="carousel-btn" onClick={nextSlide}>❯</button>
-      <button id="btn-prev" className="carousel-btn" onClick={prevSlide}>❮</button>
     </div>
   );
 };

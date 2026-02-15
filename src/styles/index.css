@@ -63,9 +63,9 @@ body {
   color: var(--primary-text-color);
 }
 
-main {
+/* main {
   padding-top: 6rem;
-}
+} */
 
 #root {
   max-width: var(--max-content-width);
