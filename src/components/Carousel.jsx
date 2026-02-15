@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
 import "../globals/globals.js";
-import { apiKey, endPointPopular, imageBaseURL, endPointTrailer } from "../globals/globals.js";
+import {
+  apiKey,
+  endPointPopular,
+  imageBaseURL,
+} from "../globals/globals.js";
+import TrailerPopup from "../components/TrailerPopup.jsx";
+import { getTrailer } from "../utility/trailerPopupUtil.js";
 
 const Carousel = () => {
   // +++++ track index / initialize state +++++
@@ -22,35 +28,16 @@ const Carousel = () => {
   };
 
   // +++++ fetch movie trailer +++++
-  const getTrailer = async (movieId) => {
-    // if popup open, close it & clear key
-    if (isPopupOpen) {
-      setIsPopupOpen(false);
-      setTrailerKey("");
-    } else {
-      // make url for speicifc movie
-      const movieUrl = `${endPointTrailer}${movieId}/videos?api_key=${apiKey}`;
+const watchTrailer = async (movieId) => {
+  const key = await getTrailer(movieId); // Calls your new utility
 
-      try {
-        const response = await fetch(movieUrl);
-        const data = await response.json();
-
-        // find trailer in results array
-        const video = data.results.find(
-          (vid) => vid.type === "Trailer" && vid.site === "YouTube",
-        );
-
-        if (video) {
-          setTrailerKey(video.key);
-          setIsPopupOpen(true);
-        } else {
-          alert("No Trailer Found!");
-        }
-      } catch (error) {
-        console.error("Error fetching trailer:", error);
-      }
-    }
-  };
+  if (key) {
+    setTrailerKey(key);
+    setIsPopupOpen(true);
+  } else {
+    alert("No Trailer Found!");
+  }
+};
 
   // +++++ fetch movies (banner img) from TMDB +++++
   useEffect(() => {
@@ -86,15 +73,8 @@ const Carousel = () => {
     // [next slide] reset timer everytime the slide changes
   }, [currentIndex, movies]);
 
-  // +++++ popup logic +++++
-  const togglePopup = () => {
-    //flipping the tiggle swtich
-    setIsPopupOpen(!isPopupOpen);
-  };
-
   // +++++ renders "loading" if 'movies' is empty on page load. +++++
   if (movies.length === 0) return <div className="loading">Loading...</div>;
-
 
   // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
@@ -118,8 +98,7 @@ const Carousel = () => {
           let shortDescription = slide.overview;
           if (slide.overview.length > 250) {
             shortDescription = slide.overview.slice(0, 250) + "...";
-          } 
-
+          }
 
           // return the img tag with the class (determined by the logic above)
           return (
@@ -138,7 +117,7 @@ const Carousel = () => {
                 <p>{shortDescription}</p>
                 <button
                   className="trailer-btn"
-                  onClick={() => getTrailer(slide.id)}
+                  onClick={() => watchTrailer(slide.id)}
                 >
                   Watch Trailer
                 </button>
@@ -148,65 +127,43 @@ const Carousel = () => {
         })}
       </div>
 
-            {/* pop up logic / ui */}
-              {isPopupOpen === true && (
-                <div
-                  className="popup-overlay"
-                  onClick={() => {
-                    setIsPopupOpen(false);
-                    setTrailerKey("");
-                  }}
-                >
-                  <div
-                    className="popup-content"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <button
-                      className="close-btn"
-                      onClick={() => {
-                        setIsPopupOpen(false);
-                        setTrailerKey("");
-                      }}
-                    >
-                      X
-                    </button>
-
-                    {/* temp hardcode YT embed */}
-                    <iframe
-                      title="Movie Trailer"
-                      src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
-                      allow="autoplay; encrypted-media;"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              )}
+      {/* +++++ TrailerPopup component +++++ */}
+      <TrailerPopup
+        isOpen={isPopupOpen}
+        trailerKey={trailerKey}
+        onClose={() => {
+          setIsPopupOpen(false);
+          setTrailerKey("");
+        }}
+      />
 
       {/* +++++ pagination dots +++++ */}
-      <div className="dots-container">
-        {/* loop thru the array & create one dot per slide obj
+      <div className="pill-container">
+        <div className="dots-container">
+          {/* loop thru the array & create one dot per slide obj
         the '_' means we arent using the slide data itself, just its index */}
-        {movies.map((_, index) => {
-          // is the dot the active slide? (same as above logic for 'slide active')
-          let dotClass = "dot";
-          if (index === currentIndex) {
-            dotClass = "dot active";
-          }
-          return (
-            <span
-              // key={index} unique key that hepls react render the list
-              key={index}
-              className={dotClass}
-              /* 
+          {movies.map((_, index) => {
+            // is the dot the active slide? (same as above logic for 'slide active')
+            let dotClass = "dot";
+            if (index === currentIndex) {
+              dotClass = "dot active";
+            }
+            return (
+              <span
+                // key={index} unique key that hepls react render the list
+                key={index}
+                className={dotClass}
+                /* 
             this arrow function prevents 'setCurrentIndex' from running immediately on page load. 
             basically: "wait for a click, then change the state to the specific index"
             otherwise you get a weird error "too many re-renders" which happened to me. 
             if you want to see what i mean remove: '() =>' and refresh the browser
             */
-              onClick={() => setCurrentIndex(index)}
-            ></span>
-          );
-        })}
+                onClick={() => setCurrentIndex(index)}
+              ></span>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
