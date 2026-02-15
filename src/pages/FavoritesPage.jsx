@@ -1,5 +1,6 @@
 // Page - Favorites
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { appTitle } from "../globals/globals";
 import "../styles/FavoritesPage.css";
 
@@ -27,8 +28,8 @@ const Favorites = () => {
           <div className="no-movie-msg-wrapper">
             <h3>Sorry!</h3>
             <p>
-              You have no favorite movies, return to the <a>homepage</a> to add
-              a favourite movie.
+              You have no favorite movies, return to the{" "}
+              <NavLink to="/">homepage</NavLink> to add a favourite movie.
             </p>
           </div>
         </div>
