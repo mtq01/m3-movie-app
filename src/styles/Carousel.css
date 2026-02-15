@@ -1,25 +1,85 @@
-/* mobile styles */
+/* +++++ mobile styles carousel +++++ */
 #hero {
     position: relative;
     overflow: hidden;
-    height: 100vh;
     width: 100%;
+    z-index: 1;
+    /* force a cinematic shape instead of full-screen height --- kind of works? */
+    height: auto;
+    aspect-ratio: 4 / 3;
+    min-height: 300px;
 }
 
+#carousel-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* movie images */
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* keeps img from having a weird crop on screen resize. */
+    object-position: center center;
+    /* hides inactive slide */
+    display: none;
+}
+
+.slide.active {
+    /* displays active slide */
+    display: block;
+}
+
+/* +++++ movie details +++++ */
+.movie-info {
+    position: absolute;
+    /* info overlay rests on bottom of carousel on mobile */
+    bottom: 0;
+    left: 0;
+    color: white;
+    z-index: 20;
+    background: var(--nav-dark-blue);
+    /* no border radius on mobile */
+    border-radius: 0;
+    padding: 1rem;
+    max-width: 100%;
+    width: 100%;
+    /* make title & button sit inline */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.75rem;
+}
+
+/* movie info adjustment for mobile screen */
+.movie-info p {
+    display: none;
+}
+
+/* reset h1 padding/margin for movie-info container */
+.movie-info>h2 {
+    padding: 0;
+    margin: 0;
+}
+
+/* +++++ pagination dots +++++ */
 .dots-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 1.25rem;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 0.625rem;
     /* dots sit on top of the cover img */
     z-index: 15;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    display: none;
+    width: 0.75rem;
+    height: 0.75rem;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
@@ -29,65 +89,146 @@
 .dot.active {
     background-color: var(--accent-yellow);
     transform: scale(1.35);
-    border: 2px solid white;
+    border: 0.125rem solid white;
     /* Makes the active dot pop slightly */
 }
 
-#carousel-slides {
-    display: flex;
-    width: 100%;
-    height: 100%;
+/* +++++ trailer buttons +++++ */
+.trailer-btn {
+    width: fit-content;
+    padding: 0.75rem;
+    border: 0;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    background: var(--ui-light-blue);
 }
 
-/* images */
-.slide {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* keeps img from having a weird crop on screen resize. doesnt work for every img depending on where the characters are. for example: if you change center to right the mandolorian poster looks good, but the aardvark one doesnt on resize */
-    object-position: top center;
-    display: none;
-    /* hides inactive slide */
-}
-
-.slide.active {
-    display: block;
-    /* displays active slide */
-}
-
-/* button styles */
-
-/* default */
-button.carousel-btn {
-    position: absolute;
-    /* sets height and width of btns */
-    width: 3rem;
-    height: 3rem;
-    /* aligns arrow in the center of the btn */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-    margin: 0 0.5rem;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 50%;
+.trailer-btn:hover {
+    background: var(--accent-yellow);
     cursor: pointer;
-    /* bcuz of the navbar i changed this from 50% to 60. otherwise the buttons look like they sit too high */
-    top: 60%;
-    /* move btns down 50% from the top to center of parent container */
-    transform: translateY(-50%);
-    /* moves btns back up by half of their own height */
-    z-index: 10;
 }
 
-button.carousel-btn:hover {
-    background: rgba(0, 0, 0);
+/* +++++ popup overlay for trailer +++++ */
+.popup-overlay {
+    position: fixed;
+    /* stays in the same spot on scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* Darkens the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* positioned on top of nav bar */
+    z-index: 2000;
 }
 
-/* pushes button to the right of the container */
-#btn-next {
+.popup-content {
+    background: #000;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    border: 2px solid var(--accent-yellow);
+}
+
+.popup-content iframe {
+    width: 100%;
+    height: 28.125rem;
+    border: none;
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: -40px;
     right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* +++++ tablet breakpoint 600px +++++ */
+@media (min-width: 37.5em) {
+
+    /* movie-info adjustment for tablet */
+    .movie-info p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .movie-info {
+        max-width: 40%;
+        flex-direction: column;
+        left: 1rem;
+        bottom: 3rem;
+        /* adds border radius on tablet & desktop */
+        border-radius: 0.25rem;
+    }
+
+    /* display dot on tablet */
+    .dot {
+        display: block;
+    }
+}
+
+/* +++++ desktop styling @ 768px +++++ */
+@media (min-width: 48rem) {
+    #hero {
+        height: 100vh;
+        z-index: 1;
+    }
+
+    /* images */
+    .slide {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* keeps img from having a weird crop on screen resize. 
+        doesnt work for every img depending on where the characters are. 
+        for example: if you change center to right the mandolorian poster looks good, 
+        but the aardvark one doesnt on resize */
+        object-position: top center;
+        display: none;
+        /* hides inactive slide */
+    }
+
+    /* movie details */
+    .movie-info {
+        position: absolute;
+        /* movies the card up from the bottom */
+        bottom: 15rem;
+        left: 1rem;
+        /* stops the text from hitting the right edge */
+        max-width: 35%;
+        padding: 2rem 1rem;
+        /* spacing between movie-info items */
+        flex-direction: column;
+        gap: 1.75rem;
+    }
+
+    /* movie-info adjustment for desktop */
+    .movie-info p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* display dots on desktop */
+    .dot {
+        display: block;
+    }
 }
