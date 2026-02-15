@@ -1,3 +1,13 @@
+/* 
++++++ createPortal is used under 'pop up logic / ui'. to solve a Stacking Context issue +++++
+
+- without it, the popup is stuck inside the carousels CSS rules. even when using a high z-index the navbar (which sits outside the carousel) stayed
+on top.
+
+- using createPortal decouples the popup from the carousels DOM hierarchy and renders it in the 'document.body' and then the popup can utilize the
+z-index properly and sit on top of all other page elements. It's a weird workaround for this, but I couldn't get anything else to work.
+*/
+import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
 import "../globals/globals.js";
@@ -151,8 +161,8 @@ const Carousel = () => {
         })}
       </div>
 
-      {/* pop up logic / ui */}
-      {isPopupOpen === true && (
+      {/* +++++ pop up logic / ui +++++ */}
+      {isPopupOpen && createPortal (
         <div
           className="popup-overlay"
           onClick={() => {
@@ -171,15 +181,19 @@ const Carousel = () => {
               X
             </button>
 
-            {/* temp hardcode YT embed */}
-            <iframe
-              title="Movie Trailer"
-              src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
-              allow="autoplay; encrypted-media;"
-              allowFullScreen
-            ></iframe>
+            {/* movie trailer iframe */}
+            <div className="video-responsive">
+              <iframe
+                title="Movie Trailer"
+                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
+                allow="autoplay; encrypted-media;"
+                allowFullScreen>
+                </iframe>
+            </div>
           </div>
-        </div>
+        </div>,
+        // destination for the 'teleport' (createPortal)
+        document.body
       )}
 
       {/* +++++ pagination dots +++++ */}
