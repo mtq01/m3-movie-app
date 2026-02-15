@@ -1,13 +1,3 @@
-/* 
-+++++ createPortal is used under 'pop up logic / ui'. to solve a Stacking Context issue +++++
-
-- without it, the popup is stuck inside the carousels CSS rules. even when using a high z-index the navbar (which sits outside the carousel) stayed
-on top.
-
-- using createPortal decouples the popup from the carousels DOM hierarchy and renders it in the 'document.body' and then the popup can utilize the
-z-index properly and sit on top of all other page elements. It's a weird workaround for this, but I couldn't get anything else to work.
-*/
-import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
 import "../globals/globals.js";
@@ -15,8 +5,9 @@ import {
   apiKey,
   endPointPopular,
   imageBaseURL,
-  endPointTrailer,
 } from "../globals/globals.js";
+import TrailerPopup from "../components/TrailerPopup.jsx";
+import { getTrailer } from "../utility/trailerPopupUtil.js";
 
 const Carousel = () => {
   // +++++ track index / initialize state +++++
@@ -37,35 +28,16 @@ const Carousel = () => {
   };
 
   // +++++ fetch movie trailer +++++
-  const getTrailer = async (movieId) => {
-    // if popup open, close it & clear key
-    if (isPopupOpen) {
-      setIsPopupOpen(false);
-      setTrailerKey("");
-    } else {
-      // make url for speicifc movie
-      const movieUrl = `${endPointTrailer}${movieId}/videos?api_key=${apiKey}`;
+const watchTrailer = async (movieId) => {
+  const key = await getTrailer(movieId); // Calls your new utility
 
-      try {
-        const response = await fetch(movieUrl);
-        const data = await response.json();
-
-        // find trailer in results array
-        const video = data.results.find(
-          (vid) => vid.type === "Trailer" && vid.site === "YouTube",
-        );
-
-        if (video) {
-          setTrailerKey(video.key);
-          setIsPopupOpen(true);
-        } else {
-          alert("No Trailer Found!");
-        }
-      } catch (error) {
-        console.error("Error fetching trailer:", error);
-      }
-    }
-  };
+  if (key) {
+    setTrailerKey(key);
+    setIsPopupOpen(true);
+  } else {
+    alert("No Trailer Found!");
+  }
+};
 
   // +++++ fetch movies (banner img) from TMDB +++++
   useEffect(() => {
@@ -100,12 +72,6 @@ const Carousel = () => {
 
     // [next slide] reset timer everytime the slide changes
   }, [currentIndex, movies]);
-
-  // +++++ popup logic +++++
-  const togglePopup = () => {
-    //flipping the tiggle swtich
-    setIsPopupOpen(!isPopupOpen);
-  };
 
   // +++++ renders "loading" if 'movies' is empty on page load. +++++
   if (movies.length === 0) return <div className="loading">Loading...</div>;
@@ -151,7 +117,7 @@ const Carousel = () => {
                 <p>{shortDescription}</p>
                 <button
                   className="trailer-btn"
-                  onClick={() => getTrailer(slide.id)}
+                  onClick={() => watchTrailer(slide.id)}
                 >
                   Watch Trailer
                 </button>
@@ -161,40 +127,15 @@ const Carousel = () => {
         })}
       </div>
 
-      {/* +++++ pop up logic / ui +++++ */}
-      {isPopupOpen && createPortal (
-        <div
-          className="popup-overlay"
-          onClick={() => {
-            setIsPopupOpen(false);
-            setTrailerKey("");
-          }}
-        >
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="close-btn"
-              onClick={() => {
-                setIsPopupOpen(false);
-                setTrailerKey("");
-              }}
-            >
-              X
-            </button>
-
-            {/* movie trailer iframe */}
-            <div className="video-responsive">
-              <iframe
-                title="Movie Trailer"
-                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
-                allow="autoplay; encrypted-media;"
-                allowFullScreen>
-                </iframe>
-            </div>
-          </div>
-        </div>,
-        // destination for the 'teleport' (createPortal)
-        document.body
-      )}
+      {/* +++++ TrailerPopup component +++++ */}
+      <TrailerPopup
+        isOpen={isPopupOpen}
+        trailerKey={trailerKey}
+        onClose={() => {
+          setIsPopupOpen(false);
+          setTrailerKey("");
+        }}
+      />
 
       {/* +++++ pagination dots +++++ */}
       <div className="pill-container">
