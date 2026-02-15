@@ -65,15 +65,28 @@
 }
 
 /* +++++ pagination dots +++++ */
-.dots-container {
+.pill-container {
     position: absolute;
-    bottom: 1.25rem;
+    bottom: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 0.625rem;
     /* dots sit on top of the cover img */
     z-index: 15;
+}
+
+.dots-container {
+    display: flex;
+    padding: 0.5rem 0.75rem;
+    gap: 0.45rem;
+    border-radius: 1rem;
+    transition: 0.3s ease;
+        background: rgba(0, 0, 0, 0.718);
+
+}
+
+.dots-container:hover {
+    transform: scale(1.25);
 }
 
 .dot {
@@ -84,6 +97,10 @@
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.dot:hover {
+    background: var(--accent-yellow);
 }
 
 .dot.active {
