@@ -3,9 +3,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    /* force a cinematic shape instead of full-screen height --- kind of works? */
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 100dvh;
     min-height: 18.75rem;
 }
 
@@ -31,30 +29,32 @@
     display: block;
 }
 
-/* +++++ movie details +++++ */
+/* +++++ movie info overlay +++++ */
 .movie-info {
     position: absolute;
     /* info overlay rests on bottom of carousel on mobile */
     bottom: 0;
     left: 0;
-    color: white;
-    z-index: 20;
+    max-width: 100%;
     background: var(--nav-dark-blue);
     /* no border radius on mobile */
     border-radius: 0;
-    padding: 1rem;
-    max-width: 100%;
+    padding: 1.5rem 1rem;
     width: 100%;
-    /* make title & button sit inline */
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1.75rem;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 20;
 }
 
 /* movie info adjustment for mobile screen */
 .movie-info p {
-    display: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* reset h1 padding/margin for movie-info container */
@@ -68,8 +68,8 @@
     position: absolute;
     bottom: 1rem;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    /* hide pills and pagination mobile */
+    display: none;
     /* dots sit on top of the cover img */
     z-index: 15;
 }
@@ -89,7 +89,6 @@
 }
 
 .dot {
-    display: none;
     width: 0.75rem;
     height: 0.75rem;
     background-color: rgba(255, 255, 255, 0.5);
@@ -126,67 +125,102 @@
     cursor: pointer;
 }
 
-/* +++++ tablet breakpoint 600px +++++ */
-@media (min-width: 37.5em) {
-
-    /* movie-info adjustment for tablet */
-    .movie-info p {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .movie-info {
-        max-width: 40%;
-        flex-direction: column;
-        left: 1rem;
-        bottom: 3rem;
-        /* adds border radius on tablet & desktop */
-        border-radius: 0.25rem;
-    }
-
-    /* display dot on tablet */
-    .dot {
-        display: block;
-    }
+/* +++++ popup overlay for trailer +++++ */
+.popup-overlay {
+    position: fixed;
+    /* stays in the same spot on scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* Darkens the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* positioned on top of nav bar */
+    z-index: 9999;
 }
 
-/* +++++ desktop styling @ 768px +++++ */
+.popup-content {
+    background: #000;
+    padding: 1.25rem;
+    width: 100%;
+    max-width: 70rem;
+    position: relative;
+    border: 0.125rem solid var(--accent-yellow);
+    border-radius: 1rem;
+    margin: 1rem;
+    z-index: 10;
+}
+
+/* +++++ video popup styling +++++ */
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.35rem;
+    
+    /* close btn bg */
+    background: rgba(255, 255, 255, 0);
+    border: 0.1875rem solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+
+    /* 'X' color & btn size */
+    color: white;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1;
+
+    /* center 'X' inside circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* smooth hover */
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: white;
+    color: var(--nav-dark-blue);
+    border: 0.1875rem solid var(--accent-yellow);
+}
+
+/* +++++ tablet & desktop styling @ 768px +++++ */
 @media (min-width: 48rem) {
     #hero {
         height: 100vh;
-        z-index: 1;
-    }
-
-    /* images */
-    .slide {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        /* keeps img from having a weird crop on screen resize. 
-        doesnt work for every img depending on where the characters are. 
-        for example: if you change center to right the mandolorian poster looks good, 
-        but the aardvark one doesnt on resize */
-        object-position: top center;
-        display: none;
-        /* hides inactive slide */
     }
 
     /* movie details */
     .movie-info {
-        position: absolute;
-        /* movies the card up from the bottom */
-        bottom: 15rem;
-        left: 1rem;
+        bottom: 5rem;
+        left: 2rem;
         /* stops the text from hitting the right edge */
-        max-width: 35%;
+        width: auto;
+        min-width: 25rem;
+        max-width: 40%;
         padding: 2rem 1rem;
-        /* spacing between movie-info items */
-        flex-direction: column;
-        gap: 1.75rem;
+        border-radius: 0.5rem;
     }
 
     /* movie-info adjustment for desktop */
@@ -199,8 +233,9 @@
         text-overflow: ellipsis;
     }
 
-    /* display dots on desktop */
-    .dot {
-        display: block;
+    /* display pills and pagination dots on desktop */
+    .pill-container {
+        display: flex;
+        justify-content: center;
     }
 }
