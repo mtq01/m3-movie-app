@@ -9,7 +9,9 @@ import {
   endPointUpcoming,
 } from "../globals/globals"; // API endpoints and key (The actual key is in .env file for security reason - .env file must be in root directory)
 
-function MovieCards() {
+
+// added id, tabIndex to MovieCards function for skip-to-content functionality 
+function MovieCards({ id, tabIndex }) {
   // State variables
   // activeCategory stores which category tab is currently selected (default: "top_rated")
   const [activeCategory, setActiveCategory] = useState("top_rated"); 
@@ -61,7 +63,7 @@ function MovieCards() {
 
   // Render UI
   return (
-    <>
+    <section id={id} tabIndex={tabIndex}>
       {/* Filter tabs: Top Rated, Upcoming, Now Playing, Popular */}
       {/* onChange calls setActiveCategory to update state */}
       <Filter onChange={setActiveCategory} />
@@ -101,7 +103,7 @@ function MovieCards() {
           ))}
         </div>
       )}
-    </>
+    </section>
   );
 }
 

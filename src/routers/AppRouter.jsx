@@ -13,14 +13,21 @@ import DetailsPage from "../pages/DetailsPage.jsx";
 function AppRouter() {
   return (
     <BrowserRouter>
+      {/* jump to content - screen reader*/}
+      <a id="screen-reader-text" href="#main-content">
+        Skip to content
+      </a>
+
       <Nav />
+
+      {/* id & tab index for jump-to-content */}
       <main>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/details" element={<DetailsPage />} /> 
-      </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/details" element={<DetailsPage />} />
+        </Routes>
       </main>
       <Footer />
     </BrowserRouter>
