@@ -76,23 +76,20 @@ Once you push your feature to GitHub you need to make a PR.
 
 - `git checkout your/feature/branch`                  (go back to the feature you are actually building.)
 
-- `git fetch`                           (view changes, `--prune` is not needed here bcuz we did that previously)
+- `git fetch`                                         (view changes, `--prune` is not needed here bcuz we did that previously)
 
 - `git merge origin/staging`                          (pour the fresh server code into your feature branch.)
 
 - `git stash pop`                                     (brings your work back onto the new code from the stash.)
 
+_Scroll Down to see an alternative method (its optional, but shorter and safer and replaces `pop` with `apply`)_
+
+
+
+
 **Key Details**
 
 **fetch:** Reaches out to GitHub and makes a "photocopy" of all team updates. It does not touch your actual code files, making it 100% safe to run anytime.
-
-- Tip: If you have an active feature branch you're working on *(and don't need to create a brand new feature)* you can update the active feature a little faster by following these steps:
-
-- `git stash -m "comment"` 
-- `git fetch --prune` 
-- `git merge origin/staging`
-- `git stash pop`
-
 
 **--all:** Tells Git to map every single branch on the server, ensuring you don't miss new work from teammates. (technically not needed since we aren't using forks in our repo, but it's still valid)
 
@@ -102,36 +99,76 @@ Once you push your feature to GitHub you need to make a PR.
 
 **origin/staging:** origin is the server (GitHub). By merging origin/staging instead of just staging, you are guaranteed to get the official, clean version of the code.
 
-## Merge Conflicts
+### Merge Conflicts
 
 1. If you get a merge conflict, dont panic.
 
 2. **Follow these steps (or ask me):**
 Pick a winner: VSCode will give you buttons at the top of the conflict:
-    - *Accept Current Change:* Keeps your version.
-    - *Accept Incoming Change:* Keeps the staging version. 
-    - *Accept Both:* Keeps both (you'll have to clean up the order).
-    - *Save and Commit:* Once the scary "red" is gone, save the file, stage it (git add .), and commit the fix.
+    - **Accept Current Change:** Keeps your version.
+    - **Accept Incoming Change:** Keeps the staging version. 
+    - **Accept Both:** Keeps both (you'll have to clean up the order).
+    - **Save and Commit:** Once the scary "red" is gone, save the file, stage it (git add .), and commit the fix.
 
 
-**Extras (Optional):**                             
-                                        - Peek a specific file in terminal. Handy if you know which file you want to look at. It will print the content of the file directly in terminal withour changing your current workspace:
+**Extras (Optional):**        
+
+- Peek a specific file in terminal. Handy if you know which file you want to look at. It will print the content of the file directly in terminal withour changing your current workspace:
                                     
-                                        git show origin/name/feature/name-of-feature:path/to/file.css
+`git show origin/name/feature/name-of-feature:path/to/file.css`
 
-                                        - Peek what changed. See what was added/removed compared to what you have right now. 'head' is the shortcut for 'where you are right now', '..' means compare against, and 'origin/staging' is the photocopy of the server you downloaded:
+- Peek what changed. See what was added/removed compared to what you have right now. 'head' is the shortcut for 'where you are right now', '..' means compare against, and 'origin/staging' is the photocopy of the server you downloaded:
 
-                                        git diff HEAD..origin/name/feature/name-of-feature      (shows all code changes)
+`git diff HEAD..origin/name/feature/name-of-feature`      (shows all code changes)
 
-                                        - Alternative ways to "peek" and the differences.
+- Alternative ways to "peek" and the differences.
 
-                                        git diff HEAD..origin/staging --name-only               (shows the file name changes)
-                                        git log HEAD..origin/staging                            (shows the list of commits)
+`git diff HEAD..origin/staging --name-only`               (shows the file name changes)
+`git log HEAD..origin/staging`                            (shows the list of commits)
 
-                                        - If the changes are too complex to read in terminal, you can open the files in your editor to see how they work (You can view/edity our collaboraters features, but please dont make changes to your team members code without permission):
+- If the changes are too complex to read in terminal, you can open the files in your editor to see how they work (You can view/edity our collaboraters features, but please dont make changes to your team members code without permission):
 
-                                        git checkout origin/name/feature/name-of-feature
+`git checkout origin/name/feature/name-of-feature`
 
+## Alternative Method for Pulling Changes (optional / safer) 
+_(Merge conflicts can happen regardless of which pull method you use)_
+
+`git stash`                             save current progress (of your feature)
+`git fetch origin staging:staging`      updates local `staging` branch without switching branches
+`git merge staging`                     brings staging changes into your feature
+`git stash apply`                       applies your stashed changes. (if conflict, review instructions below)
+`git stash drop`                        if no conflict, run the drop command to delete your stashed photocopy of your feature
+
+_dont run the `drop` command until you confirmed that your changes were applied._
+
+**Details**
+(`apply` is safer than `pop` bcuz it acts as a copy & paste rather than cut & paste) 
+
+- `pop` takes your changes out of the _stash_ and tries to merge. if the merge fails and you mess up the solution, your save point is gone!
+- `apply` is safer bcuz it applies a copy of your changes to your branch but keeps the original safely in your stash list.
+
+_if you run into a big conflict after using `apply` and realize you deleted the wrong code, you can run `git reset --hard` to undue the mess and `apply` it again bcuz a photocopy of your changes is still stored in the **stash**_
+
+### !!!!!! Merge Conflict - How To Fix:
+- VSCode will alert you of the issues, open the conflicted files.
+- [manual fix] delete the markers `<<<<`, `====` `>>>>` and fix the code
+- [tool fix] use the _conflict_ view and either `Accept Incoming Change`, `Accept Current Change`, or `Accept Both`
+- once the code is fixed run `git add <filename>` and `git commit -m "resolved merge conflict..."
+
+**Stash List Details:**
+
+- View whats inside your **stash list**:         `git stash list`
+- Multiple stashes will look like:               `stash@{0}`, `stash@{1}` etc.
+- Inspect a stash:                               `git stash show -p stash@{0}` (-p means patch & will show you which lines of code changed)
+
+_if you make a mistake and delete the wrong lines during a **merge conflict**, do this:_
+- wipe the conflicted files:                     `git reset --hard`
+- start over with a using your stashed files:    `git stash apply`
+
+**Naming Your Stashes (Optional, good practice):**
+_makes your stash list easier to read later_
+
+- `git stash save "name-of-stash"`
    
    
 
@@ -142,7 +179,7 @@ Pick a winner: VSCode will give you buttons at the top of the conflict:
             Delete on GitHub             - `https://github.com/mtq01/m3-movie-app/branches (click trashcan bside branch)`
             Prune 'Ghost' References     - `git fetch --prune`
 
-            Note: IF we did delete the Branches on GitHub and Locally, we would also need to run the'--prune' command to clean up any 'ghost' references. Our computer still thinks the branch exists until we prune it.
+_Note: IF we did delete the Branches on GitHub and Locally, we would also need to run the'--prune' command to clean up any 'ghost' references. Our computer still thinks the branch exists until we prune it._
                                          
                                          
 **Tips on Deleting a Local Branch:**
