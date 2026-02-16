@@ -1,9 +1,9 @@
 /* <nav> mobile styling */
 #logo {
-    width: 4rem;
+    width: 3.5rem;
     padding-right: 1rem;
     /* hides white vertical border to right of cinemax logo that displays on desktop */
-    background: linear-gradient(transparent, transparent);
+    /* background: linear-gradient(transparent, transparent); */
 }
 
 /* icon button styling */
@@ -44,14 +44,14 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1001;
+    z-index: var(--z-index-nav);
 }
 
 #main-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--global-padding);
+    padding: var(--mobile-nav-padding);
     background: var(--nav-dark-blue);
 }
 
@@ -63,7 +63,6 @@ header {
     display: flex;
     background: var(--nav-dark-blue);
     position: absolute;
-    z-index: 1001;
     right: 0;
     left: 0;
     top: 5.4rem;
@@ -94,7 +93,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    z-index: var(--z-index-login);
 }
 
 .login {
@@ -111,7 +110,7 @@ ul {
         background-size: .0625rem 75%;
         background-repeat: no-repeat;
         background-position: right center;
-        width: 4rem;
+        width: 4.5rem;
     }
 
     #hamburger {
