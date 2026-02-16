@@ -63,6 +63,7 @@ function MovieCards({ id, tabIndex }) {
 
   // Render UI
   return (
+    // ++++++++++++++++++ changed <> & </> to <section> & added 'id={id} tabIndex={tabIndex}' for jump-to-content
     <section id={id} tabIndex={tabIndex}>
       {/* Filter tabs: Top Rated, Upcoming, Now Playing, Popular */}
       {/* onChange calls setActiveCategory to update state */}
