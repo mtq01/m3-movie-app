@@ -19,8 +19,6 @@ function AppRouter() {
       </a>
 
       <Nav />
-
-      {/* id & tab index for jump-to-content */}
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
