@@ -4,10 +4,13 @@
     /* stays in the same spot on scroll */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    /* default height */
+    height: 100vh;
+    /* fallback height */
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.8);
-    /* Darkens the background */
+    /* darkens the background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +21,6 @@
 .popup-content {
     background: #000;
     padding: 1.25rem;
-    width: 100%;
     max-width: 70rem;
     position: relative;
     border: 0.125rem solid var(--accent-yellow);
@@ -29,12 +31,13 @@
 /* +++++ video popup styling +++++ */
 .video-responsive {
     overflow: hidden;
-    padding-bottom: 56.25%;
+    padding-bottom: 65%;
     position: relative;
     height: 0;
 }
 
 .video-responsive iframe {
+    /* object-fit: cover; */
     left: 0;
     top: 0;
     height: 100%;

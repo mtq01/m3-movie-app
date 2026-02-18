@@ -11,10 +11,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section>
+    <>
       <Carousel />
-      <MovieCards />
-    </section>
+      {/* passed skip to content directly into movie cards component (had to update MovieCards.jsx as well) */}
+      <MovieCards id="main-content" tabIndex="-1" />
+    </>
   );
 };
 
