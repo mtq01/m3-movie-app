@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/Carousel.css";
 import "../globals/globals.js";
-import {
-  apiKey,
-  endPointPopular,
-  imageBaseURL,
-} from "../globals/globals.js";
+import { apiKey, endPointPopular, imageBaseURL } from "../globals/globals.js";
 import TrailerPopup from "../components/TrailerPopup.jsx";
 import { getTrailer } from "../utility/trailerPopupUtil.js";
 
@@ -15,29 +11,70 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [trailerKey, setTrailerKey] = useState("");
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
-  // --> next slide logic (required for useEffect timer to work)
+  // --> next slide logic (required for useEffect timer to work & mobile swipe next)
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
       if (prevIndex === movies.length - 1) {
         return 0; // go back to the start
       } else {
-        return prevIndex + 1; // go fwd
+        return prevIndex + 1; // go fwd 1 slide
+      }
+    });
+  };
+  // prev slide logic (move backward - mobile)
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      // if at first slide, jump to end slide
+      if (prevIndex === 0) {
+        return movies.length - 1;
+      } else {
+        return prevIndex - 1; // go back 1 slide
       }
     });
   };
 
-  // +++++ fetch movie trailer +++++
-const watchTrailer = async (movieId) => {
-  const key = await getTrailer(movieId); // Calls your new utility
+  // handlers for touch swipe mobile
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
-  if (key) {
-    setTrailerKey(key);
-    setIsPopupOpen(true);
-  } else {
-    alert("No Trailer Found!");
-  }
-};
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50; // Swiped left (show next)
+    const isRightSwipe = distance < -50; // Swiped right (show prev)
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+
+    // Reset values so a tap doesn't trigger a swipe later
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  // +++++ fetch movie trailer +++++
+  const watchTrailer = async (movieId) => {
+    const key = await getTrailer(movieId); // Calls your new utility
+
+    if (key) {
+      setTrailerKey(key);
+      setIsPopupOpen(true);
+    } else {
+      alert("No Trailer Found!");
+    }
+  };
 
   // +++++ fetch movies (banner img) from TMDB +++++
   useEffect(() => {
@@ -78,7 +115,12 @@ const watchTrailer = async (movieId) => {
 
   // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
-    <div id="hero">
+    <div
+      id="hero"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div id="carousel-slides">
         {/* +++++ runs for each obj in the movies array, x3 total +++++ */}
         {movies.map((slide, index) => {
@@ -109,7 +151,7 @@ const watchTrailer = async (movieId) => {
                 src={`${imageBaseURL}${slide.backdrop_path}`}
                 // .title is the movie name
                 alt={slide.title}
-                className={classNameValue}
+                className="hero-img"
               />
 
               <div className="movie-info">
