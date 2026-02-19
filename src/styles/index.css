@@ -91,12 +91,21 @@ h4 {
   font-family: var(--font-heading);
 }
 
+/* [LVHFA] Specificity link style format (Link, Visited, Hover, Focus, Active) - we arent using visited 
+- Meets accessibility standards
+*/
 a {
   color: var(--primary-text-color);
-  /* remove underline */
   text-decoration: none;
+  transition: color 0.2s ease;
 }
-
 a:hover {
   color: var(--accent-yellow);
+}
+a:focus {
+  outline: .125rem solid var(--accent-yellow);
+  outline-offset: .25rem;
+}
+a:active {
+  color: var(--ui-light-blue);
 }
