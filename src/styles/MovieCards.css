@@ -117,3 +117,19 @@ button.favourite {
     opacity: 1;
   }
 }
+
+/* Styling for the favoruite button states */
+.fav-btn svg {
+  width: 2.5rem;
+  height: auto;
+}
+
+.fav-btn.add svg {
+  fill: none;
+  stroke: var(--accent-yellow);
+  stroke-width: 40;
+}
+
+.fav-btn.remove svg {
+  fill: var(--accent-yellow);
+}
