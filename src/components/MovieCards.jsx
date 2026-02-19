@@ -32,7 +32,7 @@ function MovieCards({ id, tabIndex }) {
     upcoming: endPointUpcoming,
   };
 
-  // Variable for favourites button
+  // Pulls favorites array from the redux store
   const favs = useSelector((state) => state.favs.favMovies);
 
   // useEffect: Fetch movies whenever activeCategory changes
@@ -108,7 +108,7 @@ function MovieCards({ id, tabIndex }) {
               overview={movie.overview} // Movie overview text
               // Learn more link passes movie ID via query params for the details page (Query parameters in URLs in React/JS work just like query strings in PHP.)
               details_link={`/details?id=${movie.id}`}
-              // isFav state boolean actived via isFav.js
+              // Checks whether movie is already via the isFav boolean and controls the button state
               isFav={isFav(favs, movie.id)}
             />
           ))}

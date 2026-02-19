@@ -24,7 +24,7 @@ const initialState = {
   favMovies: favsFromLocalStorage.favMovies,
 };
 
-// This helper function finds the index of movieToRemove inside of the favMovies array by loop through the movie ids until it finds a match.
+// This helper function finds the index of movieToRemove inside of the favMovies array by looping through the movie ids until it finds a match.
 function getMovieIndex(movieToRemove, favMovies) {
   return favMovies.findIndex((movie) => movie.id === movieToRemove.id);
 }
