@@ -7,10 +7,32 @@ on top.
 - using createPortal decouples the popup from the carousels DOM hierarchy and renders it in the 'document.body' and then the popup can utilize the
 z-index properly and sit on top of all other page elements. It's a weird workaround for this, but I couldn't get anything else to work.
 */
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import '../styles/TrailerPopup.css';
 
 const TrailerPopup = ({ trailerKey, onClose }) => {
+
+  // close popup if ESC key is pressed
+  // listen for ESC key
+  useEffect(() => {
+    const escKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    // add listener only IF the popup isopen
+    if (trailerKey) {
+      window.addEventListener("keydown", escKeyDown);
+    }
+
+    // remove listener after popup closes
+    return () => {
+      window.removeEventListener("keydown", escKeyDown);
+    };
+  }, [trailerKey, onClose]);
+
   // if no key, show nothing
   if (!trailerKey) return null;
 
