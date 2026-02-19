@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "../styles/MovieCards.css";
 
 function MovieCard({
@@ -9,9 +10,9 @@ function MovieCard({
   is_favourite, // not used yet, but we'll need this later for toggling favourites
 }) {
   return (
+    //Keep in mind that {poster}, {title}, and other properties will receive their values later from the TMDB JSON response in MovieCards.jsx
     <article className="movie-card">
       <div className="movie-poster">
-        {/* Poster image (placeholder for now) */}
         <img src={poster} alt={title} />
       </div>
 
@@ -25,12 +26,11 @@ function MovieCard({
         </span>
         <p className="movie-date">{release_date}</p>
         <p className="movie-overview">{overview}</p>
-
-        {/* Learn more link
-            This will later become a router link */}
-        <a href={details_link} className="learn-more">
-          Learn more
-        </a>
+        {/* We want to use react router to navigate us to details page, so need to use NavLink */}
+        <NavLink to={details_link} className="learn-more">
+         Learn more
+        </NavLink>
+        
       </div>
     </article>
   );
