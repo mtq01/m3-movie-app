@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard"; // Component to render individual movie cards
 import Filter from "./Filter"; // Component for category Tabs
+import isFav from "../utility/isFav";
+import { useSelector } from "react-redux";
 import {
   apiKey,
   endPointPopular,
@@ -9,27 +11,29 @@ import {
   endPointUpcoming,
 } from "../globals/globals"; // API endpoints and key (The actual key is in .env file for security reason - .env file must be in root directory)
 
-
-// added id, tabIndex to MovieCards function for skip-to-content functionality 
+// added id, tabIndex to MovieCards function for skip-to-content functionality
 function MovieCards({ id, tabIndex }) {
   // State variables
   // activeCategory stores which category tab is currently selected (default: "top_rated")
-  const [activeCategory, setActiveCategory] = useState("top_rated"); 
+  const [activeCategory, setActiveCategory] = useState("top_rated");
 
   // movies stores the array of movie objects fetched from the API
-  const [movies, setMovies] = useState([]); 
+  const [movies, setMovies] = useState([]);
 
   // loading tracks whether the API fetch is in progress
   const [loading, setLoading] = useState(true);
 
   // Map category names to their corresponding API endpoints (category name -> endpoint value)
   // This allows us to easily switch API URLs based on the selected category
-  const categoryEndpoints = { 
+  const categoryEndpoints = {
     popular: endPointPopular,
     top_rated: endPointTopRated,
     now_playing: endPointNowPlaying,
     upcoming: endPointUpcoming,
   };
+
+  // Pulls favorites array from the redux store
+  const favs = useSelector((state) => state.favs.favMovies);
 
   // useEffect: Fetch movies whenever activeCategory changes
   useEffect(() => {
@@ -43,7 +47,9 @@ function MovieCards({ id, tabIndex }) {
         // Fetch data from TMDB API
         // `language=en-US` ensures English data
         // `page=1` fetches the first page of results
-        const response = await fetch(`${endpoint}?api_key=${apiKey}&language=en-US&page=1`);
+        const response = await fetch(
+          `${endpoint}?api_key=${apiKey}&language=en-US&page=1`,
+        );
 
         // Parse JSON response
         const data = await response.json();
@@ -79,27 +85,31 @@ function MovieCards({ id, tabIndex }) {
             // Render a MovieCard for each movie
             <MovieCard
               key={movie.id} // unique key for React list rendering
-
+              id={movie.id}
               title={movie.title} // Movie title
-              
               // Poster image:
               // TMDb returns only a partial path (movie.poster_path)
               // Prepend with base URL to get full image
               // If no poster exists, fallback to placeholder image
-              poster={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.jpg"} 
-                // Release date formatted like our design
-                release_date={new Date(movie.release_date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-                })} 
+              poster={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "/placeholder.jpg"
+              }
+              // Release date formatted like our design
+              release_date={new Date(movie.release_date).toLocaleDateString(
+                "en-US",
+                {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                },
+              )}
               overview={movie.overview} // Movie overview text
-
               // Learn more link passes movie ID via query params for the details page (Query parameters in URLs in React/JS work just like query strings in PHP.)
-              details_link={`/details?id=${movie.id}`} 
-
-              // Favourite functionality not implemented yet
-              is_favourite={false} 
+              details_link={`/details?id=${movie.id}`}
+              // Checks whether movie is already via the isFav boolean and controls the button state
+              isFav={isFav(favs, movie.id)}
             />
           ))}
         </div>

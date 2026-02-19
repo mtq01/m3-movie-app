@@ -1,6 +1,7 @@
 .about {
   background-color: var(--ui-light-blue);
   min-height: 100vh; /*temp min-height until base is adjusted */
+  padding-top: 5rem;
 }
 .about-hero-image {
   width: 100%;
