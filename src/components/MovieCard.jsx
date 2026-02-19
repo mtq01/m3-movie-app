@@ -18,7 +18,7 @@ function MovieCard({
   const dispatch = useDispatch();
 
   //This function runs when fav button is clicked.
-  // addToFav is a boolean (true = add and false = remove)
+  //addToFav is a boolean (true = add and false = remove)
 
   function handleFavClick(addToFav) {
     if (addToFav) {
@@ -28,6 +28,7 @@ function MovieCard({
     }
   }
 
+  // object for movies and what gets stored inside of redux
   const movieObj = {
     id,
     poster,
@@ -47,7 +48,7 @@ function MovieCard({
       <div className="movie-content">
         <span className="movie-card-row-1">
           <h3 className="movie-title">{title}</h3>
-          {/* When fav button is clicked it sends movie object to handleFavClick with a true, telling redux to add movie to favMovies array in the store*/}
+          {/* FavButton recieved the movie data (movieObj), remove = boolean controled by isFav.js and handleFavClick dispatches the redux actions */}
           <div className="favorite-btn">
             <FavButton
               movieObj={movieObj}

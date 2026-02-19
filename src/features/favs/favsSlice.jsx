@@ -24,6 +24,11 @@ const initialState = {
   favMovies: favsFromLocalStorage.favMovies,
 };
 
+// This helper function finds the index of movieToRemove inside of the favMovies array by loop through the movie ids until it finds a match.
+function getMovieIndex(movieToRemove, favMovies) {
+  return favMovies.findIndex((movie) => movie.id === movieToRemove.id);
+}
+
 export const favsSlice = createSlice({
   name: "favs",
   initialState,
@@ -39,16 +44,18 @@ export const favsSlice = createSlice({
       state.favMovies = newFavs;
     },
 
-    // This reducer runs when the user clicks the fav button again to remove a movie
+    // This reducer runs when user clicks on the fav button again to remove it from favorites
+    // Movie gets removed from favMovies and updates the local storage
     removeFav: (state, action) => {
-      // filter() used  to create a new array from favMovies and keeps the movie ids that does not match the clicked movie
-      const updatedFavs = state.favMovies.filter((movie) => {
-        return movie.id !== action.payload.id;
-      });
+      // Makes copy of the current favorites array
+      const favsCopy = [...state.favMovies];
+      //Remove the clicked movie from index
+      //Splice(index, 1) removes ONE movie from index
+      favsCopy.splice(getMovieIndex(action.payload, state.favMovies), 1);
       // Save updated favorites into local storage
-      localStorage.setItem(appStorageName, JSON.stringify(updatedFavs));
-      //Updates redux store with the new array
-      state.favMovies = updatedFavs;
+      localStorage.setItem(appStorageName, JSON.stringify(favsCopy));
+      //Updates redux store
+      state.favMovies = favsCopy;
     },
   },
 });

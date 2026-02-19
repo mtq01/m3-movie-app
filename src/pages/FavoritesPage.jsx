@@ -10,8 +10,9 @@ const Favorites = () => {
     document.title = `Favorites | ${appTitle}`;
   }, []);
 
+  // Lets you connect to the favs array from the redux store
+  //favMovies is the array inside favsSlice
   const favs = useSelector((state) => state.favs.favMovies);
-  console.log(favs);
 
   return (
     <section className="favorites">
@@ -28,32 +29,33 @@ const Favorites = () => {
         </div>
 
         <div className="fav-content-container">
-          <div className="no-movie-msg-wrapper">
-            {favs.length < 1 ? (
-              <>
-                <h3>Sorry!</h3>
-                <p>
-                  You have no favorite movies. Return to the{" "}
-                  <NavLink to="/">homepage</NavLink> to add a favourite movie.
-                </p>
-              </>
-            ) : (
-              <div className="fav-movie-grid">
-                {favs.map((singleMovie) => (
-                  <MovieCard
-                    key={singleMovie.id}
-                    id={singleMovie.id}
-                    title={singleMovie.title}
-                    poster={singleMovie.poster}
-                    release_date={singleMovie.release_date}
-                    overview={singleMovie.overview}
-                    details_link={`/details?id=${singleMovie.id}`}
-                    isFav={true}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Below the conditional rendering shows the no movie msg if there are no favorites and if there are favorites it will display the movie grid */}
+          {favs.length < 1 ? (
+            <div className="no-movie-msg-wrapper">
+              <h3>Sorry!</h3>
+              <p>
+                You have no favorite movies. Return to the{" "}
+                {/* Link back to homepage */}
+                <NavLink to="/">homepage</NavLink> to add a favourite movie.
+              </p>
+            </div>
+          ) : (
+            <div className="fav-movie-grid">
+              {/* Loops through the favorites array and renders one MovieCard */}
+              {favs.map((singleMovie) => (
+                <MovieCard
+                  key={singleMovie.id}
+                  id={singleMovie.id}
+                  title={singleMovie.title}
+                  poster={singleMovie.poster}
+                  release_date={singleMovie.release_date}
+                  overview={singleMovie.overview}
+                  details_link={`/details?id=${singleMovie.id}`}
+                  isFav={true}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -118,18 +118,20 @@ button.favourite {
   }
 }
 
-/* Styling for the favoruite button states */
+/* Styling for the favorite button states */
 .fav-btn svg {
   width: 2.5rem;
   height: auto;
 }
 
+/* state when false */
 .fav-btn.add svg {
   fill: none;
   stroke: var(--accent-yellow);
   stroke-width: 40;
 }
 
+/* state when true */
 .fav-btn.remove svg {
   fill: var(--accent-yellow);
 }
