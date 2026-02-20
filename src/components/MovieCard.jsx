@@ -41,7 +41,16 @@ function MovieCard({
   return (
     //Keep in mind that {poster}, {title}, and other properties will receive their values later from the TMDB JSON response in MovieCards.jsx
     <article className="movie-card">
+      {/* FavButton recieved the movie data (movieObj), remove = boolean controled by isFav.js and handleFavClick dispatches the redux actions */}
+      <div className="favorite-btn desktop-fav">
+        <FavButton
+          movieObj={movieObj}
+          remove={isFav}
+          handleFavClick={handleFavClick}
+        />
+      </div>
       <div className="movie-poster">
+        <p className="movie-rating">97</p>
         <img src={poster} alt={title} />
       </div>
 
@@ -49,7 +58,7 @@ function MovieCard({
         <span className="movie-card-row-1">
           <h3 className="movie-title">{title}</h3>
           {/* FavButton recieved the movie data (movieObj), remove = boolean controled by isFav.js and handleFavClick dispatches the redux actions */}
-          <div className="favorite-btn">
+          <div className="favorite-btn mobile-fav">
             <FavButton
               movieObj={movieObj}
               remove={isFav}

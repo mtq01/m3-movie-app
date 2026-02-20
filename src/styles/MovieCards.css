@@ -12,9 +12,17 @@
 
 /* single movie card wrapper */
 .movie-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 17rem;
+}
+
+/* prevents the title from overlapping the bookmark btn */
+.movie-title {
+  /* take up X width of parent, leaves room for bookmark */
+  flex-grow: 1;
+  max-width: 85%;
 }
 
 /* Poster image wrapper to control poster image size - acts like a frame */
@@ -22,8 +30,8 @@
   width: 100%;
   aspect-ratio: 2/3;
   overflow: hidden;
-  background-color: azure;
   border-radius: 0.25rem;
+  position: relative;
 }
 
 .movie-poster img {
@@ -38,24 +46,30 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 0.5rem;
+  justify-content: space-between;
 }
 
 .movie-card-row-1 {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .movie-overview {
-  padding: 1.5rem 0;
+  /* padding: 1.5rem 0; */
   margin-bottom: 1rem;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.movie-date {
+.movie-date,
+.learn-more {
   font-style: italic;
+  color: var(--ui-light-blue);
+  width: fit-content;
 }
 
 button.favourite {
@@ -63,12 +77,93 @@ button.favourite {
   height: 2rem;
 }
 
+/* hide floating bookmark btn (on top of movie poster) */
+.desktop-fav {
+  display: none;
+}
+
+/* mobile/tablet bookmark btn style */
+.mobile-fav {
+  display: block;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+}
+
+.movie-card-row-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/*  +++++ bookmark button styling */
+/* state when false */
+.fav-btn.add svg {
+  fill: none;
+  stroke: var(--accent-yellow);
+  stroke-width: 40;
+}
+
+/* state when true */
+.fav-btn svg {
+  width: 2.5rem;
+  height: auto;
+  cursor: pointer;
+
+}
+
+/* state when false */
+.fav-btn.add {
+  background: transparent;
+  border: none;
+}
+
+.fav-btn.add svg {
+  fill: none;
+  stroke: var(--accent-yellow);
+  stroke-width: 40;
+}
+
+.fav-btn.remove svg {
+  fill: var(--accent-yellow);
+}
+
+/* state when true */
+.fav-btn.remove {
+  background: transparent;
+  border: none;
+}
+
+.fav-btn.remove svg {
+  fill: var(--accent-yellow);
+}
+
+/* +++++ MOVIE RATING */
+.movie-rating {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--accent-yellow);
+  color: black;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  z-index: 20;
+}
+
 /* TABLET BREAKPOINT HERE */
 
 @media (min-width: 48em) {
   .movie-cards-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     padding: 1rem 5rem;
+  }
+
+  .movie-content {
+    gap: 0.5rem;
+    min-height: 20rem;
+    justify-content: space-between;
   }
 }
 
@@ -78,21 +173,35 @@ button.favourite {
 @media (min-width: 80em) {
   .movie-cards-container {
     max-width: 120rem;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   /* movie card with movie content positioned on top on hover */
-
   .movie-card {
     position: relative;
   }
 
-  .movie-poster {
-    opacity: 1;
-    transition: 0.5s ease;
+  /* hide mobile bookmark */
+  .mobile-fav {
+    display: none;
   }
 
-  /* movie content overlay */
+  /* show desktop fav */
+  .desktop-fav {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 0.5rem;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /*  show lofatin button on hover, or if movie is favorites */
+  .movie-card:hover .desktop-fav,
+  .movie-card:has(.fav-btn.remove) .desktop-fav {
+    opacity: 1;
+  }
 
   .movie-content {
     position: absolute;
@@ -104,34 +213,28 @@ button.favourite {
     background-color: rgba(3, 34, 74, 0.75);
     opacity: 0;
     transition: 0.5s ease;
+    gap: 1rem;
+    justify-content: space-between;
+    z-index: 10;
   }
 
   /* movie card hovers */
+  .movie-card:hover .movie-content {
+    opacity: 1;
+  }
 
   .movie-card:hover .movie-poster {
     opacity: 0.3;
     filter: blur(2px);
   }
 
-  .movie-card:hover .movie-content {
-    opacity: 1;
+  /* ++++ movie rating desktop position */
+  .movie-rating {
+    bottom: 1rem;
+    right: 1rem;
+    /* auto resets the positioning from mobile allowing it to be repositioned */
+    top: auto;
+    font-size: 0.8rem;
   }
-}
 
-/* Styling for the favorite button states */
-.fav-btn svg {
-  width: 2.5rem;
-  height: auto;
-}
-
-/* state when false */
-.fav-btn.add svg {
-  fill: none;
-  stroke: var(--accent-yellow);
-  stroke-width: 40;
-}
-
-/* state when true */
-.fav-btn.remove svg {
-  fill: var(--accent-yellow);
 }
