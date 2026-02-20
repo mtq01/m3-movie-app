@@ -12,6 +12,7 @@ function MovieCard({
   overview,
   details_link,
   isFav,
+  rating, 
 }) {
   //useDispatch lets this component send actions to redux store
   // We use dispatch to tell redux when to add or remove a movie, these actions are imported in from favsSlice
@@ -36,6 +37,7 @@ function MovieCard({
     release_date,
     overview,
     details_link,
+    rating,
   };
 
   return (
@@ -50,7 +52,6 @@ function MovieCard({
         />
       </div>
       <div className="movie-poster">
-        <p className="movie-rating">97</p>
         <img src={poster} alt={title} />
       </div>
 
@@ -68,6 +69,8 @@ function MovieCard({
         </span>
         <p className="movie-date">{release_date}</p>
         <p className="movie-overview">{overview}</p>
+        {/*toFixed() is a JavaScript number method that rounds a number, keeps 1 digit after the decimal point if you choose 1 for example as an argument and returns the result as a string */}
+        <p className="movie-rating">{rating?.toFixed(1)}</p>
         {/* We want to use react router to navigate us to details page, so need to use NavLink */}
         <NavLink to={details_link} className="learn-more">
           Learn more
