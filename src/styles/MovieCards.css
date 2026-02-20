@@ -43,6 +43,7 @@
 
 /* holds all movie card text and interactions */
 .movie-content {
+  min-height: 20rem;
   display: flex;
   flex-direction: column;
   padding: 1rem 0.5rem;
@@ -52,6 +53,7 @@
 .movie-card-row-1 {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -93,7 +95,6 @@ button.favourite {
 .movie-card-row-1 {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 }
 
@@ -110,7 +111,6 @@ button.favourite {
   width: 2.5rem;
   height: auto;
   cursor: pointer;
-
 }
 
 /* state when false */
@@ -204,6 +204,7 @@ button.favourite {
   }
 
   .movie-content {
+    height: auto;
     position: absolute;
     top: 0;
     right: 0;
@@ -236,5 +237,4 @@ button.favourite {
     top: auto;
     font-size: 0.8rem;
   }
-
 }
