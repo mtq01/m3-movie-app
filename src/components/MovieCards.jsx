@@ -110,6 +110,7 @@ function MovieCards({ id, tabIndex }) {
               details_link={`/details?id=${movie.id}`}
               // Checks whether movie is already via the isFav boolean and controls the button state
               isFav={isFav(favs, movie.id)}
+              rating={movie.vote_average} 
             />
           ))}
         </div>

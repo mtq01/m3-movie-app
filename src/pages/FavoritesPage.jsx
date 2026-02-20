@@ -52,6 +52,7 @@ const Favorites = () => {
                   overview={singleMovie.overview}
                   details_link={`/details?id=${singleMovie.id}`}
                   isFav={true}
+                  rating={singleMovie.rating}      
                 />
               ))}
             </div>
