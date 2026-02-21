@@ -23,6 +23,7 @@
   /* take up X width of parent, leaves room for bookmark */
   flex-grow: 1;
   max-width: 85%;
+  font-size: 1.25rem;
 }
 
 /* Poster image wrapper to control poster image size - acts like a frame */
@@ -30,7 +31,10 @@
   width: 100%;
   aspect-ratio: 2/3;
   overflow: hidden;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
+  box-shadow:
+    0 1px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(134, 187, 232, 0.15);
   position: relative;
 }
 
@@ -43,6 +47,7 @@
 
 /* holds all movie card text and interactions */
 .movie-content {
+  min-height: 20rem;
   display: flex;
   flex-direction: column;
   padding: 1rem 0.5rem;
@@ -52,6 +57,7 @@
 .movie-card-row-1 {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -90,13 +96,6 @@ button.favourite {
   right: 0;
 }
 
-.movie-card-row-1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
 /*  +++++ bookmark button styling */
 /* state when false */
 .fav-btn.add svg {
@@ -110,26 +109,10 @@ button.favourite {
   width: 2.5rem;
   height: auto;
   cursor: pointer;
-
 }
 
 /* state when false */
-.fav-btn.add {
-  background: transparent;
-  border: none;
-}
-
-.fav-btn.add svg {
-  fill: none;
-  stroke: var(--accent-yellow);
-  stroke-width: 40;
-}
-
-.fav-btn.remove svg {
-  fill: var(--accent-yellow);
-}
-
-/* state when true */
+.fav-btn.add,
 .fav-btn.remove {
   background: transparent;
   border: none;
@@ -147,7 +130,7 @@ button.favourite {
   background: var(--accent-yellow);
   color: black;
   padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   font-weight: bold;
   z-index: 20;
 }
@@ -157,13 +140,11 @@ button.favourite {
 @media (min-width: 48em) {
   .movie-cards-container {
     grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 5rem;
+    padding: 2rem 5rem;
   }
 
   .movie-content {
     gap: 0.5rem;
-    min-height: 20rem;
-    justify-content: space-between;
   }
 }
 
@@ -172,13 +153,7 @@ button.favourite {
 /* media is very big becasue it's set limit the columns to just six at very large screens */
 @media (min-width: 80em) {
   .movie-cards-container {
-    max-width: 120rem;
     grid-template-columns: repeat(5, 1fr);
-  }
-
-  /* movie card with movie content positioned on top on hover */
-  .movie-card {
-    position: relative;
   }
 
   /* hide mobile bookmark */
@@ -204,6 +179,7 @@ button.favourite {
   }
 
   .movie-content {
+    height: auto;
     position: absolute;
     top: 0;
     right: 0;
@@ -211,6 +187,7 @@ button.favourite {
     left: 0;
     padding: 1.25rem;
     background-color: rgba(3, 34, 74, 0.75);
+    border-radius: (--border-radius);
     opacity: 0;
     transition: 0.5s ease;
     gap: 1rem;
@@ -236,5 +213,4 @@ button.favourite {
     top: auto;
     font-size: 0.8rem;
   }
-
 }
