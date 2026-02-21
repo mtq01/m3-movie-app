@@ -67,7 +67,7 @@
 .fav-movie-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem 1rem;
+  gap: 3rem 1.25rem;
   padding: 1.5rem 0;
   /* centers cards inside the grid columns */
   justify-items: center;
@@ -84,6 +84,6 @@
 
 @media (min-width: 80em) {
   .fav-movie-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
