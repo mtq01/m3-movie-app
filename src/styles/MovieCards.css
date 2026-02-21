@@ -146,6 +146,10 @@ button.favourite {
   .movie-content {
     gap: 0.5rem;
   }
+
+  .movie-card {
+    max-width: none;
+  }
 }
 
 /* DESKTOP BREAKPOINT HERE */
