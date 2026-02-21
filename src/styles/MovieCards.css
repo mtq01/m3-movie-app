@@ -140,7 +140,7 @@ button.favourite {
 @media (min-width: 48em) {
   .movie-cards-container {
     grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 0 4rem 0;
+    padding: 2rem 5rem;
   }
 
   .movie-content {
@@ -154,11 +154,6 @@ button.favourite {
 @media (min-width: 80em) {
   .movie-cards-container {
     grid-template-columns: repeat(5, 1fr);
-  }
-
-  /* movie card with movie content positioned on top on hover */
-  .movie-card {
-    position: relative;
   }
 
   /* hide mobile bookmark */
