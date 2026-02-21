@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TrailerPopup from "../components/TrailerPopup";
-import "../styles/MovieCards.css"; //needs to create its own stylesheet
+import "../styles/Details.css";
 
 function Details({ movie }) {
   const [showTrailer, setShowTrailer] = useState(false); // control trailer popup visibility
@@ -26,15 +26,18 @@ function Details({ movie }) {
         alt={movie.title}
         className="details-poster"
       />
+      <div className="details-info">
+      {/* Title */}
+      <p className="title"> {movie.title}</p>
 
       {/* Release Date */}
-      <p><strong>Release Date:</strong> {releaseDate}</p>
+      <p className="date">{releaseDate}</p>
 
       {/* Rating */}
       <p><strong>Rating:</strong> {movie.vote_average?.toFixed(1)}</p>
 
       {/* Overview */}
-      <p><strong>Overview:</strong> {movie.overview}</p>
+      <p>{movie.overview}</p>
 
       {/* Cast */}
       {movie.cast?.length > 0 && (
@@ -50,6 +53,7 @@ function Details({ movie }) {
       {movie.writers?.length > 0 && (
         <p><strong>Written by:</strong> {movie.writers.join(", ")}</p>
       )}
+     </div>
 
       {/* Watch Trailer Button */}
       {movie.trailerKey && (

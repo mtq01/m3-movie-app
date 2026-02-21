@@ -1,0 +1,98 @@
+/* I could write new classes in Filter.jsx and override all the React Tabs classes, 
+but I preferred to use this cheat sheet and stick with the default React Tabs classes 
+unless I needed to add two extra classes for the mobile menu. */
+
+/* <Tabs>	           react-tabs
+   <TabList>	       react-tabs__tab-list
+   <Tab>	           react-tabs__tab
+   Active <Tab>        react-tabs__tab--selected
+   <TabPanel>	       react-tabs__tab-panel
+   Active <TabPanel>   react-tabs__tab-panel--selected */
+
+
+/* Hamburger button */
+.filter-menu-btn {
+  display: flex;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: flex-end; /* align icon to right */
+  width: 100%;
+}
+
+/* Hamburger button hover - used same idea like footer imgs */
+.filter-menu-btn img:hover {
+  filter: brightness(0) saturate(100%) invert(62%) sepia(85%)
+  saturate(600%) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+/* Hamburger icon size */
+.filter-menu-btn img {
+  width: 35px;
+  height: 35px;
+  margin-top: 0.5rem;
+  margin-right: 0.8rem;
+}
+
+/* Tabs hidden by default */
+.react-tabs__tab-list {
+  display: none;
+}
+
+/* Show tabs when menu is open */
+.show-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Individual tab (mobile dropdown) */
+.react-tabs__tab {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--ui-light-blue);
+  color: black;
+  border-radius: 0.2rem;
+  min-width: 150px;
+  text-align: center; 
+  box-sizing: border-box;
+}
+
+/* Hover and selected */
+.react-tabs__tab:hover,
+.react-tabs__tab--selected {
+  background-color: var(--accent-yellow);
+}
+
+
+@media (min-width: 48em) {
+  /* Hide hamburger on desktop */
+  .filter-menu-btn {
+    display: none;
+  }
+
+  /* Tabs container centered */
+  .react-tabs__tab-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* Individual tabs */
+  .react-tabs__tab {
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+    background-color: var(--ui-light-blue);
+    color: black;
+    border-radius: 0.2rem;
+  }
+
+  /* Hover and active */
+  .react-tabs__tab--selected {
+    background-color: var(--accent-yellow);
+  }
+}
