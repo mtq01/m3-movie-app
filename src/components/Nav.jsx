@@ -164,11 +164,15 @@ const Nav = () => {
                 setIsLoginOpen(false);
               }}
             >
-              <label>Username</label>
+            <div className="form-group">
+              <label>Username:</label>
               <input type="text" />
+            </div>
 
-              <label>Password</label>
+            <div className="form-group">
+              <label>Password:</label>
               <input type="password" />
+            </div>
             
               <button type="submit">Sign In</button>
             </form>

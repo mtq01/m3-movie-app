@@ -1,0 +1,53 @@
+.details-page {
+  background-color: var(--bg-dark-blue);
+  display: flex;
+  flex-direction: column; /* stack everything vertically */
+  align-items: center;   
+  padding: 4rem;
+  margin-top: 2.5rem;
+  gap: 0.5rem;
+}
+
+/* Poster image styling */
+.details-poster {
+  aspect-ratio: 2/3;
+  border-radius: 0.25rem;
+  max-width: 60vw;
+}
+
+/* Movie info paragraphs stacked */
+.details-info {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 60vw;
+  text-align: left;
+  margin: 2rem 0; 
+}
+
+.details-page p strong, .title {
+  font-weight: bold;
+}
+
+.date{
+color: var(--ui-light-blue);
+font-style: italic;
+}
+
+/* Watch Trailer button */
+.play-trailer-btn {
+    width: fit-content;
+    padding: 0.75rem;
+    border: 0;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    background: var(--ui-light-blue);
+}
+
+.play-trailer-btn:hover {
+  background: var(--accent-yellow);
+  cursor: pointer;
+}
+
+/* needs to add media query */
