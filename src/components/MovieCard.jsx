@@ -12,7 +12,7 @@ function MovieCard({
   overview,
   details_link,
   isFav,
-  rating, 
+  rating,
 }) {
   //useDispatch lets this component send actions to redux store
   // We use dispatch to tell redux when to add or remove a movie, these actions are imported in from favsSlice
@@ -28,7 +28,6 @@ function MovieCard({
       dispatch(removeFav(movieObj));
     }
   }
-
   // object for movies and what gets stored inside of redux
   const movieObj = {
     id,

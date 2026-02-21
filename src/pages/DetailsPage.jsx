@@ -27,14 +27,13 @@ const DetailsPage = () => {
       try {
         // Fetch basic movie details (includes: poster, title, release date, rating and overview)
         const movieResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`,
         );
         const movieData = await movieResponse.json();
 
-
         // Fetch movie credits (cast and crew). These data are new and only fetched on the Details page
         const creditsResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`
+          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`,
         );
         const creditsData = await creditsResponse.json();
 
@@ -47,14 +46,14 @@ const DetailsPage = () => {
           .filter((c) => c.job === "Director")
           .map((d) => d.name); // directors
         const writers = creditsData.crew
-          .filter((c) =>
-            c.job === "Writer" || c.job === "Screenplay" || c.job === "Story"
+          .filter(
+            (c) =>
+              c.job === "Writer" || c.job === "Screenplay" || c.job === "Story",
           )
           .map((w) => w.name); // writers
 
         // Fetch trailer key (YouTube only) for the popup. getTrailer is a function that we imported from trailerPopupUtil.js
         const trailerKey = await getTrailer(movieId);
-
 
         // Combine all data into a single object
         setMovie({
