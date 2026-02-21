@@ -31,7 +31,7 @@
   width: 100%;
   aspect-ratio: 2/3;
   overflow: hidden;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   box-shadow:
     0 1px 8px 0 rgba(0, 0, 0, 0.2),
     0 10px 20px 0 rgba(134, 187, 232, 0.15);
@@ -96,12 +96,6 @@ button.favourite {
   right: 0;
 }
 
-.movie-card-row-1 {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 /*  +++++ bookmark button styling */
 /* state when false */
 .fav-btn.add svg {
@@ -118,22 +112,7 @@ button.favourite {
 }
 
 /* state when false */
-.fav-btn.add {
-  background: transparent;
-  border: none;
-}
-
-.fav-btn.add svg {
-  fill: none;
-  stroke: var(--accent-yellow);
-  stroke-width: 40;
-}
-
-.fav-btn.remove svg {
-  fill: var(--accent-yellow);
-}
-
-/* state when true */
+.fav-btn.add,
 .fav-btn.remove {
   background: transparent;
   border: none;
@@ -151,7 +130,7 @@ button.favourite {
   background: var(--accent-yellow);
   color: black;
   padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   font-weight: bold;
   z-index: 20;
 }
@@ -161,13 +140,11 @@ button.favourite {
 @media (min-width: 48em) {
   .movie-cards-container {
     grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 5rem;
+    padding: 1rem 0 4rem 0;
   }
 
   .movie-content {
     gap: 0.5rem;
-    min-height: 20rem;
-    justify-content: space-between;
   }
 }
 
@@ -176,7 +153,6 @@ button.favourite {
 /* media is very big becasue it's set limit the columns to just six at very large screens */
 @media (min-width: 80em) {
   .movie-cards-container {
-    max-width: 120rem;
     grid-template-columns: repeat(5, 1fr);
   }
 

@@ -1,5 +1,5 @@
 .about {
-  min-height: 100vh; /* ensures section fills at least one viewport height */
+  min-height: calc(100vh - 12rem);
   background-color: var(--ui-light-blue);
   padding-bottom: 4rem;
   margin-top: 3.9rem; /* offset for fixed header */
