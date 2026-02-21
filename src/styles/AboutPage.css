@@ -2,7 +2,7 @@
   min-height: 100vh; /* ensures section fills at least one viewport height */
   background-color: var(--ui-light-blue);
   padding-bottom: 4rem;
-  margin-top: 4rem; /* offset for fixed header */
+  margin-top: 3.9rem; /* offset for fixed header */
 }
 .about-hero-image {
   width: 100%;
@@ -18,7 +18,7 @@
   width: 80%;
   position: relative;
   z-index: 2; /* indexed above hero image */
-  margin-top: -12rem; /* overlaps hero image without removing element from document flow (unlike top with absolute positioning) */
+  margin-top: -18rem; /* overlaps hero image without removing element from document flow (unlike top with absolute positioning) */
   left: 50%;
   transform: translateX(-50%);
   padding: 2.5rem 2rem;
@@ -65,11 +65,14 @@ TABLET STARTS HERE  */
     padding-bottom: 2rem;
   }
   .about-content-container {
-    margin-top: -18rem;
+    margin-top: -20rem;
   }
 }
 /* DESKTOP STARTS HERE */
 @media (min-width: 43.75em) {
+  .about {
+    margin-top: 4.5rem; /* offset for fixed header */
+  }
   .about-content-container h2 {
     font-size: 2rem;
   }

@@ -23,6 +23,7 @@
   /* take up X width of parent, leaves room for bookmark */
   flex-grow: 1;
   max-width: 85%;
+  font-size: 1.25rem;
 }
 
 /* Poster image wrapper to control poster image size - acts like a frame */
@@ -31,6 +32,9 @@
   aspect-ratio: 2/3;
   overflow: hidden;
   border-radius: 0.25rem;
+  box-shadow:
+    0 1px 8px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px 0 rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
