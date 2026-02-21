@@ -1,8 +1,9 @@
 import { useState } from "react";
+import TrailerPopup from "../components/TrailerPopup";
 import "../styles/MovieCards.css"; //needs to create its own stylesheet
 
 function Details({ movie }) {
-  const [showTrailer, setShowTrailer] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false); // control trailer popup visibility
 
   if (!movie) return null;
 
@@ -17,6 +18,9 @@ function Details({ movie }) {
   return (
     <section className="details-page">
       {/* Poster */}
+      {/* We wrote this line because in DetailsPage.jsx we fetch the basic movie data by ID, and the poster is included in that response.
+      However, TMDB returns something like: poster_path: "/abc123.jpg" which is only a partial path.
+      So we need this line to convert that partial path into a full image URL. */}
       <img
         src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.jpg"}
         alt={movie.title}
@@ -25,6 +29,9 @@ function Details({ movie }) {
 
       {/* Release Date */}
       <p><strong>Release Date:</strong> {releaseDate}</p>
+
+      {/* Rating */}
+      <p><strong>Rating:</strong> {movie.vote_average?.toFixed(1)}</p>
 
       {/* Overview */}
       <p><strong>Overview:</strong> {movie.overview}</p>
@@ -44,29 +51,21 @@ function Details({ movie }) {
         <p><strong>Written by:</strong> {movie.writers.join(", ")}</p>
       )}
 
-      {/* Play Trailer Button */}
-      {movie.trailerUrl && (
+      {/* Watch Trailer Button */}
+      {movie.trailerKey && (
         <button className="play-trailer-btn" onClick={() => setShowTrailer(true)}>
-          Play Trailer
+          Watch Trailer
         </button>
       )}
 
-      {/* Trailer */}
+      {/* Trailer Popup */}
       {showTrailer && (
-        <div className="trailer-modal">
-          <div className="trailer-content">
-            <button className="close-btn" onClick={() => setShowTrailer(false)}>X</button>
-            <iframe
-              width="100%"
-              height="500"
-              src={movie.trailerUrl}
-              title={`${movie.title} Trailer`}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      )}
+        <TrailerPopup
+          trailerKey={movie.trailerKey} // pass the key
+          onClose={() => setShowTrailer(false)} // allow closing
+        />
+        )}
+
     </section>
   );
 }
