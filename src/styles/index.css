@@ -111,7 +111,7 @@ a:hover {
   color: var(--accent-yellow);
 }
 a:focus {
-  outline: 0.125rem solid var(--accent-yellow);
+  color: var(--ui-light-blue);
   outline-offset: 0.25rem;
 }
 a:active {
