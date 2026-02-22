@@ -81,6 +81,9 @@ function MovieCards({ id, tabIndex }) {
         // aria-live tells screen readers to accounce 'loading movies' as soon as the element appears (polite is the type of voice)
         <p aria-live="polite">Loading movies...</p>
       ) : (
+        <>
+        {/* sr-only confirms the movies have loaded & tells the user which category is on screen and how many movies are displayed. */}
+        <p className="sr-only">{movies.length} movies loaded in the {activeCategory.replace('_', ' ')} category.</p>
         <div className="movie-cards-container">
           {movies.map((movie) => (
             // Render a MovieCard for each movie
@@ -115,6 +118,7 @@ function MovieCards({ id, tabIndex }) {
             />
           ))}
         </div>
+        </>
       )}
     </section>
   );
