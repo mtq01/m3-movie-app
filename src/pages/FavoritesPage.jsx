@@ -28,7 +28,7 @@ const Favorites = () => {
           <h2>My List</h2>
         </div>
 
-        <div className="fav-content-container">
+        <div id="main-content" tabIndex="-1" className="fav-content-container">
           {/* Below the conditional rendering shows the no movie msg if there are no favorites and if there are favorites it will display the movie grid */}
           {favs.length < 1 ? (
             <div className="no-movie-msg-wrapper">
