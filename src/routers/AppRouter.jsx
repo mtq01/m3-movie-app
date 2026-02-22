@@ -10,7 +10,6 @@ import AboutPage from "../pages/AboutPage.jsx";
 import FavoritesPage from "../pages/FavoritesPage.jsx";
 import DetailsPage from "../pages/DetailsPage.jsx";
 
-//Provider wraps entire application so the redux store is available to every component
 function AppRouter() {
   return (
     <BrowserRouter>
