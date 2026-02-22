@@ -44,19 +44,28 @@ function MovieCards({ id, tabIndex }) {
         // Get the correct endpoint for the selected category
         const endpoint = categoryEndpoints[activeCategory];
 
-        // Fetch data from TMDB API
-        // `language=en-US` ensures English data
-        // `page=1` fetches the first page of results
+        /* fetch data from TMDB API
+        `language=en-US` gets english data only
+        `page=1` fetches the first page of results 
+        'with_original_language makes sure movies shown in categories (top rated etc.) are only english */
         const response = await fetch(
-          `${endpoint}?api_key=${apiKey}&language=en-US&page=1`,
+          `${endpoint}?api_key=${apiKey}&language=en-US&page=1&with_original_language=en`,
         );
-
+      
         // Parse JSON response
         const data = await response.json();
 
-        // Store results in state
-        // `data.results` is an array of movie objects from TMDb
-        setMovies(data.results);
+        /* +++++ 
+        fix for showing english only movies
+        manually filter the results array to only include movies where the original_language is 'en' 
+        +++++ */
+        const englishMoviesOnly = data.results.filter(
+          (movie) => movie.original_language === "en"
+        );
+
+        // store the filtered results instead of the raw data.results
+        setMovies(englishMoviesOnly);
+
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
