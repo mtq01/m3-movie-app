@@ -78,7 +78,8 @@ function MovieCards({ id, tabIndex }) {
       {/* If loading is TRUE -> show "Loading movies..." (Show a loading message while API fetch is in progress)
       If loading is FALSE -> show the movie cards     */}
       {loading ? (
-        <p>Loading movies...</p>
+        // aria-live tells screen readers to accounce 'loading movies' as soon as the element appears (polite is the type of voice)
+        <p aria-live="polite">Loading movies...</p>
       ) : (
         <div className="movie-cards-container">
           {movies.map((movie) => (
