@@ -11,6 +11,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [trailerKey, setTrailerKey] = useState("");
+  const [currentMovieTitle, setCurrentMovieTitle] = useState("");
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -66,11 +67,12 @@ const Carousel = () => {
   };
 
   // +++++ fetch movie trailer +++++
-  const watchTrailer = async (movieId) => {
-    const key = await getTrailer(movieId); // Calls your new utility
+  const watchTrailer = async (movieObj) => {
+    const key = await getTrailer(movieObj); // Calls your new utility
 
     if (key) {
       setTrailerKey(key);
+      setCurrentMovieTitle(movieObj.title);
       setIsPopupOpen(true);
     } else {
       alert("No Trailer Found!");
@@ -174,7 +176,7 @@ const Carousel = () => {
                 <p>{shortDescription}</p>
                 <button
                   className="trailer-btn"
-                  onClick={() => watchTrailer(slide.id)}
+                  onClick={() => watchTrailer(slide)}
                   // not tabbable if not current slide
                   tabIndex={index === currentIndex ? 0 : -1}
                 >
@@ -190,9 +192,11 @@ const Carousel = () => {
       <TrailerPopup
         isOpen={isPopupOpen}
         trailerKey={trailerKey}
+        movieTitle={currentMovieTitle} // pass title state
         onClose={() => {
           setIsPopupOpen(false);
           setTrailerKey("");
+          setCurrentMovieTitle(""); // reset when closed
         }}
       />
 
