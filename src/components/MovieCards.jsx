@@ -14,8 +14,8 @@ import {
 // added id, tabIndex to MovieCards function for skip-to-content functionality
 function MovieCards({ id, tabIndex }) {
   // State variables
-  // activeCategory stores which category tab is currently selected (default: "top_rated")
-  const [activeCategory, setActiveCategory] = useState("top_rated");
+  // activeCategory stores which category tab is currently selected (default: "popular")
+  const [activeCategory, setActiveCategory] = useState("popular");
 
   // movies stores the array of movie objects fetched from the API
   const [movies, setMovies] = useState([]);
@@ -78,42 +78,50 @@ function MovieCards({ id, tabIndex }) {
       {/* If loading is TRUE -> show "Loading movies..." (Show a loading message while API fetch is in progress)
       If loading is FALSE -> show the movie cards     */}
       {loading ? (
-        <p>Loading movies...</p>
+        // aria-live tells screen readers to accounce 'loading movies' as soon as the element appears (polite is the type of voice)
+        <p aria-live="polite">Loading movies...</p>
       ) : (
-        <div className="movie-cards-container">
-          {movies.map((movie) => (
-            // Render a MovieCard for each movie
-            <MovieCard
-              key={movie.id} // unique key for React list rendering
-              id={movie.id}
-              title={movie.title} // Movie title
-              // Poster image:
-              // TMDb returns only a partial path (movie.poster_path)
-              // Prepend with base URL to get full image
-              // If no poster exists, fallback to placeholder image
-              poster={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : "/placeholder.jpg"
-              }
-              // Release date formatted like our design
-              release_date={new Date(movie.release_date).toLocaleDateString(
-                "en-US",
-                {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                },
-              )}
-              overview={movie.overview} // Movie overview text
-              // Learn more link passes movie ID via query params for the details page (Query parameters in URLs in React/JS work just like query strings in PHP.)
-              details_link={`/details?id=${movie.id}`}
-              // Checks whether movie is already via the isFav boolean and controls the button state
-              isFav={isFav(favs, movie.id)}
-              rating={movie.vote_average} 
-            />
-          ))}
-        </div>
+        <>
+          {/* sr-only confirms the movies have loaded & tells the user which category is on screen and how many movies are displayed. */}
+          <p className="sr-only" aria-live="polite">
+            {movies.length} movies loaded in the{" "}
+            {activeCategory.replace("_", " ")} category.
+          </p>
+          <div className="movie-cards-container">
+            {movies.map((movie) => (
+              // Render a MovieCard for each movie
+              <MovieCard
+                key={movie.id} // unique key for React list rendering
+                id={movie.id}
+                title={movie.title} // Movie title
+                // Poster image:
+                // TMDb returns only a partial path (movie.poster_path)
+                // Prepend with base URL to get full image
+                // If no poster exists, fallback to placeholder image
+                poster={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : "/placeholder.jpg"
+                }
+                // Release date formatted like our design
+                release_date={new Date(movie.release_date).toLocaleDateString(
+                  "en-US",
+                  {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  },
+                )}
+                overview={movie.overview} // Movie overview text
+                // Learn more link passes movie ID via query params for the details page (Query parameters in URLs in React/JS work just like query strings in PHP.)
+                details_link={`/details?id=${movie.id}`}
+                // Checks whether movie is already via the isFav boolean and controls the button state
+                isFav={isFav(favs, movie.id)}
+                rating={movie.vote_average}
+              />
+            ))}
+          </div>
+        </>
       )}
     </section>
   );
