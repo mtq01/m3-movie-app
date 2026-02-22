@@ -30,7 +30,8 @@
   margin: 0 1.15rem;
 }
 
-.about-content-container h2 {
+.about-content-container h1 {
+  margin: 0;
   text-align: center;
   text-transform: uppercase;
 }
