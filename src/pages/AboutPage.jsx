@@ -18,7 +18,7 @@ const AboutPage = () => {
         src={aboutHero}
         alt="employees working at table together"
       />
-      <div id="main-content" tabIndex="-1" className="about-content-container">
+      <div className="about-content-container">
         <h2>About Us</h2>
         <p className="about-content">
           <span className="cinemax-bolded">CineMAX</span> is a modern digital
