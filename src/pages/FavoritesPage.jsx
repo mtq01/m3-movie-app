@@ -27,7 +27,7 @@ const Favorites = () => {
           >
             <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
           </svg>
-          <h2>My List</h2>
+          <h1>My List</h1>
         </div>
 
         <div id="main-content" tabIndex="-1" className="fav-content-container">
