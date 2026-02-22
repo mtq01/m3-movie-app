@@ -74,7 +74,7 @@
 
 /* TABLET STARTS HERE */
 
-@media (min-width: 50em) {
+@media (min-width: 48em) {
   .fav-movie-grid {
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem 5rem;
