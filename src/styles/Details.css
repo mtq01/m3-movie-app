@@ -3,43 +3,53 @@
   display: flex;
   flex-direction: column; /* stack everything vertically */
   align-items: center;
-  padding: 4rem;
+  padding: 3rem;
   margin-top: 2.5rem;
   gap: 0.5rem;
 }
 
-/* Poster image styling */
 .details-poster {
   border-radius: var(--border-radius);
   max-width: 100%;
 }
 
-/* Movie info paragraphs stacked */
 .details-info {
   font-size: 1rem;
   line-height: 1.5;
-  max-width: 100%;
   text-align: left;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;   
 }
 
-/* .details-page p strong,
-.title {
-  font-weight: bold;
-} */
+.title{
+  font-size: 2rem;
+}
 
 .date {
   color: var(--ui-light-blue);
   font-style: italic;
+  font-size: 1.3rem;
 }
 
-/* .details-info p {
-  margin-bottom: 1rem; 
-} */
+.overview{
+  font-size: 1.1rem;
+}
+
+.details-info h3 strong{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.details-info h3{
+  font-weight: normal;
+  font-size: 1.1rem;
+}
 
 .rating-box {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.3rem;
   background-color: var(--ui-light-blue);
   color: #000;
   font-weight: bold;
@@ -47,15 +57,16 @@
   text-align: center;
 }
 
-/* Watch Trailer button */
 .play-trailer-btn {
+    display: block;
     width: fit-content;
+    margin: 0 auto;
     padding: 0.75rem;
     border: 0;
     color: #000;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius);
     background: var(--ui-light-blue);
 }
 
@@ -94,26 +105,23 @@
 .details-buttons {
   display: flex;           
   align-items: center;    
-  justify-content: space-between; 
-  margin-top: 1.5rem;      
+  justify-content: flex-start; 
+  gap: 2rem;
 }
 
-.details-buttons .play-trailer-btn,
-.details-buttons .fav-btn {
-  flex: 0 0 auto;      
-}
 
 @media (min-width: 67em) {
+
   .details-page {
-    flex-direction: row; /* side by side */
-    align-items: stretch; /* same height for poster and info */
-    gap: 4rem; 
+   flex-direction: row; /* side by side */
+   align-items: stretch; /* same height for poster and info */
+   gap: 3.5rem; 
   }
 
   .details-poster {
-  aspect-ratio: 2/3;
-  border-radius: 0.25rem;
-  max-width: 60vw;
+   aspect-ratio: 2/3;
+   border-radius: 0.25rem;
+   max-width: 60vw;
   }
 
   .details-right {
@@ -125,16 +133,12 @@
 
   .details-info {
     margin: 0; 
+    padding-bottom: 1rem;
     border-bottom: 2px solid var(--ui-light-blue);
-    font-size: 1.2rem;
   }
 
-  .play-trailer-btn {
-    width: fit-content; 
-    align-self: flex-start; 
-  }
-  .title{
-    font-size: 1.5rem;
+  .play-trailer-btn{
+    margin-top: 1rem;
   }
 
 }
