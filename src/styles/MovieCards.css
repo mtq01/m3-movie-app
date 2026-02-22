@@ -79,14 +79,15 @@
 
 .learn-more {
   padding: 0.25rem 0.5rem;
-  background: var(--accent-yellow);
+  background: var(--ui-light-blue);
   color: #000;
   border-radius: 0.5rem;
   width: fit-content;
   font-weight: 600;
 }
+
 .learn-more:hover {
-  background: var(--ui-light-blue);
+  background: var(--accent-yellow);
 }
 
 button.favourite {
