@@ -83,7 +83,7 @@ const DetailsPage = () => {
   if (!movie) return <p>Movie not found.</p>;
 
   // Render the Details component with the fetched movie data
-  return <Details movie={movie} />;
+  return <Details id="main-content" tabIndex="-1" movie={movie} />;
 };
 
 export default DetailsPage;
