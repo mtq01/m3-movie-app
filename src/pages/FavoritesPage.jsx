@@ -22,16 +22,18 @@ const Favorites = () => {
             className="fav-icon"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
+            // aria-hidden="true" prevents a screen reader from trying to read the path data or saying "unlabeled image"
+            aria-hidden="true"
           >
             <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
           </svg>
-          <h2>My List</h2>
+          <h1>My List</h1>
         </div>
 
         <div id="main-content" tabIndex="-1" className="fav-content-container">
           {/* Below the conditional rendering shows the no movie msg if there are no favorites and if there are favorites it will display the movie grid */}
           {favs.length < 1 ? (
-            <div className="no-movie-msg-wrapper">
+            <div className="no-movie-msg-wrapper" aria-live="polite">
               <h3>Sorry!</h3>
               <p>
                 You have no favorite movies. Return to the{" "}
