@@ -51,9 +51,12 @@ function MovieCard({
         />
       </div>
       <div className="movie-poster">
-        <img src={poster} alt={title} />
+        <img src={poster} alt={ `${title} poster`}/>
         {/*toFixed() is a JavaScript number method that rounds a number, keeps 1 digit after the decimal point if you choose 1 for example as an argument and returns the result as a string */}
-        <p className="movie-rating">{rating?.toFixed(1)}</p>
+        <p className="movie-rating">
+          <span className="sr-only">Rating: </span>
+          {rating?.toFixed(1)}
+          <span className="sr-only">out of 10</span></p>
       </div>
 
       <div className="movie-content">
