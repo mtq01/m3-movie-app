@@ -38,6 +38,7 @@ Styles for the Global Elements go here.
   --z-index-nav: 1001; /* for header */
   --z-index-login: 1100; /* login backdrop */
   --z-index-popup: 9999; /* movie trailer */
+  --z-index-carousel-movie-info: 950; /* carousel movie info overlay */
 
   /* movie info overlay desktop positioning */
   --info-bottom-desktop: 5rem;
