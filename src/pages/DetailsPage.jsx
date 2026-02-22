@@ -78,9 +78,9 @@ const DetailsPage = () => {
   }, [movieId]);
 
   // Show loading message while fetching data
-  if (loading) return <p>Loading movie details...</p>;
+  if (loading) return <p aria-live="polite">Loading movie details...</p>;
   // Show error message if movie not found
-  if (!movie) return <p>Movie not found.</p>;
+  if (!movie) return <p role="alert" aria-live="assertive">Movie not found.</p>;
 
   // Render the Details component with the fetched movie data
   return <Details id="main-content" tabIndex="-1" movie={movie} />;
