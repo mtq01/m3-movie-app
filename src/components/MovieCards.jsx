@@ -83,7 +83,7 @@ function MovieCards({ id, tabIndex }) {
       ) : (
         <>
         {/* sr-only confirms the movies have loaded & tells the user which category is on screen and how many movies are displayed. */}
-        <p className="sr-only">{movies.length} movies loaded in the {activeCategory.replace('_', ' ')} category.</p>
+        <p className="sr-only" aria-live="polite">{movies.length} movies loaded in the {activeCategory.replace('_', ' ')} category.</p>
         <div className="movie-cards-container">
           {movies.map((movie) => (
             // Render a MovieCard for each movie
