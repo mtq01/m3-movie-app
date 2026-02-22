@@ -23,8 +23,7 @@
   border-bottom: 1px solid var(--ui-light-blue);
 }
 
-.fav-heading-container h2 {
-  font-size: 1.75rem;
+.fav-heading-container h1 {
   text-transform: uppercase;
 }
 
