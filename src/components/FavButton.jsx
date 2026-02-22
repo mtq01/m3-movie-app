@@ -12,18 +12,38 @@ function FavButton({ movieObj, remove = false, handleFavClick }) {
     handleFavClick(false, movieObj);
   }
 
+  /* create dynamic label based on the state 
+      - the SR will announce the appropriate label based on its state
+  */
+  let label = "";
+  if (remove === true) {
+    label = `Remove ${movieObj.title} from favorites`;
+  } else {
+    label = `Add ${movieObj.title} to favorites`;
+  }
+
   return (
     <>
       {/* Boolean for true or false. The button state change is controlled in MovieCards.css */}
       {remove === false ? (
-        <button className="fav-btn add" onClick={handleAddFav}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        <button 
+          className="fav-btn add"
+          aria-label={label}
+          aria-pressed="false" // not favorited
+          onClick={handleAddFav}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
             <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
           </svg>
         </button>
       ) : (
-        <button className="fav-btn remove" onClick={handleRemoveFav}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        <button 
+          className="fav-btn remove" 
+          aria-label={label}
+          aria-pressed="true" // favorited
+          onClick={handleRemoveFav}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
             <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
           </svg>
         </button>
