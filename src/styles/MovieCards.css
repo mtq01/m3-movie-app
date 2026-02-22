@@ -127,8 +127,8 @@ button.favourite {
   position: absolute;
   top: 0;
   right: 0;
-  background: var(--accent-yellow);
-  color: black;
+  background: var(--ui-light-blue);
+  color: #000000;
   padding: 0.2rem 0.5rem;
   border-radius: var(--border-radius);
   font-weight: bold;
@@ -145,6 +145,10 @@ button.favourite {
 
   .movie-content {
     gap: 0.5rem;
+  }
+
+  .movie-card {
+    max-width: none;
   }
 }
 
