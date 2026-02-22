@@ -203,8 +203,7 @@ const Carousel = () => {
       {/* +++++ pagination dots +++++ */}
       <div className="pill-container">
         <div className="dots-container">
-          {/* loop thru the array & create one dot per slide obj
-        the '_' means we arent using the slide data itself, just its index */}
+          {/* loop thru the array & create one dot per slide obj */}
           {movies.map((slide, index) => {
             const isActive = index === currentIndex;
             // is the dot the active slide? (same as above logic for 'slide active')
