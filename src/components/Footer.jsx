@@ -3,11 +3,12 @@ import "../styles/Footer.css";
 
 const Footer = () => {
   return (
-    <footer id="site-footer" aria-label="Footer">  {/* aria-label is an invisible text label for screen readers. */}
+    <footer id="site-footer">  
       {/* footer content wrapper */}
       <div className="footer-content">
         
         {/* navigation links */}
+        <nav aria-label="Footer Navigation">
         <ul className="footer-links">
           <li>
             <NavLink to="/">Home</NavLink>
@@ -16,6 +17,7 @@ const Footer = () => {
             <NavLink to="/about">About</NavLink>
           </li>
         </ul>
+        </nav>
 
         {/* social media icons */}
         <ul className="footer-icons">
@@ -23,7 +25,7 @@ const Footer = () => {
             <a href="https://www.facebook.com/" aria-label="Facebook">
               <img
                 src="./src/assets/icons/facebook.svg"
-                alt="Facebook Icon"
+                aria-hidden="true"
               />
             </a>
           </li>
@@ -31,15 +33,15 @@ const Footer = () => {
             <a href="https://www.instagram.com/" aria-label="Instagram">
               <img
                 src="./src/assets/icons/instagram.svg"
-                alt="Instagram Icons"
+                aria-hidden="true"
               />
             </a>
           </li>
           <li>
-            <a href="https://www.microsoft.com/en/microsoft-365/outlook/" aria-label="Email">
+            <a href="mailto:https://www.microsoft.com/en/microsoft-365/outlook/" aria-label="Email">
               <img
                 src="./src/assets/icons/email.svg"
-                alt="Email Icons"
+                aria-hidden="true"
               />
             </a>
           </li>
