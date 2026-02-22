@@ -64,11 +64,17 @@ function Filter({ onChange }) {
         ref={buttonRef}
         className="filter-menu-btn"
         onClick={() => setIsOpen(!isOpen)}
+        aria-label="Filter movies by category"
+        aria-expanded={isOpen}
+        aria-controls="movie-filter-tabs"
       >
-        <img src={hamFilter} alt="Filter menu" />
+        {/* adding aria-hidden=true and changing the alt text to "" ensures the SR reads a clean, desciptive aria label (Filter Movie By Category)
+        ... otherwise it would have read "Filter Movies By Category, Filter Menu" */}
+        <img src={hamFilter} alt="" aria-hidden="true" />
       </button>
 
       <TabList 
+      id="movie-filter-tabs" // matches aria-controls above
       ref={tabListRef}
       className={`react-tabs__tab-list ${isOpen ? "show-menu" : ""}`}>
         {/* .map() -> loops through the array and creates a <Tab> for each category. */}
