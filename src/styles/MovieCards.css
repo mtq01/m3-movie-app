@@ -88,6 +88,7 @@
 
 .learn-more:hover {
   background: var(--accent-yellow);
+  color: #000;
 }
 
 button.favourite {
