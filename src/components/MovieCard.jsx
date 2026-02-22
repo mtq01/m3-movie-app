@@ -75,8 +75,8 @@ function MovieCard({
         <p className="movie-overview">{overview}</p>
         {/* We want to use react router to navigate us to details page, so need to use NavLink */}
         {/* aria-label is added bcuz without it screen readers will read "Learn More" for every movie, but the user won't know which movie it's referring to */}
-        <NavLink to={details_link} className="learn-more" aria-label={`Learn more about ${title}`}>
-          Learn more
+        <NavLink to={details_link} aria-label={`Learn more about ${title}`}>
+          <p className="learn-more">Learn More</p>
         </NavLink>
       </div>
     </article>
