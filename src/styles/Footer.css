@@ -28,16 +28,13 @@
 }
 
 /* icon sizing */
-.footer-icons img {
-  width: 1rem;
-  height: 1rem;
+.icon {
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
-/* icon hover effect */
-.footer-icons a:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(85%) saturate(600%)
-    hue-rotate(5deg);
-  /* Color and fill do not affect an <img> tag, so I had to use this sloppy line, or I could use an inline SVG and use fill to change the hover color. */
+.footer-icons a:hover .icon {
+    fill: var(--accent-yellow);
 }
 
 .footer-copy {
