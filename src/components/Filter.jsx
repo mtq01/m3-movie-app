@@ -9,10 +9,10 @@ import hamFilter from "../assets/icons/ham-filter.svg";
 //This array is iterated in Filter component to dynamically create <Tab> buttons and <TabPanel>s.
 //The order in the array determines the order of the tabs in the UI.
 const categories = [
+  { label: "Popular", value: "popular" },
   { label: "Top Rated", value: "top_rated" },
   { label: "Upcoming", value: "upcoming" },
-  { label: "Now Playing", value: "now_playing" },
-  { label: "Popular", value: "popular" }
+  { label: "Now Playing", value: "now_playing" }
 ];
 
 //onChange is the name of a prop that Filter component receives from its parent (MovieCards.jsx).
