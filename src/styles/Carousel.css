@@ -1,267 +1,267 @@
 /* +++++ mobile styles carousel +++++ */
 #hero {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    /* standard height */
-    height: 100vh;
-    /* fallback height */
-    height: 100svh;
-    min-height: 18.75rem;
-    /* prevents hero from being MASSIVE on really big screens */
-    max-height: 1080px;
-    /* prevents horizontal scroll (when swiping slides on carousel) */
-    touch-action: pan-y;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  /* standard height */
+  height: 100vh;
+  /* fallback height */
+  height: 100svh;
+  min-height: 18.75rem;
+  /* prevents hero from being MASSIVE on really big screens */
+  max-height: 1080px;
+  /* prevents horizontal scroll (when swiping slides on carousel) */
+  touch-action: pan-y;
 }
 
 #carousel-slides,
 .slide {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 /* movie container for images + text */
 .slide {
-    display: none;
-    position: relative;
+  display: none;
+  position: relative;
 }
 
 .slide.active {
-    /* displays active slide */
-    display: block;
+  /* displays active slide */
+  display: block;
 }
 
 .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* keeps img from having a weird crop on screen resize. */
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* keeps img from having a weird crop on screen resize. */
+  object-position: center;
 }
 
 /* +++++ movie info overlay +++++ */
 .movie-info {
-    position: absolute;
-    /* info overlay rests on bottom of carousel on mobile */
-    bottom: 0;
-    left: 0;
-    max-width: 100%;
-    background: var(--nav-dark-blue);
-    /* no border radius on mobile */
-    border-radius: 0;
-    padding: 1.5rem 1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: var(--z-index-nav);
+  position: absolute;
+  /* info overlay rests on bottom of carousel on mobile */
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  background: var(--nav-dark-blue);
+  /* no border radius on mobile */
+  border-radius: 0;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: var(--z-index-carousel-movie-info);
 }
 
 /* movie info adjustment for mobile screen */
 .movie-info p {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* reset h1 padding/margin for movie-info container */
-.movie-info>h2 {
-    padding: 0;
-    margin: 0;
+.movie-info > h2 {
+  padding: 0;
+  margin: 0;
 }
 
 /* +++++ pagination dots +++++ */
 .pill-container {
-    position: absolute;
-    bottom: 1rem;
-    width: 100%;
-    /* hide pills and pagination mobile */
-    display: none;
-    /* dots sit on top of the cover img */
-    z-index: var(--z-index-base);
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  /* hide pills and pagination mobile */
+  display: none;
+  /* dots sit on top of the cover img */
+  z-index: var(--z-index-base);
 }
 
 .dots-container {
-    display: flex;
-    padding: 0.5rem 0.75rem;
-    gap: 0.45rem;
-    border-radius: 1rem;
-    transition: 0.3s ease;
-    background: rgba(0, 0, 0, 0.718);
-
+  display: flex;
+  padding: 0.5rem 0.75rem;
+  gap: 0.45rem;
+  border-radius: 1rem;
+  transition: 0.3s ease;
+  background: rgba(0, 0, 0, 0.718);
 }
 
 .dots-container:hover {
-    transform: scale(1.25);
+  transform: scale(1.25);
 }
 
 .dot {
-    width: 0.75rem;
-    height: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
 }
 
 .dot:hover {
-    background: var(--accent-yellow);
+  background: var(--accent-yellow);
 }
 
 .dot.active {
-    background-color: var(--accent-yellow);
-    border: 0.125rem solid white;
-    /* active dot scales */
-    transform: scale(1.35);
+  background-color: var(--accent-yellow);
+  border: 0.125rem solid white;
+  /* active dot scales */
+  transform: scale(1.35);
 }
 
 /* +++++ trailer buttons +++++ */
 .trailer-btn {
-    width: fit-content;
-    padding: 0.75rem;
-    border: 0;
-    color: #000;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 0.25rem;
-    background: var(--ui-light-blue);
+  width: fit-content;
+  padding: 0.75rem;
+  border: 0;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  background: var(--ui-light-blue);
 }
 
 .trailer-btn:hover {
-    background: var(--accent-yellow);
-    cursor: pointer;
+  background: var(--accent-yellow);
+  cursor: pointer;
 }
 
 /* +++++ popup overlay for trailer +++++ */
 .popup-overlay {
-    position: fixed;
-    /* stays in the same spot on scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    /* Darkens the background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* positioned on top of nav bar */
-    z-index: var(--z-index-popup);
+  position: fixed;
+  /* stays in the same spot on scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  /* Darkens the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* positioned on top of nav bar */
+  z-index: var(--z-index-popup);
 }
 
 .popup-content {
-    background: #000;
-    padding: 1.25rem;
-    width: 100%;
-    max-width: 70rem;
-    position: relative;
-    border: 0.125rem solid var(--accent-yellow);
-    border-radius: 1rem;
-    margin: 1rem;
-    z-index: var(--z-index-popup);
+  background: #000;
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 70rem;
+  position: relative;
+  border: 0.125rem solid var(--accent-yellow);
+  border-radius: 1rem;
+  margin: 1rem;
+  z-index: var(--z-index-popup);
 }
 
 /* +++++ video popup styling +++++ */
 .video-responsive {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
 }
 
 .video-responsive iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: none;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border: none;
 }
 
 .close-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.35rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.35rem;
 
-    /* close btn bg */
-    background: rgba(255, 255, 255, 0);
-    border: 0.1875rem solid rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
+  /* close btn bg */
+  background: rgba(255, 255, 255, 0);
+  border: 0.1875rem solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
 
-    /* 'X' color & btn size */
-    color: white;
-    width: 1.75rem;
-    height: 1.75rem;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    z-index: 1;
+  /* 'X' color & btn size */
+  color: white;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1;
 
-    /* center 'X' inside circle */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* center 'X' inside circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    /* smooth hover */
-    transition: all 0.3s ease;
+  /* smooth hover */
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-    background: white;
-    color: var(--nav-dark-blue);
-    border: 0.1875rem solid var(--accent-yellow);
+  background: white;
+  color: var(--nav-dark-blue);
+  border: 0.1875rem solid var(--accent-yellow);
 }
 
 /* +++++ tablet & desktop styling @ 768px +++++ */
 @media (min-width: 48rem) {
+  /* movie details */
+  .movie-info {
+    bottom: var(--info-bottom-desktop);
+    left: 2rem;
+    /* stops the text from hitting the right edge */
+    width: auto;
+    min-width: 25rem;
+    max-width: 40%;
+    padding: 2rem 1rem;
+    border-radius: 0.5rem;
+  }
 
-    /* movie details */
-    .movie-info {
-        bottom: var(--info-bottom-desktop);
-        left: 2rem;
-        /* stops the text from hitting the right edge */
-        width: auto;
-        min-width: 25rem;
-        max-width: 40%;
-        padding: 2rem 1rem;
-        border-radius: 0.5rem;
-    }
+  /* movie-info adjustment for desktop */
+  .movie-info p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    /* movie-info adjustment for desktop */
-    .movie-info p {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  /* display pills and pagination dots on desktop */
+  .pill-container {
+    display: flex;
+    justify-content: center;
+  }
 
-    /* display pills and pagination dots on desktop */
-    .pill-container {
-        display: flex;
-        justify-content: center;
-    }
-
-    /* overlay for carousel images */
-    .slide::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* This creates the cinematic fade from transparent to dark */
-        background: #000203;
-        background: linear-gradient(70deg,
-                rgba(0, 2, 3, 1) 0%,
-                rgba(1, 23, 10, 0) 50%,
-                rgba(0, 0, 0, 1) 100%);
-        z-index: 1;
-        /* Sits above the image */
-    }
+  /* overlay for carousel images */
+  .slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* This creates the cinematic fade from transparent to dark */
+    background: #000203;
+    background: linear-gradient(
+      70deg,
+      rgba(0, 2, 3, 1) 0%,
+      rgba(1, 23, 10, 0) 50%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    z-index: 1;
+    /* Sits above the image */
+  }
 }
