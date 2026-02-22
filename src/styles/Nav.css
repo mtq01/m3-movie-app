@@ -46,6 +46,8 @@ header {
     left: 0;
     width: 100%;
     z-index: var(--z-index-nav);
+    display: flex;
+    justify-content: center;
 }
 
 #main-nav {
@@ -54,6 +56,8 @@ header {
     justify-content: space-between;
     padding: var(--mobile-nav-padding);
     background: var(--nav-dark-blue);
+    max-width: 123.75rem;
+    width: 100%;
 }
 
 #primary-nav-menu {
