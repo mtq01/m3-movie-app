@@ -71,11 +71,22 @@
   overflow: hidden;
 }
 
-.movie-date,
-.learn-more {
+.movie-date {
   font-style: italic;
   color: var(--ui-light-blue);
   width: fit-content;
+}
+
+.learn-more {
+  padding: 0.25rem 0.5rem;
+  background: var(--accent-yellow);
+  color: #000;
+  border-radius: 0.5rem;
+  width: fit-content;
+  font-weight: 600;
+}
+.learn-more:hover {
+  background: var(--ui-light-blue);
 }
 
 button.favourite {
