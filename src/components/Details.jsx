@@ -72,14 +72,17 @@ function Details({ movie, id, tabIndex }) {
 
         {/* Release Date */}
         <h2 className="date">{releaseDate}</h2>
-
+      <div className="details-buttons">
         {/* Rating */}
-        <p>
-        <span className="rating-box">{movie.vote_average?.toFixed(1)}
-        </span></p>
+        <span className="rating-box">{movie.vote_average?.toFixed(1)}</span>
+          <FavButton
+          movieObj={movie}
+          remove={detailsIsFav}
+          handleFavClick={handleFavClick}/>
+      </div>
 
         {/* Overview */}
-        <p>{movie.overview}</p>
+        <p className="overview">{movie.overview}</p>
 
         {/* Cast */}
         {movie.cast?.length > 0 && (
@@ -102,7 +105,7 @@ function Details({ movie, id, tabIndex }) {
           </h3>
         )}
       </div>
-<div className="details-buttons">
+
       {/* Watch Trailer Button */}
       {movie.trailerKey && (
         <button
@@ -112,14 +115,6 @@ function Details({ movie, id, tabIndex }) {
           Watch Trailer
         </button>
       )}
-     
-      
-        <FavButton
-          movieObj={movie}
-          remove={detailsIsFav}
-          handleFavClick={handleFavClick}
-        />
-      </div>
       </div>
       {/* Trailer Popup */}
       {showTrailer && (
