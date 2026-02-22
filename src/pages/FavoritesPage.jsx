@@ -34,7 +34,7 @@ const Favorites = () => {
           {/* Below the conditional rendering shows the no movie msg if there are no favorites and if there are favorites it will display the movie grid */}
           {favs.length < 1 ? (
             <div className="no-movie-msg-wrapper" aria-live="polite">
-              <h3>Sorry!</h3>
+              <h2>Sorry!</h2>
               <p>
                 You have no favorite movies. Return to the{" "}
                 {/* Link back to homepage */}
@@ -54,7 +54,7 @@ const Favorites = () => {
                   overview={singleMovie.overview}
                   details_link={`/details?id=${singleMovie.id}`}
                   isFav={true}
-                  rating={singleMovie.rating}      
+                  rating={singleMovie.rating}
                 />
               ))}
             </div>
