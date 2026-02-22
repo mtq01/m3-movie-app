@@ -15,13 +15,13 @@
   gap: 1rem;
   background-color: var(--bg-dark-blue);
   max-width: 60rem;
-  width: 80%;
+  width: 85%;
   position: relative;
   z-index: 2; /* indexed above hero image */
-  margin-top: -18rem; /* overlaps hero image without removing element from document flow (unlike top with absolute positioning) */
+  margin-top: -20rem; /* overlaps hero image without removing element from document flow (unlike top with absolute positioning) */
   left: 50%;
   transform: translateX(-50%);
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1rem;
 }
 
 .about-content {
@@ -65,7 +65,8 @@ TABLET STARTS HERE  */
     padding-bottom: 2rem;
   }
   .about-content-container {
-    margin-top: -20rem;
+    width: 80%;
+    padding: 2.5rem 2rem;
   }
 }
 /* DESKTOP STARTS HERE */
