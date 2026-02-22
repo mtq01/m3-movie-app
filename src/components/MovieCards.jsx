@@ -70,10 +70,18 @@ function MovieCards({ id, tabIndex }) {
   // Render UI
   return (
     // ++++++++++++++++++ changed <> & </> to <section> & added 'id={id} tabIndex={tabIndex}' for jump-to-content
-    <section id={id} tabIndex={tabIndex}>
+    <section 
+      id={id} 
+      tabIndex={tabIndex} 
+      aria-label="Movie Gallery"
+      >
       {/* Filter tabs: Top Rated, Upcoming, Now Playing, Popular */}
       {/* onChange calls setActiveCategory to update state */}
       <Filter onChange={setActiveCategory} />
+
+      {/* hidden header for SR navigation. announces "Category Movies" 
+      removes the "_" from top_rated and now_playing which would sound weird if read by an SR */}
+      <h2 className="sr-only">{activeCategory.replace("_", " ")} Movies</h2>
 
       {/* If loading is TRUE -> show "Loading movies..." (Show a loading message while API fetch is in progress)
       If loading is FALSE -> show the movie cards     */}

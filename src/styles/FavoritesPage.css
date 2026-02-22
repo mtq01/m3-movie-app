@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  width: 80vw;
+  width: 85vw;
   margin: 0 auto;
   padding: 2.5rem 0 4rem 0;
 }
@@ -23,8 +23,7 @@
   border-bottom: 1px solid var(--ui-light-blue);
 }
 
-.fav-heading-container h2 {
-  font-size: 1.75rem;
+.fav-heading-container h1 {
   text-transform: uppercase;
 }
 
@@ -79,11 +78,14 @@
   .fav-movie-grid {
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem 5rem;
+    gap: 3rem 1.25rem;
   }
 }
 
+/* DESKTOP STARTS HERE */
+
 @media (min-width: 80em) {
   .fav-movie-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
