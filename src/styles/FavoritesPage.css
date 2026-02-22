@@ -82,6 +82,8 @@
   }
 }
 
+/* DESKTOP STARTS HERE */
+
 @media (min-width: 80em) {
   .fav-movie-grid {
     grid-template-columns: repeat(4, 1fr);
