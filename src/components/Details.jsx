@@ -61,7 +61,7 @@ function Details({ movie, id, tabIndex }) {
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : "/placeholder.jpg"
         }
-        alt={ `${movie.title} movie poster `}
+        alt={`${movie.title} movie poster`}
         className="details-poster"
       />
 
@@ -120,6 +120,7 @@ function Details({ movie, id, tabIndex }) {
       {showTrailer && (
         <TrailerPopup
           trailerKey={movie.trailerKey} // pass the key
+          movieTitle={movie.title}
           onClose={() => setShowTrailer(false)} // allow closing
         />
       )}
