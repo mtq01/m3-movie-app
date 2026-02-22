@@ -167,7 +167,7 @@ const Carousel = () => {
                 // backdrop_path asks for horizontal landscape img (large banners/carouselss)
                 src={`${imageBaseURL}${slide.backdrop_path}`}
                 // .title is the movie name
-                alt={slide.title}
+                alt={`${slide.title} banner`}
                 className="hero-img"
               />
 
@@ -205,7 +205,8 @@ const Carousel = () => {
         <div className="dots-container">
           {/* loop thru the array & create one dot per slide obj
         the '_' means we arent using the slide data itself, just its index */}
-          {movies.map((_, index) => {
+          {movies.map((slide, index) => {
+            const isActive = index === currentIndex;
             // is the dot the active slide? (same as above logic for 'slide active')
             let dotClass = "dot";
             if (index === currentIndex) {
@@ -223,6 +224,8 @@ const Carousel = () => {
             if you want to see what i mean remove: '() =>' and refresh the browser
             */
                 onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to slide ${index + 1}: ${slide.title}`}
+                aria-current={isActive ? "true" : "false"}
               ></button>
             );
           })}
