@@ -49,6 +49,8 @@ function Details({ movie, id, tabIndex }) {
     }
   }
 
+  console.log("Current Movie Title:", movie.title);
+  console.log("Is there a trailer key?:", !!movie.trailerKey);
   return (
     <section className="details-page">
       {/* Poster */}
@@ -61,70 +63,71 @@ function Details({ movie, id, tabIndex }) {
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : "/placeholder.jpg"
         }
-        alt={ `${movie.title} movie poster `}
+        alt={`${movie.title} movie poster `}
         className="details-poster"
       />
 
       <div className="details-right">
-      <div id={id} tabIndex={tabIndex} className="details-info">
-        {/* Title */}
-        <h1 className="title"> {movie.title}</h1>
+        <div id={id} tabIndex={tabIndex} className="details-info">
+          {/* Title */}
+          <h1 className="title"> {movie.title}</h1>
 
-        {/* Release Date */}
-        <h2 className="date">{releaseDate}</h2>
+          {/* Release Date */}
+          <h2 className="date">{releaseDate}</h2>
 
-        {/* Rating */}
-        <p>
-        <span className="rating-box">{movie.vote_average?.toFixed(1)}
-        </span></p>
+          {/* Rating */}
+          <p>
+            <span className="rating-box">{movie.vote_average?.toFixed(1)}</span>
+          </p>
 
-        {/* Overview */}
-        <p>{movie.overview}</p>
+          {/* Overview */}
+          <p>{movie.overview}</p>
 
-        {/* Cast */}
-        {movie.cast?.length > 0 && (
-          <h3>
-            <strong>Starring:</strong> {movie.cast.join(", ")}
-          </h3>
-        )}
+          {/* Cast */}
+          {movie.cast?.length > 0 && (
+            <h3>
+              <strong>Starring:</strong> {movie.cast.join(", ")}
+            </h3>
+          )}
 
-        {/* Directors */}
-        {movie.directors?.length > 0 && (
-          <h3>
-            <strong>Directed by:</strong> {movie.directors.join(", ")}
-          </h3>
-        )}
+          {/* Directors */}
+          {movie.directors?.length > 0 && (
+            <h3>
+              <strong>Directed by:</strong> {movie.directors.join(", ")}
+            </h3>
+          )}
 
-        {/* Writers */}
-        {movie.writers?.length > 0 && (
-          <h3>
-            <strong>Written by:</strong> {movie.writers.join(", ")}
-          </h3>
-        )}
-      </div>
-<div className="details-buttons">
-      {/* Watch Trailer Button */}
-      {movie.trailerKey && (
-        <button
-          className="play-trailer-btn"
-          onClick={() => setShowTrailer(true)}
-        >
-          Watch Trailer
-        </button>
-      )}
-     
-      
-        <FavButton
-          movieObj={movie}
-          remove={detailsIsFav}
-          handleFavClick={handleFavClick}
-        />
-      </div>
+          {/* Writers */}
+          {movie.writers?.length > 0 && (
+            <h3>
+              <strong>Written by:</strong> {movie.writers.join(", ")}
+            </h3>
+          )}
+        </div>
+        <div className="details-buttons">
+          {/* Watch Trailer Button */}
+          {movie.trailerKey && (
+            <button
+              className="play-trailer-btn"
+              onClick={() => setShowTrailer(true)}
+              aria-label={`Watch trailer for ${movie.title}`}
+            >
+              Watch Trailer
+            </button>
+          )}
+
+          <FavButton
+            movieObj={movieObj.id}
+            remove={detailsIsFav}
+            handleFavClick={handleFavClick}
+          />
+        </div>
       </div>
       {/* Trailer Popup */}
       {showTrailer && (
         <TrailerPopup
           trailerKey={movie.trailerKey} // pass the key
+          movieTitle={movie.title}
           onClose={() => setShowTrailer(false)} // allow closing
         />
       )}
