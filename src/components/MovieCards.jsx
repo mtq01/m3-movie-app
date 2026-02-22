@@ -14,8 +14,8 @@ import {
 // added id, tabIndex to MovieCards function for skip-to-content functionality
 function MovieCards({ id, tabIndex }) {
   // State variables
-  // activeCategory stores which category tab is currently selected (default: "top_rated")
-  const [activeCategory, setActiveCategory] = useState("top_rated");
+  // activeCategory stores which category tab is currently selected (default: "popular")
+  const [activeCategory, setActiveCategory] = useState("popular");
 
   // movies stores the array of movie objects fetched from the API
   const [movies, setMovies] = useState([]);

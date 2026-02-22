@@ -103,7 +103,7 @@ ul {
     background: var(--ui-light-blue);
     width: clamp(250px, 90%, 400px);
     padding: 2rem;
-    border-radius: 1.5rem;
+    border-radius: var(--border-radius);
     font-size: 1.2rem;
     font-weight: bold;
     box-sizing: border-box;
@@ -112,19 +112,21 @@ ul {
 .login h2{
     text-align: center;
     font-size: 1.5rem;
+    color: var(--nav-dark-blue);
 }
 
 .login form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem; 
+    color: var(--nav-dark-blue);
 }
 
 
 .form-group input {
     padding: 0.8rem;
     margin: 0.3rem 0;
-    border-radius: 0.8rem;
+    border-radius: var(--border-radius);
     border: 1px solid white;
     width: 100%;
     background-color: var(--nav-dark-blue);
@@ -133,7 +135,7 @@ ul {
 
 .login button {
     padding: 0.8rem;
-    border-radius: 0.8rem;
+    border-radius: var(--border-radius);
     border: 1px solid white;
     background-color: var(--nav-dark-blue);
     font-weight: bold;

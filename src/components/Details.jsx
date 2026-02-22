@@ -34,7 +34,7 @@ function Details({ movie, id, tabIndex }) {
       : "/placeholder.jpg",
     title: movie.title,
     release_date: releaseDate,
-    overview: movie.over,
+    overview: movie.overview,
     details_link: `/details?id=${movie.id}`,
     rating: movie.vote_average,
   };
@@ -61,47 +61,48 @@ function Details({ movie, id, tabIndex }) {
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : "/placeholder.jpg"
         }
-        alt={movie.title}
+        alt={ `${movie.title} movie poster `}
         className="details-poster"
       />
 
+      <div className="details-right">
       <div id={id} tabIndex={tabIndex} className="details-info">
         {/* Title */}
-        <p className="title"> {movie.title}</p>
+        <h1 className="title"> {movie.title}</h1>
 
         {/* Release Date */}
-        <p className="date">{releaseDate}</p>
+        <h2 className="date">{releaseDate}</h2>
 
         {/* Rating */}
         <p>
-          <strong>Rating:</strong> {movie.vote_average?.toFixed(1)}
-        </p>
+        <span className="rating-box">{movie.vote_average?.toFixed(1)}
+        </span></p>
 
         {/* Overview */}
         <p>{movie.overview}</p>
 
         {/* Cast */}
         {movie.cast?.length > 0 && (
-          <p>
+          <h3>
             <strong>Starring:</strong> {movie.cast.join(", ")}
-          </p>
+          </h3>
         )}
 
         {/* Directors */}
         {movie.directors?.length > 0 && (
-          <p>
+          <h3>
             <strong>Directed by:</strong> {movie.directors.join(", ")}
-          </p>
+          </h3>
         )}
 
         {/* Writers */}
         {movie.writers?.length > 0 && (
-          <p>
+          <h3>
             <strong>Written by:</strong> {movie.writers.join(", ")}
-          </p>
+          </h3>
         )}
       </div>
-
+<div className="details-buttons">
       {/* Watch Trailer Button */}
       {movie.trailerKey && (
         <button
@@ -111,15 +112,15 @@ function Details({ movie, id, tabIndex }) {
           Watch Trailer
         </button>
       )}
-
-      <div>
+     
+      
         <FavButton
           movieObj={movie}
           remove={detailsIsFav}
           handleFavClick={handleFavClick}
         />
       </div>
-
+      </div>
       {/* Trailer Popup */}
       {showTrailer && (
         <TrailerPopup
