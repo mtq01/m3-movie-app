@@ -6,7 +6,7 @@ import TrailerPopup from "../components/TrailerPopup";
 import isFav from "../utility/isFav";
 import "../styles/Details.css";
 
-function Details({ movie }) {
+function Details({ movie, id, tabIndex }) {
   const [showTrailer, setShowTrailer] = useState(false); // control trailer popup visibility
 
   // dispatch actions for Redux
@@ -65,7 +65,7 @@ function Details({ movie }) {
         className="details-poster"
       />
 
-      <div className="details-info">
+      <div id={id} tabIndex={tabIndex} className="details-info">
         {/* Title */}
         <p className="title"> {movie.title}</p>
 
