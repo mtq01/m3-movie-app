@@ -16,7 +16,6 @@ const AboutPage = () => {
       <img
         className="about-hero-image"
         src={aboutHero}
-        alt="employees working at table together"
       />
       <div id="main-content" tabIndex="-1" className="about-content-container">
         <h2>About Us</h2>
@@ -32,7 +31,7 @@ const AboutPage = () => {
         </p>
 
         <div className="tmdb-attribute-container">
-          <img className="tmdb-logo" src={tmdbLogo} alt="tmdb-logo" />
+          <img className="tmdb-logo" src={tmdbLogo} alt="TMDB The Movie Database" />
 
           <p className="tmdb-attribute-text">
             “This product uses the TMDb API but is not endorsed or certified by
