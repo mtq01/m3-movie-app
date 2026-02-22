@@ -13,6 +13,7 @@ const Carousel = () => {
   const [trailerKey, setTrailerKey] = useState("");
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   // --> next slide logic (required for useEffect timer to work & mobile swipe next)
   const nextSlide = () => {
@@ -99,6 +100,8 @@ const Carousel = () => {
 
   // +++++ [timer] change slides every 5sec +++++
   useEffect(() => {
+    if (isPaused) return; // dont start timer if paused (user is hovering over the img)
+
     // set thee interval
     const interval = setInterval(() => {
       nextSlide();
@@ -108,18 +111,25 @@ const Carousel = () => {
     return () => clearInterval(interval);
 
     // [next slide] reset timer everytime the slide changes
-  }, [currentIndex, movies]);
+  }, [currentIndex, movies, isPaused]);
 
   // +++++ renders "loading" if 'movies' is empty on page load. +++++
   if (movies.length === 0) return <div className="loading">Loading...</div>;
 
   // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
-    <div
+    <section
       id="hero"
+      aria-roledescription="carousel"
+      aria-label="Featured Movies"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      // pause logic (on hover)
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
     >
       <div id="carousel-slides">
         {/* +++++ runs for each obj in the movies array, x3 total +++++ */}
@@ -145,7 +155,12 @@ const Carousel = () => {
           // return the img tag with the class (determined by the logic above)
           return (
             // key={slide.id} TMDB unique ID
-            <div key={slide.id} className={classNameValue}>
+            <div 
+              key={slide.id} 
+              className={classNameValue}
+              // hides non-active slides from screen reader
+              aria-hidden={index !== currentIndex} 
+              >
               <img
                 // backdrop_path asks for horizontal landscape img (large banners/carouselss)
                 src={`${imageBaseURL}${slide.backdrop_path}`}
@@ -160,6 +175,8 @@ const Carousel = () => {
                 <button
                   className="trailer-btn"
                   onClick={() => watchTrailer(slide.id)}
+                  // not tabbable if not current slide
+                  tabIndex={index === currentIndex ? 0 : -1}
                 >
                   Watch Trailer
                 </button>
@@ -191,7 +208,7 @@ const Carousel = () => {
               dotClass = "dot active";
             }
             return (
-              <span
+              <button
                 // key={index} unique key that hepls react render the list
                 key={index}
                 className={dotClass}
@@ -202,12 +219,12 @@ const Carousel = () => {
             if you want to see what i mean remove: '() =>' and refresh the browser
             */
                 onClick={() => setCurrentIndex(index)}
-              ></span>
+              ></button>
             );
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
