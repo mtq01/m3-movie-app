@@ -9,10 +9,11 @@ import HomePage from "../pages/HomePage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
 import FavoritesPage from "../pages/FavoritesPage.jsx";
 import DetailsPage from "../pages/DetailsPage.jsx";
+import { cinemax } from "./globals";
 
 function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={`/${cinemax}`}>
       <div className="site-wrapper">
         {/* jump to content - screen reader*/}
         <a id="screen-reader-text" href="#main-content">
