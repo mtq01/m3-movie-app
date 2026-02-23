@@ -92,7 +92,7 @@ const Nav = () => {
       <NavLink to="/" className="cinemax-logo" onClick={handleMenuClose}>
       <img
         id="logo"
-        src="./src/assets/logos/cinemax-logo.svg"
+        src="./public/cinemax-logo.svg"
         alt="Cinemax"
       />
       </NavLink>
