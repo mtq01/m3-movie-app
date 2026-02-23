@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
-
+import logo from "../assets/logo/cinemax-logo.svg";
 const Nav = () => {
   // +++++ state management +++++
   /* 
@@ -90,10 +90,11 @@ const Nav = () => {
 
       {/* Mahtab-link logo to home page using React Router */}
       <NavLink to="/" className="cinemax-logo" onClick={handleMenuClose}>
-      <img
-        id="logo"
-        src="./public/cinemax-logo.svg"
-        alt="Cinemax"
+      <img 
+        id ="logo" 
+        src={logo} 
+        alt="" 
+        aria-hidden="true" 
       />
       </NavLink>
 
