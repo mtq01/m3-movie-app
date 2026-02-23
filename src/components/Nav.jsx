@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
-import logo from "../assets/logo/cinemax-logo.svg";
+
+
 const Nav = () => {
   // +++++ state management +++++
   /* 
@@ -92,7 +93,7 @@ const Nav = () => {
       <NavLink to="/" className="cinemax-logo" aria-label="Cinemax Home" onClick={handleMenuClose}>
       <img 
         id ="logo" 
-        src={logo} 
+        src="./cinemax-logo.svg" 
         alt="" 
         aria-hidden="true" 
       />
