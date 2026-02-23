@@ -27,7 +27,7 @@ Styles for the Global Elements go here.
   --primary-text-color: #fff;
 
   /* spacing */
-  --max-content-width: 120rem;
+  --max-content-width: 123.75rem;
   --global-margin: 0 1rem;
   --global-padding: 1rem;
   --mobile-nav-padding: 0.5rem 1rem;
@@ -38,6 +38,7 @@ Styles for the Global Elements go here.
   --z-index-nav: 1001; /* for header */
   --z-index-login: 1100; /* login backdrop */
   --z-index-popup: 9999; /* movie trailer */
+  --z-index-carousel-movie-info: 950; /* carousel movie info overlay */
 
   /* movie info overlay desktop positioning */
   --info-bottom-desktop: 5rem;
@@ -61,7 +62,8 @@ Styles for the Global Elements go here.
 html,
 body,
 #root {
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 body {
@@ -71,9 +73,15 @@ body {
   color: var(--primary-text-color);
 }
 
-/* main {
-  padding-top: 6rem;
-} */
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; /* pushes footer to the bottom */
+}
 
 #root {
   max-width: var(--max-content-width);
@@ -103,8 +111,8 @@ a:hover {
   color: var(--accent-yellow);
 }
 a:focus {
-  outline: .125rem solid var(--accent-yellow);
-  outline-offset: .25rem;
+  color: var(--ui-light-blue);
+  outline-offset: 0.25rem;
 }
 a:active {
   color: var(--ui-light-blue);

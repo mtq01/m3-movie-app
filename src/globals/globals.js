@@ -20,3 +20,5 @@ export const imageBaseURL = "https://image.tmdb.org/t/p/w1280";
 /* Example of API Call with the set variables
 >>> const url = `${endPointNowPlaying}?api_key=${apiKey}`; <<< */
 
+// Key used to store and retrieve fav'd movies from local storage
+export const appStorageName = "cinemax-favs";

@@ -2,13 +2,20 @@ import { apiKey, endPointTrailer } from "../globals/globals.js";
 
 /* 
 +++++ getTrailer function. +++++
-- [input] movieId is the unque id for the movie from TMDB
+- [input] movieObj is the unque id for the movie from TMDB
 - [output] returns the UT 'key' string if found, otherwise returns null
 */
 
-export const getTrailer = async (movieId) => {
-    // grab the specific api URL for movies
-    const movieUrl = `${endPointTrailer}${movieId}/videos?api_key=${apiKey}`;
+export const getTrailer = async (movieObj) => {
+
+    /* - if on details page, movieObj IS the ID (string)
+       - if on the Home PAage, movieObj has an .id (obj) */
+    const id = movieObj.id || movieObj; 
+
+    // 'id' will always be a number, and wont ever be 'undefined'
+    const movieUrl = `${endPointTrailer}${id}/videos?api_key=${apiKey}`;
+
+
 
     try {
         const response = await fetch(movieUrl);

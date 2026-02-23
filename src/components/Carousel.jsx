@@ -11,8 +11,10 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [trailerKey, setTrailerKey] = useState("");
+  const [currentMovieTitle, setCurrentMovieTitle] = useState("");
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   // --> next slide logic (required for useEffect timer to work & mobile swipe next)
   const nextSlide = () => {
@@ -65,11 +67,12 @@ const Carousel = () => {
   };
 
   // +++++ fetch movie trailer +++++
-  const watchTrailer = async (movieId) => {
-    const key = await getTrailer(movieId); // Calls your new utility
+  const watchTrailer = async (movieObj) => {
+    const key = await getTrailer(movieObj); // Calls your new utility
 
     if (key) {
       setTrailerKey(key);
+      setCurrentMovieTitle(movieObj.title);
       setIsPopupOpen(true);
     } else {
       alert("No Trailer Found!");
@@ -99,6 +102,8 @@ const Carousel = () => {
 
   // +++++ [timer] change slides every 5sec +++++
   useEffect(() => {
+    if (isPaused) return; // dont start timer if paused (user is hovering over the img)
+
     // set thee interval
     const interval = setInterval(() => {
       nextSlide();
@@ -108,18 +113,25 @@ const Carousel = () => {
     return () => clearInterval(interval);
 
     // [next slide] reset timer everytime the slide changes
-  }, [currentIndex, movies]);
+  }, [currentIndex, movies, isPaused]);
 
   // +++++ renders "loading" if 'movies' is empty on page load. +++++
   if (movies.length === 0) return <div className="loading">Loading...</div>;
 
   // +++++ OUTPUT [Carousel Slides & Info] +++++
   return (
-    <div
+    <section
       id="hero"
+      aria-roledescription="carousel"
+      aria-label="Featured Movies"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      // pause logic (on hover)
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
     >
       <div id="carousel-slides">
         {/* +++++ runs for each obj in the movies array, x3 total +++++ */}
@@ -145,12 +157,17 @@ const Carousel = () => {
           // return the img tag with the class (determined by the logic above)
           return (
             // key={slide.id} TMDB unique ID
-            <div key={slide.id} className={classNameValue}>
+            <div 
+              key={slide.id} 
+              className={classNameValue}
+              // hides non-active slides from screen reader
+              aria-hidden={index !== currentIndex} 
+              >
               <img
                 // backdrop_path asks for horizontal landscape img (large banners/carouselss)
                 src={`${imageBaseURL}${slide.backdrop_path}`}
                 // .title is the movie name
-                alt={slide.title}
+                alt={`${slide.title} banner`}
                 className="hero-img"
               />
 
@@ -159,7 +176,9 @@ const Carousel = () => {
                 <p>{shortDescription}</p>
                 <button
                   className="trailer-btn"
-                  onClick={() => watchTrailer(slide.id)}
+                  onClick={() => watchTrailer(slide)}
+                  // not tabbable if not current slide
+                  tabIndex={index === currentIndex ? 0 : -1}
                 >
                   Watch Trailer
                 </button>
@@ -173,25 +192,27 @@ const Carousel = () => {
       <TrailerPopup
         isOpen={isPopupOpen}
         trailerKey={trailerKey}
+        movieTitle={currentMovieTitle} // pass title state
         onClose={() => {
           setIsPopupOpen(false);
           setTrailerKey("");
+          setCurrentMovieTitle(""); // reset when closed
         }}
       />
 
       {/* +++++ pagination dots +++++ */}
       <div className="pill-container">
         <div className="dots-container">
-          {/* loop thru the array & create one dot per slide obj
-        the '_' means we arent using the slide data itself, just its index */}
-          {movies.map((_, index) => {
+          {/* loop thru the array & create one dot per slide obj */}
+          {movies.map((slide, index) => {
+            const isActive = index === currentIndex;
             // is the dot the active slide? (same as above logic for 'slide active')
             let dotClass = "dot";
             if (index === currentIndex) {
               dotClass = "dot active";
             }
             return (
-              <span
+              <button
                 // key={index} unique key that hepls react render the list
                 key={index}
                 className={dotClass}
@@ -202,12 +223,14 @@ const Carousel = () => {
             if you want to see what i mean remove: '() =>' and refresh the browser
             */
                 onClick={() => setCurrentIndex(index)}
-              ></span>
+                aria-label={`Go to slide ${index + 1}: ${slide.title}`}
+                aria-current={isActive ? "true" : "false"}
+              ></button>
             );
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

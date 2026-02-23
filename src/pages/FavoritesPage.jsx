@@ -1,20 +1,66 @@
-// Page - Favorites
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import MovieCard from "../components/MovieCard";
+import { NavLink } from "react-router-dom";
 import { appTitle } from "../globals/globals";
+import "../styles/FavoritesPage.css";
 
-// dynamic page title
 const Favorites = () => {
   useEffect(() => {
     document.title = `Favorites | ${appTitle}`;
   }, []);
 
-  return (
-    <section>
-      {/* Page Specific Components*/}
+  // Lets you connect to the favs array from the redux store
+  //favMovies is the array inside favsSlice
+  const favs = useSelector((state) => state.favs.favMovies);
 
-      {/* Placeholders - <h2> <p> and <section> can be deleted */}
-      <h2>My List - Favorites</h2>
-      <p>List of favorites goes here</p>
+  return (
+    <section className="favorites">
+      <div className="fav-container">
+        <div className="fav-heading-container">
+          <svg
+            className="fav-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+            // aria-hidden="true" prevents a screen reader from trying to read the path data or saying "unlabeled image"
+            aria-hidden="true"
+          >
+            <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z" />
+          </svg>
+          <h1>My List</h1>
+        </div>
+
+        <div id="main-content" tabIndex="-1" className="fav-content-container">
+          {/* Below the conditional rendering shows the no movie msg if there are no favorites and if there are favorites it will display the movie grid */}
+          {favs.length < 1 ? (
+            <div className="no-movie-msg-wrapper" aria-live="polite">
+              <h2>Sorry!</h2>
+              <p>
+                You have no favorite movies. Return to the{" "}
+                {/* Link back to homepage */}
+                <NavLink to="/">homepage</NavLink> to add a favourite movie.
+              </p>
+            </div>
+          ) : (
+            <div className="fav-movie-grid">
+              {/* Loops through the favorites array and renders one MovieCard */}
+              {favs.map((singleMovie) => (
+                <MovieCard
+                  key={singleMovie.id}
+                  id={singleMovie.id}
+                  title={singleMovie.title}
+                  poster={singleMovie.poster}
+                  release_date={singleMovie.release_date}
+                  overview={singleMovie.overview}
+                  details_link={`/details?id=${singleMovie.id}`}
+                  isFav={true}
+                  rating={singleMovie.rating}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </section>
   );
 };

@@ -21,7 +21,12 @@
 .popup-content {
     background: #000;
     padding: 1.25rem;
+    width: 90%;
     max-width: 70rem;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     border: 0.125rem solid var(--accent-yellow);
     border-radius: 1rem;
@@ -30,9 +35,10 @@
 }
 /* +++++ video popup styling +++++ */
 .video-responsive {
-    overflow: hidden;
-    padding-bottom: 65%;
     position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
     height: 0;
 }
 
