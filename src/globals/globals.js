@@ -1,3 +1,6 @@
+// required step for app build (to live)
+export const cinemax = "cinemax";
+
 // required for dynamic page title
 export const appTitle = "Cinemax";
 
