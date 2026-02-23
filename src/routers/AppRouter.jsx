@@ -9,7 +9,7 @@ import HomePage from "../pages/HomePage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
 import FavoritesPage from "../pages/FavoritesPage.jsx";
 import DetailsPage from "../pages/DetailsPage.jsx";
-import { cinemax } from "./globals";
+import { cinemax } from "../globals/globals.js";
 
 function AppRouter() {
   return (
